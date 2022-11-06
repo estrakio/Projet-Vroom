@@ -17,9 +17,7 @@
     <body>
         <!-- DIV = Ce que je veux dépendant de ce que je met dedans  -->
         <div id="header" class="row">
-            <div class="col-4 gauche"><?php include "menuGauche.php"; ?></div>
-            <div class="col-4 milieu"></div>
-            <div class="col-4 droite"></div>
+            <div class="col-12 milieu"><?php include "menuGauche.php"; ?></div>
         </div>  
 
         <div id="content" class="container">

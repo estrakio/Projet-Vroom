@@ -15,8 +15,8 @@
 -->
 </nav>
 
-<nav class="navbar navbar-expand-lg">
-  <div class="container-fluid">
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <div class="container">
     <a class="navbar-brand" href="index.php?content=accueil"><img src="../images/maison.png" alt="" height="50"> </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -55,8 +55,8 @@
             <li><a class="dropdown-item" href="index.php?content=matricule">Obtenir un matricule</a></li>
           </ul>
         </li>
-
       </ul>
+      <img src="../images/Vroom.png" class="logo">
     </div>
   </div>
 </nav>
