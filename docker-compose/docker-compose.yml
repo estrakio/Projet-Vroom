@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+
+  db:
+    image: postgres
+    volumes:
+        - ../postgres_data:/var/lib/postgresql/data/
+    environment:
+        - POSTGRES_DB=vroooom
+        - POSTGRES_USER=vroooom
+        - POSTGRES_PASSWORD=vroooom
+    ports:
+      - 5432:5432
+
+
+  backend:
+    # tty: true
+    image: backend
+
+    build: 
+      context: ..
+      dockerfile: Dockerfile
+      
+    volumes: 
+      - '..:/var/www/html'
+    ports:
+      - 80:80
+
+volumes:
+    postgres_data:
