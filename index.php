@@ -14,12 +14,12 @@
 
         <!-- Jquery needed -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script src="js/scripts.js"></script>
+        <script src="./js/scripts.js"></script>
 
     <!-- Function used to shrink nav bar removing paddings and adding black background -->
         <script>
             $(window).scroll(function() {
-                if ($(document).scrollTop() > 500) {
+                if ($(document).scrollTop() > 75) {
                     $('.nav').addClass('affix');
                     console.log("OK");
                 } else {
@@ -49,8 +49,8 @@
                     </ul>
                 </div>
                 <span class="navTrigger">
-                    <i>azer</i>
-                    <i>xeer</i>
+                    <i></i>
+                    <i></i>
                     <i></i>
                 </span>
             </div>

@@ -14,13 +14,14 @@
 
         <!-- Jquery needed -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script src="js/scripts.js"></script>
+        <script src="./js/scripts.js"></script>
 
 
     </head> 
 
     <body>
         <!-- DIV = Ce que je veux dépendant de ce que je met dedans  -->
+        
         <nav class="nav affix">
             <div class="container">
                 <div class="logo">
