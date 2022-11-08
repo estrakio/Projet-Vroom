@@ -20,7 +20,7 @@
             <div class="col-12 milieu"><?php include "menuGauche.php"; ?></div>
         </div>  
 
-        <div id="content" class="container">
+        <div id="content" >
            <?php
 
             if (isset($_GET["content"])) {
