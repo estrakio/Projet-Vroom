@@ -35,14 +35,14 @@
         <nav class="nav">
             <div class="container">
                 <div class="logo">
-                    <a href="/index.php?content=accueil">Your Logo</a>
+                    <a href="/index.php?content=accueil">Accueil</a>
                 </div>
                 <div id="mainListDiv" class="main_list">
                     <ul class="navlinks">
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Portfolio</a></li>
-                        <li><a href="#">Services</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="/index.php?content=clients">Clients</a></li>
+                        <li><a href="#">Garage</a></li>
+                        <li><a href="#">Expert</a></li>
+                        <li><a href="#">Contrat</a></li>
                     </ul>
                 </div>
                 <span class="navTrigger">
