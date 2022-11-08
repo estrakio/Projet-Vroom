@@ -1,3 +1,10 @@
+<?php
+
+include 'connexion.php';
+
+?>
+
+
 <html>
     <head>
         <title> Site de TEST </title>
