@@ -32,8 +32,6 @@
                         <li><a href="/formulaire.php?content=garage">Garage</a></li>
                         <li><a href="/formulaire.php?content=expert">Expert</a></li>
                         <li><a href="/formulaire.php?content=location">Location</a></li>
-                        <li><a href="/formulaire.php?content=modele">model</a></li>
-                        <li><a href="/formulaire.php?content=piece">pièce</a></li>
                         <li><a href="/formulaire.php?content=rendezVous">Rendez-Vous</a></li>
                         <li><a href="/formulaire.php?content=societeExperts">Société expert</a></li>
                         <li><a href="/formulaire.php?content=vehicule">vehicule</a></li>
