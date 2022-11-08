@@ -55,9 +55,9 @@
         <section class="home">
         </section>
 
-    
 
         <div id="content">
+
            <?php
 
             if (isset($_GET["content"])) {
