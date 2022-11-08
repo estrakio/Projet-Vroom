@@ -7,7 +7,7 @@
         
         <!--  Mon css perso pour inclure les polices de caracteres-->
         <link rel="stylesheet" href="./css/fonts.css">
-        <link rel="stylesheet" href="./css/index.css">
+        <link rel="stylesheet" href="./css/formulaire.css">
 
         <!-- scripts necessaires pour bootstrap -->
         <script src="./bootstrap/5.1.2/js/bootstrap.bundle.min.js"></script>
@@ -16,23 +16,12 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="js/scripts.js"></script>
 
-    <!-- Function used to shrink nav bar removing paddings and adding black background -->
-        <script>
-            $(window).scroll(function() {
-                if ($(document).scrollTop() > 500) {
-                    $('.nav').addClass('affix');
-                    console.log("OK");
-                } else {
-                    $('.nav').removeClass('affix');
-                }
-            });
-        </script>
 
     </head> 
 
     <body>
         <!-- DIV = Ce que je veux dépendant de ce que je met dedans  -->
-        <nav class="nav">
+        <nav class="nav affix">
             <div class="container">
                 <div class="logo">
                     <a href="/index.php?content=accueil">Accueil</a>
@@ -51,14 +40,13 @@
                     </ul>
                 </div>
                 <span class="navTrigger">
-                    <i>azer</i>
-                    <i>xeer</i>
+                    <i></i>
+                    <i></i>
                     <i></i>
                 </span>
             </div>
         </nav>
-        <section class="home">
-        </section>
+        
 
 
         <div id="content">
