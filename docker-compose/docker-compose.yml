@@ -19,7 +19,7 @@ services:
     image: backend
 
     build: 
-      context: ..
+      context: ../docker
       dockerfile: Dockerfile
       
     volumes: 
