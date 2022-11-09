@@ -67,21 +67,21 @@ include 'connexion.php';
 
 
         <div id="content">
+            <?php
+                if (isset($_GET["content"])) {
 
-           <?php
-
-            if (isset($_GET["content"])) {
-
-                include $_GET["content"].".php";
-            }
-            else{
-                include "accueil.php";
-            }
-           ?>
+                    include $_GET["content"].".php";
+                }
+                else{
+                    include "accueil.php";
+                }
+            ?>
 
         </div>
         
         <div id="footer" class="row">
+            <?php include "footer.php"; ?>
+        </div>
 
     </body>
 

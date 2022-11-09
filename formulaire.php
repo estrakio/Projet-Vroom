@@ -64,6 +64,8 @@
         </div>
         
         <div id="footer" class="row">
+            <?php include "footer.php"; ?>
+        </div>
 
     </body>
 
