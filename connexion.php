@@ -205,7 +205,7 @@
     $test = "SELECT idmarque FROM marques WHERE id = 1";
     $valid = pg_query($conn, $test);
     $result = pg_fetch_row($valid)[0];
-    print($result == "alfa Romeo");
+    //print($result == "alfa Romeo");
     if ( $result != "alfa Romeo"){
         $insert = "
                     INSERT INTO marques (idmarque)

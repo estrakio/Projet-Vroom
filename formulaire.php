@@ -29,6 +29,7 @@
                 </div>
                 <div id="mainListDiv" class="main_list">
                     <ul class="navlinks">
+                        <li><a href="/formulaire.php?content=liste">Liste</a></li>
                         <li><a href="/formulaire.php?content=clients">Clients</a></li>
                         <li><a href="/formulaire.php?content=garage">Garage</a></li>
                         <li><a href="/formulaire.php?content=expert">Expert</a></li>
