@@ -4,7 +4,7 @@
         <form>
         <br>
             <div>
-                <label for="">Plaque d'immatriculation</label>
+                <label for="">Choisissez un champ</label>
                 <input type="text" class="form-control">
             </div>
         </form>
