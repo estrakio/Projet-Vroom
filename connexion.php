@@ -161,20 +161,6 @@
             FOREIGN KEY(Id) REFERENCES Location(Id),
             FOREIGN KEY(id_1) REFERENCES Modele(id)
          );     
-        ";
-
-    $sql .= "
-
-        CREATE TABLE IF NOT EXISTS Vehicule(
-            plaque_d_immatriculation VARCHAR(50),
-            couleur VARCHAR(50),
-            kilometrage VARCHAR(50),
-            Id INT NOT NULL,
-            id_1 INT NOT NULL,
-            PRIMARY KEY(plaque_d_immatriculation),
-            FOREIGN KEY(Id) REFERENCES Location(Id),
-            FOREIGN KEY(id_1) REFERENCES Modele(id)
-         );     
         ";    
 
     $sql .= "
@@ -201,7 +187,7 @@
      
     pg_query($conn, $sql);
 
-
+// Ajout de données dans la table MARQUES
     $test = "SELECT idmarque FROM marques WHERE id = 1";
     $valid = pg_query($conn, $test);
     $result = pg_fetch_row($valid)[0];
@@ -239,4 +225,88 @@
                         VALUES ('toyota');";
         pg_query($conn, $insert);
     }
+
+
+
+// Ajout de données dans la TABLE CLIENTS
+    $test = "SELECT nom FROM clients WHERE id = 1";
+    $valid = pg_query($conn, $test);
+    $result = pg_fetch_row($valid)[0];
+    //print($result == "alfa Romeo");
+    if ( $result != "mousli"){
+        $insertClients = "
+                    INSERT INTO clients (nom, prenom, age, datedenaissance, numerotelephone, mail, adresse, ville, codepostal, pays)
+                        VALUES ('mousli', 'mathis', '20', '2000-08-23', '0606060606', 'waltermathis@hotmail.congo', '6 rue du pif', 'strasbourg', '60000', 'france');";
+        $insertClients .= "
+                    INSERT INTO clients (nom, prenom, age, datedenaissance, numerotelephone, mail, adresse, ville, codepostal, pays)
+                        VALUES ('rimmely', 'ewan', '23', '2010-05-13', '0742132443', 'rimmelyEwan@hotmail.congo', '12 avenue du pif', 'paris', '42000', 'afrique');";
+        
+        pg_query($conn, $insertClients);
+    }
+
+// Ajout de données dans la TABLE SOCIETEEXPERT     
+$test = "SELECT nom FROM societeexpert WHERE id = 1";
+$valid = pg_query($conn, $test);
+$result = pg_fetch_row($valid)[0];
+
+if ( $result != "pedaie Societe"){
+    $insertSociExpert = "
+                INSERT INTO societeexpert (nom, adresse, codepostal, numerosiret, ville)
+                    VALUES ('pedaie Societe', '6 avenue charles de gaulle', '67700', '12345678998765', 'Paris');";
+    $insertSociExpert .= "
+                INSERT INTO societeexpert (nom, adresse, codepostal, numerosiret, ville)
+                    VALUES ('de la Faux entreprise', '6 route charles de hugo', '67700', '89987651234567', 'metz');";
+
+    pg_query($conn, $insertSociExpert);
+}
+
+// Ajout de données dans la TABLE EXPERT     
+    $test = "SELECT nom FROM expert WHERE id = 1 ";
+    $valid = pg_query($conn, $test);
+    $result = pg_fetch_row($valid)[0];
+
+    if ( $result != "pedaie"){
+        $insertExpert = "
+                    INSERT INTO expert (nom, prenom, login, adressemail, motdepasse, numerotelephone, id_1)
+                        VALUES ('pedaie', 'mathis', 'm.pedaie', 'pedaie-pro@hotmail.fr', 'bonjour123', '0388123432', '1');";
+        $insertExpert .= "
+                    INSERT INTO expert (nom, prenom, login, adressemail, motdepasse, numerotelephone, id_1)
+                        VALUES ('de laFaux', 'bertrand', 'b.delafaux', 'delafaux-pro@gmail.fr', 'bonjour123', '0678123432', '1');";
+
+        pg_query($conn, $insertExpert);
+    }
+
+// Ajout de données dans la TABLE GARAGE     
+    $test = "SELECT nomdugarage FROM garage WHERE id = 1 ";
+    $valid = pg_query($conn, $test);
+    $result = pg_fetch_row($valid)[0];
+
+    if ( $result != "otto mobile"){
+        $insertExpert = "
+                    INSERT INTO garage (nomdugarage, nomduproprietaire, adresse, codepostal, ville, pays)
+                        VALUES ('otto mobile', 'mathis moustache', '4 rue du garage otto', '677123', 'Saverne', 'Allemagne');";
+        $insertExpert .= "
+                    INSERT INTO garage (nomdugarage, nomduproprietaire, adresse, codepostal, ville, pays)
+                        VALUES ('moto toto', 'ewan salopette', '23 rue du grand moulin', '67000', 'Marseillle', 'Turquie');";
+
+        pg_query($conn, $insertExpert);
+    }
+
+// Ajout de données dans la TABLE LOCATION
+    $test = "SELECT datedebutlocation FROM location WHERE id = 1 ";
+    $valid = pg_query($conn, $test);
+    $result = pg_fetch_row($valid)[0];
+
+
+    if ( $result != "2000-01-01"){
+        $insertLocation = "
+                    INSERT INTO location (dateDebutLocation, dureeLocation, dateFinLocation, id_1)
+                        VALUES ('2000-01-01', '4 ans', '2004-01-01', 1 );";
+        $insertLocation .= "
+                    INSERT INTO location (dateDebutLocation, dureeLocation, dateFinLocation, id_1)
+                        VALUES ('2003-01-01', '4 ans', '2007-01-01', 1 );";
+
+        pg_query($conn, $insertLocation);
+    }
+
 ?>
