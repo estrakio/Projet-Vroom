@@ -23,6 +23,10 @@ body {
     font-size: 33px;
 }
 
+.btn-lg {
+    width: 120px;
+}
+
 .form-control {
     font-size: 1.8rem;
 }

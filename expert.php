@@ -33,6 +33,10 @@
                 <input type="password" class="form-control" placeholder="Mot de passe">
             </div>
         </form>
+        <div class="text-center">
+            <a href="#" class="btn btn-secondary btn-lg" role="button" title="Envoyer">Envoyer</a>
+            <br><br>
+        </div>
     </div>
     <div class="col-3"></div>
 </div>

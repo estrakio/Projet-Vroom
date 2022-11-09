@@ -9,6 +9,11 @@
             </div>
             <br>
             <div>
+                <label for="ville">Ville</label>
+                <input type="text" class="form-control" placeholder="Ville">
+            </div>
+            <br>
+            <div>
                 <label for="adresse">Adresse</label>
                 <input type="text" class="form-control" placeholder="Adresse">
             </div>
@@ -23,11 +28,11 @@
                 <input type="number" class="form-control" placeholder="Numéro Siret">
             </div>
             <br>
-            <div>
-                <label for="ville">Ville</label>
-                <input type="text" class="form-control" placeholder="Ville">
-            </div>
         </form>
+        <div class="text-center">
+            <a href="#" class="btn btn-secondary btn-lg" role="button" title="Envoyer">Envoyer</a>
+            <br><br>
+        </div>
     </div>
     <div class="col-3"></div>
 </div>

@@ -88,6 +88,11 @@
                 <input type="text" class="form-control" placeholder="Critères">
             </div>
         </form>
+        <br>
+        <div class="text-center">
+            <a href="#" class="btn btn-secondary btn-lg" role="button" title="Envoyer">Envoyer</a>
+            <br><br>
+        </div>
     <div class="col-3"></div>
 </div>
 
