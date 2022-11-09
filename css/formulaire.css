@@ -20,6 +20,10 @@ body {
     font-size: 33px;
 }
 
+.clients {
+    color: #00E676;
+}
+
 .form-control {
     font-size: 1.6rem;
 }
