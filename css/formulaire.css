@@ -21,6 +21,11 @@ body {
     margin: 0;
     padding-top: 55px;
     font-size: 33px;
+    min-height: 80vh;
+}
+
+.cache {
+    visibility: hidden;
 }
 
 .btn-lg {
