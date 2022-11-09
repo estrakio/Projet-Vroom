@@ -27,9 +27,18 @@
 <div class="row">
     <div class="col-3 "></div>
     <div class="col-6">
-    ---------------------------------------------------------------
         <form>
             <div>
+            <div>
+                <label for="marque">Marque de la voiture</label>
+                <select class="form-control">
+                    <option>marque 1</option>
+                    <option>marque 2</option>
+                    <option>marque 3</option>
+                    <option>marque 4</option>
+                </select>
+            </div>
+            <br>
                 <label for="nomModele">Modèle de la voiture</label>
                 <select class="form-control">
                     <option>modele 1</option>
@@ -78,18 +87,7 @@
                 <label for="critAir">Critères</label>
                 <input type="text" class="form-control" placeholder="Critères">
             </div>
-            <br>
-            <div>
-                <label for="marque">Marque de la voiture</label>
-                <select class="form-control">
-                    <option>marque 1</option>
-                    <option>marque 2</option>
-                    <option>marque 3</option>
-                    <option>marque 4</option>
-                </select>
-            </div>
         </form>
-    </div>
     <div class="col-3"></div>
 </div>
 
