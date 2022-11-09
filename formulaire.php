@@ -29,7 +29,8 @@
                 </div>
                 <div id="mainListDiv" class="main_list">
                     <ul class="navlinks clients">
-                        <li class="clients"><a href="/formulaire.php?content=clients" class="clients">Clients</a></li>
+                        <li><a href="/formulaire.php?content=liste">Liste</a></li>
+                        <li class="clients"><a href="/formulaire.php?content=clients">Clients</a></li>
                         <li><a href="/formulaire.php?content=garage">Garage</a></li>
                         <li><a href="/formulaire.php?content=expert">Expert</a></li>
                         <li><a href="/formulaire.php?content=location">Location</a></li>
@@ -64,6 +65,8 @@
         </div>
         
         <div id="footer" class="row">
+            <?php include "footer.php"; ?>
+        </div>
 
     </body>
 

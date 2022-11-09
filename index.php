@@ -46,6 +46,7 @@ include 'connexion.php';
                 </div>
                 <div id="mainListDiv" class="main_list">
                     <ul class="navlinks">
+                        <li><a href="/formulaire.php?content=liste">Liste</a></li>
                         <li><a href="/formulaire.php?content=clients">Clients</a></li>
                         <li><a href="/formulaire.php?content=garage">Garage</a></li>
                         <li><a href="/formulaire.php?content=expert">Expert</a></li>
@@ -67,21 +68,21 @@ include 'connexion.php';
 
 
         <div id="content">
+            <?php
+                if (isset($_GET["content"])) {
 
-           <?php
-
-            if (isset($_GET["content"])) {
-
-                include $_GET["content"].".php";
-            }
-            else{
-                include "accueil.php";
-            }
-           ?>
+                    include $_GET["content"].".php";
+                }
+                else{
+                    include "accueil.php";
+                }
+            ?>
 
         </div>
         
         <div id="footer" class="row">
+            <?php include "footer.php"; ?>
+        </div>
 
     </body>
 
