@@ -3,7 +3,7 @@
 // Connect to the database
 $conn = pg_connect("host=db dbname=vroooom user=vroooom password=vroooom");
 // Show the client and server versions
-print_r(pg_version($conn));
+//print_r(pg_version($conn));
 
 
 $sql = "
