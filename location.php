@@ -94,4 +94,36 @@
 
 <?php
 
+if (isset(
+    $_GET['dateDebutLocation'], 
+    $_GET['dureelocation'],
+    $_GET['dateFinLocation'],
+    $_GET['marque'],
+    $_GET['nomModele'],
+    $_GET['generation'],
+    $_GET['finition'],
+    $_GET['categorie'],
+    $_GET['energie'],
+    $_GET['annee'],
+    $_GET['boiteDeVitesse'],
+    $_GET['options'],
+    $_GET['critAir']
+    ))
+{
+    echo "Début de la location : " . $_GET['dateDebutLocation'] . "</br>";
+    echo "Durée de la location : " . $_GET['dureelocation'] . "</br>";
+    echo "Fin de la location : " . $_GET['dateFinLocation'] . "</br>";
+    echo "Marque de la voiture : " . $_GET['marque'] . "</br>";
+    echo "Modèle de la voiture : " . $_GET['nomModele'] . "</br>";
+    echo "Génération : " . $_GET['generation'] . "</br>";
+    echo "Finition : " . $_GET['finition'] . "</br>";
+    echo "Catégorie : " . $_GET['categorie'] . "</br>";
+    echo "Energie : " . $_GET['energie'] . "</br>";
+    echo "Année : " . $_GET['annee'] . "</br>";
+    echo "Boite de vitesse : " . $_GET['boiteDeVitesse'] . "</br>";
+    echo "Options : " . $_GET['options'] . "</br>";
+    echo "Critères : " . $_GET['critAir'] . "</br>";
+
+}
+
 ?>

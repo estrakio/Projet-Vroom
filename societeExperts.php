@@ -44,4 +44,19 @@
 
 <?php
 
+if (isset(
+    $_GET['nom'],
+    $_GET['ville'],
+    $_GET['adresse'],
+    $_GET['codePostal'],
+    $_GET['numeroSiret']
+    ))
+{
+    echo "Nom : " . $_GET['nom'] . "</br>";
+    echo "Ville : " . $_GET['ville'] . "</br>";
+    echo "Adresse : " . $_GET['adresse'] . "</br>";
+    echo "Code Postal : " . $_GET['codePostal'] . "</br>";
+    echo "Numéro Siret : " . $_GET['numeroSiret'] . "</br>";
+}
+
 ?>

@@ -1,15 +1,16 @@
 <div class="row">
     <div class="col-3 "></div>
     <div class="col-6">
-        <form>
+    <form action="/formulaire.php?content=vehicule" method="get" id="formVehicule">
+    <input hidden value="vehicule" name="content" id="content">
         <br>
             <div>
                 <label for="">Plaque d'immatriculation</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" name = "immatriculation">
             </div>
         </form>
         <div class="text-center">
-            <a href="#" class="btn btn-secondary btn-lg" role="button" title="Envoyer">Envoyer</a>
+            <button class="btn btn-secondary btn-lg" type="submit" form="formVehicule" value="Submit">Envoyer</button>
             <br><br>
         </div>
     </div>
@@ -21,5 +22,12 @@
 
 
 <?php
+
+if (isset(
+    $_GET['immatriculation']
+    ))
+{
+    echo "Plaque d'immatriculation : " . $_GET['immatriculation'];
+}
 
 ?>

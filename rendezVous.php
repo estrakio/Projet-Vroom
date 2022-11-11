@@ -16,3 +16,15 @@
     </div>
     <div class="col-3"></div>
 </div>
+
+
+<?php
+
+if (isset(
+    $_GET['dateRdv']
+    ))
+{
+    echo "Date du rendez-vous : " . $_GET['dateRdv'];
+}
+
+?>

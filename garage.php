@@ -48,4 +48,21 @@
 
 <?php
 
+if (isset(
+    $_GET['nomDuGarage'], 
+    $_GET['nomDuProprietaire'],
+    $_GET['pays'],
+    $_GET['ville'],
+    $_GET['adresse'],
+    $_GET['codePostal']
+    ))
+{
+    echo "Nom du garage : " . $_GET['nomDuGarage'] . "</br>";
+    echo "Nom du proprietaire : " . $_GET['nomDuProprietaire'] . "</br>";
+    echo "Pays : " . $_GET['pays'] . "</br>";
+    echo "Ville : " . $_GET['ville'] . "</br>";
+    echo "Adresse : " . $_GET['adresse'] . "</br>";
+    echo "Code postal : " . $_GET['codePostal'] . "</br>";
+}
+
 ?>

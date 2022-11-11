@@ -47,5 +47,22 @@
 
 
 <?php
+// Si la variable : nom, prenom, age, mail, numeroTelephone, dateDeNaissance, pays, ville, adresse, codePostal exisent alors echo
+if (isset(
+    $_GET['nom'], 
+    $_GET['prenom'],
+    $_GET['adresseMail'],
+    $_GET['numeroTelephone'],
+    $_GET['login'],
+    $_GET['motDePasse']
+    ))
+{
+    echo "Nom : " . $_GET['nom'] . "</br>";
+    echo "Prénom : " . $_GET['prenom'] . "</br>";
+    echo "Mail : " . $_GET['adresseMail'] . "</br>";
+    echo "Numéro de téléphone : " . $_GET['numeroTelephone'] . "</br>";
+    echo "Login : " . $_GET['login'] . "</br>";
+    echo "Mot de passe : " . $_GET['motDePasse'] . "</br>";
+}
 
 ?>
