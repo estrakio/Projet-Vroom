@@ -24,6 +24,21 @@ body {
     min-height: 80vh;
 }
 
+.champ {
+    border: solid #000;
+    border-width: 0 0 2 2;
+}
+
+.fiche {
+    padding-left: 12%;
+    position: absolute;
+    transition: transform 330ms ease-in-out;
+}
+
+.decal {
+    transform: translate(-100%, 100%);
+}
+
 .cache {
     visibility: hidden;
 }
