@@ -309,4 +309,27 @@ if ( $result != "pedaie Societe"){
         pg_query($conn, $insertLocation);
     }
 
+
+    function insertSql($nomDeTable,$tableau){
+        
+        
+        // Connect to the database
+        $conn = pg_connect("host=db dbname=vroooom user=vroooom password=vroooom");
+        // Show the client and server versions
+        //print_r(pg_version($conn));
+
+        $champs = "";
+        $listeValues = "";
+        foreach($tableau as $nomChamp => $valeurs){
+            $champs .= $nomChamp;
+            $listeValues .= "'".$valeurs."'";
+            if ( next($tableau)){
+                $champs .= ", ";
+                $listeValues .= ", ";
+            }
+        }
+
+        $sql = " INSERT INTO ".$nomDeTable."(".$champs.") VALUES (".$listeValues.");";
+        pg_query($conn, $sql);
+    }
 ?>
