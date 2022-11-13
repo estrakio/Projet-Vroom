@@ -1,77 +1,120 @@
 <?php
     $conn = pg_connect("host=db dbname=vroooom user=vroooom password=vroooom");
 
+    $fullfiche = "";
+
     $sql = "SELECT * FROM Clients";
     $valid = pg_query($conn, $sql);
     $optClient = "<optgroup id='client' label='Clients'>";
     $clientId = 1;
     while ($clients = pg_fetch_assoc($valid)) {
-        var_dump($clients);
+        //var_dump($clients);
         $id = "client"."z".strval($clientId);
-        $$id = "<div id='fiche".$clientId."' class='col-8 fiche'>
+        $$id = "<div id='fiche".$id."' class='col-8 fiche desactiver'>
                     <br>
                     <b>Clients</b>
                     <br><br>
                     <div id='' class='champ row'>
                         <div id='' class='col-5'>Numéros Client: </div>
-                        <div id='".$id."zid"."' class='col-7'>".$clients['id']."</div>                    
+                        <div id='".$id."zid"."' class='col-7 modifiable'>".$clients['id']."</div>                    
                     </div>
                     <div id='' class='row champ'>
                         <div class='col-5'>Nom: </div>
-                        <div id='".$id."znom"."' class='col-7'>".$clients['nom']."</div>                    
+                        <div id='".$id."znom"."' class='col-7 modifiable'>".$clients['nom']."</div>                    
                     </div>
                     <div id='' class='row champ'>
                         <div class='col-5'>Prenom: </div>
-                        <div id='".$id."zprenom"."' class='col-7'>".$clients['prenom']."</div>                    
+                        <div id='".$id."zprenom"."' class='col-7 modifiable'>".$clients['prenom']."</div>                    
                     </div>
                     <div id='' class='row champ'>
                         <div class='col-5'>Age: </div>
-                        <div id='".$id."zage"."' class='col-7'>".$clients['age']."</div>                    
+                        <div id='".$id."zage"."' class='col-7 modifiable'>".$clients['age']."</div>                    
                     </div>
                     <div id='' class='row champ'>
                         <div class='col-5'>Date de naissance: </div>
-                        <div id='".$id."zdatedenaissance"."' class='col-7'>".$clients['datedenaissance']."</div>                    
+                        <div id='".$id."zdatedenaissance"."' class='col-7 modifiable'>".$clients['datedenaissance']."</div>                    
                     </div>
                     <div id='' class='row champ'>
                         <div class='col-5'>Numéro de Téléphone: </div>
-                        <div id='".$id."znumerotelephone"."' class='col-7'>".$clients['numerotelephone']."</div>                    
+                        <div id='".$id."znumerotelephone"."' class='col-7 modifiable'>".$clients['numerotelephone']."</div>                    
                     </div>
                     <div id='' class='row champ'>
                         <div class='col-5'>Email: </div>
-                        <div id='".$id."zmail"."' class='col-7'>".$clients['mail']."</div>                    
+                        <div id='".$id."zmail"."' class='col-7 modifiable'>".$clients['mail']."</div>                    
                     </div>
                     <div id='' class='row champ'>
                         <div class='col-5'>Adresse: </div>
-                        <div id='".$id."zadresse"."' class='col-7'>".$clients['adresse']."</div>                    
+                        <div id='".$id."zadresse"."' class='col-7 modifiable'>".$clients['adresse']."</div>                    
                     </div>
                     <div id='' class='row champ'>
                         <div class='col-5'>Ville: </div>
-                        <div id='".$id."zville"."' class='col-7'>".$clients['ville']."</div>                    
+                        <div id='".$id."zville"."' class='col-7 modifiable'>".$clients['ville']."</div>                    
                     </div>
                     <div id='' class='row champ'>
                         <div class='col-5'>Code postal: </div>
-                        <div id='".$id."zcodepostal"."' class='col-7'>".$clients['codepostal']."</div>                    
+                        <div id='".$id."zcodepostal"."' class='col-7 modifiable'>".$clients['codepostal']."</div>                    
                     </div>
                     <div id='' class='row champ'>
                         <div class='col-5'>Pays: </div>
-                        <div id='".$id."zpays"."' class='col-7'>".$clients['pays']."</div>                    
+                        <div id='".$id."zpays"."' class='col-7 modifiable'>".$clients['pays']."</div>                    
                     </div>
                     <br>
                 </div>
                 ";
-        $optClient .= "<option>".$clients['nom']."  ".$clients['prenom']."</option>";
+        $fullfiche .= ${$id};
+        $optClient .= "<option value='fiche".$id."' >".$clients['nom']."  ".$clients['prenom']."</option>";
         $clientId += 1;
     }
     $optClient .= "</optgroup>";
+     
     
 
 
     $sql = "SELECT * FROM Garage";
     $valid = pg_query($conn, $sql);
     $optGarage = "<optgroup id='garage' label='Garages'>";
+    $garageId = 1;
     while ($garage = pg_fetch_assoc($valid)) {
         //var_dump($garage);
-        $optGarage .= "<option>".$garage['nomdugarage']."</option>";
+        $id = "garage"."z".strval($garageId);
+        $$id = "<div id='fiche".$id."' class='col-8 fiche desactiver'>
+                    <br>
+                    <b>Garage</b>
+                    <br><br>
+                    <div id='' class='champ row'>
+                        <div id='' class='col-5'>Numéros Client Garage: </div>
+                        <div id='".$id."zid"."' class='col-7 modifiable'>".$garage['id']."</div>                    
+                    </div>
+                    <div id='' class='row champ'>
+                        <div class='col-5'>Nom du garage: </div>
+                        <div id='".$id."znomdugarage"."' class='col-7 modifiable'>".$garage['nomdugarage']."</div>                    
+                    </div>
+                    <div id='' class='row champ'>
+                        <div class='col-5'>Nom du propriétaire: </div>
+                        <div id='".$id."znomduproprietaire"."' class='col-7 modifiable'>".$garage['nomduproprietaire']."</div>                    
+                    </div>
+                    <div id='' class='row champ'>
+                        <div class='col-5'>Adresse: </div>
+                        <div id='".$id."zadresse"."' class='col-7 modifiable'>".$garage['adresse']."</div>                    
+                    </div>
+                    <div id='' class='row champ'>
+                        <div class='col-5'>Code postal: </div>
+                        <div id='".$id."zcodepostal"."' class='col-7 modifiable'>".$garage['codepostal']."</div>                    
+                    </div>
+                    <div id='' class='row champ'>
+                        <div class='col-5'>Ville: </div>
+                        <div id='".$id."zville"."' class='col-7 modifiable'>".$garage['ville']."</div>                    
+                    </div>
+                    <div id='' class='row champ'>
+                        <div class='col-5'>Pays: </div>
+                        <div id='".$id."zpays"."' class='col-7 modifiable'>".$garage['pays']."</div>                    
+                    </div>
+                    <br>
+                </div>
+                ";
+        $fullfiche .= ${$id};
+        $optGarage .= "<option value='fiche".$id."'>".$garage['nomdugarage']."</option>";
+        $garageId += 1;
     }
     $optGarage .= "</optgroup>";
 
@@ -79,8 +122,43 @@
     $sql = "SELECT * FROM societeExpert";
     $valid = pg_query($conn, $sql);
     $optSocieteExpert = "<optgroup id='societeExpert' label='Société Expert'>";
-    while ($expert = pg_fetch_assoc($valid)) {
-        $optSocieteExpert .= "<option>".$expert['nom']."</option>";
+    $SocieteExpertId = 1;
+    while ($SocieteExpert = pg_fetch_assoc($valid)) {
+        $id = "SocieteExpert"."z".strval($SocieteExpertId);
+        $$id = "<div id='fiche".$id."' class='col-8 fiche desactiver'>
+                    <br>
+                    <b>Société d'Expert</b>
+                    <br><br>
+                    <div id='' class='champ row'>
+                        <div id='' class='col-5'>Numéros Client: </div>
+                        <div id='".$id."zid"."' class='col-7 modifiable'>".$SocieteExpert['id']."</div>                    
+                    </div>
+                    <div id='' class='row champ'>
+                        <div class='col-5'>Nom: </div>
+                        <div id='".$id."znom"."' class='col-7 modifiable'>".$SocieteExpert['nom']."</div>                    
+                    </div>
+                    <div id='' class='row champ'>
+                        <div class='col-5'>Adresse: </div>
+                        <div id='".$id."zadresse"."' class='col-7 modifiable'>".$SocieteExpert['adresse']."</div>                    
+                    </div>
+                    <div id='' class='row champ'>
+                        <div class='col-5'>Code postal: </div>
+                        <div id='".$id."zcodepostal"."' class='col-7 modifiable'>".$SocieteExpert['codepostal']."</div>                    
+                    </div>
+                    <div id='' class='row champ'>
+                        <div class='col-5'>Numéro de Siret: </div>
+                        <div id='".$id."znumerosiret"."' class='col-7 modifiable'>".$SocieteExpert['numerosiret']."</div>                    
+                    </div>
+                    <div id='' class='row champ'>
+                        <div class='col-5'>Ville: </div>
+                        <div id='".$id."zville"."' class='col-7 modifiable'>".$SocieteExpert['ville']."</div>                    
+                    </div>
+                    <br>
+                </div>
+                ";
+        $fullfiche .= ${$id};
+        $optSocieteExpert .= "<option value='fiche".$id."'>".$SocieteExpert['nom']."</option>";
+        $SocieteExpertId += 1;
     }
     $optSocieteExpert .= "</optgroup>";
 
@@ -88,11 +166,51 @@
     $sql = "SELECT * FROM Expert";
     $valid = pg_query($conn, $sql);
     $optExpert = "<optgroup id='expert' label='Expert'>";
+    $expertId = 1;
     while ($expert = pg_fetch_assoc($valid)) {
-        $optExpert .= "<option>".$expert['nom']."  ".$expert['prenom']."</option>";
+        $id = "expert"."z".strval($expertId);
+        $$id = "<div id='fiche".$id."' class='col-8 fiche desactiver'>
+                    <br>
+                    <b>Expert</b>
+                    <br><br>
+                    <div id='' class='champ row'>
+                        <div id='' class='col-5'>Numéros D'Expert: </div>
+                        <div id='".$id."zid"."' class='col-7 modifiable'>".$expert['id']."</div>                    
+                    </div>
+                    <div id='' class='row champ'>
+                        <div class='col-5'>Nom: </div>
+                        <div id='".$id."znom"."' class='col-7 modifiable'>".$expert['nom']."</div>                    
+                    </div>
+                    <div id='' class='row champ'>
+                        <div class='col-5'>Prenom: </div>
+                        <div id='".$id."zprenom"."' class='col-7 modifiable'>".$expert['prenom']."</div>                    
+                    </div>
+                    <div id='' class='row champ'>
+                        <div class='col-5'>Login: </div>
+                        <div id='".$id."zlogin"."' class='col-7 modifiable'>".$expert['login']."</div>                    
+                    </div>
+                    <div id='' class='row champ'>
+                        <div class='col-5'>Adresse mail: </div>
+                        <div id='".$id."zadressemail"."' class='col-7 modifiable'>".$expert['adressemail']."</div>                    
+                    </div>
+                    <div id='' class='row champ'>
+                        <div class='col-5'>Mot de passe: </div>
+                        <div id='".$id."zmotdepasse"."' class='col-7 modifiable'>".$expert['motdepasse']."</div>                    
+                    </div>
+                    <div id='' class='row champ'>
+                        <div class='col-5'>Numéro de téléphone: </div>
+                        <div id='".$id."znumerotelephone"."' class='col-7 modifiable'>".$expert['numerotelephone']."</div>                    
+                    </div>
+                    <br>
+                </div>
+                ";
+        $fullfiche .= ${$id};
+        $optExpert .= "<option value='fiche".$id."'>".$expert['nom']."  ".$expert['prenom']."</option>";
+        $expertId += 1;
     }
     $optExpert .= "</optgroup>";
     //var_dump($expert);
+
 
     $sql = "SELECT * FROM RendezVous";
     $valid = pg_query($conn, $sql);
@@ -109,11 +227,23 @@
 <script>
     function update() {
         valeur = $("#first").val();
-        console.log("test");
+        //console.log("test");
         $("#second optgroup").hide();
         $("#second optgroup#"+valeur).show();
-        console.log(valeur);
-        $("#fiche1").addClass("decal");
+        //console.log(valeur);
+        $(".fiche").removeClass("activer");
+        $("#footer ").removeClass("descend");
+        $("#second").prop('selectedIndex',0);
+    }
+
+    function update2() {
+        valeur = $("#second").val();
+        $(".fiche").removeClass("activer");
+        $("#"+valeur).addClass("activer");
+        
+        $("#footer ").removeClass("descend");
+        $("#footer ").addClass("descend");
+        //console.log(valeur);
     }
 </script>
 
@@ -136,7 +266,7 @@
             <br>
             <div>
                 <label for="">Choisissez: </label>
-                <select class="form-control" id="second">
+                <select class="form-control" id="second" onchange="update2()">
                     <option disabled selected value> -- select an option -- </option>
                     <?php echo ($optClient.$optGarage.$optExpert.$optSocieteExpert.$optRDV) ?>
                 </select>
@@ -148,7 +278,7 @@
 <div class="row">
     <div class="col-1"></div>
     <?php  
-        echo($clientz1);
+        echo($fullfiche);
     ?>
 </div>
 

@@ -4,7 +4,7 @@ include 'connexion.php';
 
 ?>
 
-
+<!DOCTYPE HTML>
 <html>
     <head>
         <title> Site de TEST </title>
@@ -22,6 +22,7 @@ include 'connexion.php';
         <!-- Jquery needed -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="./js/scripts.js"></script>
+        <script src="./tinymce/js/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
 
     <!-- Function used to shrink nav bar removing paddings and adding black background -->
         <script>

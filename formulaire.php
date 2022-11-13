@@ -1,3 +1,4 @@
+<!DOCTYPE HTML>
 <html>
     <head>
         <title> Site de TEST </title>
@@ -15,7 +16,7 @@
         <!-- Jquery needed -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="./js/scripts.js"></script>
-
+        <script src="./tinymce/js/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
 
     </head> 
 

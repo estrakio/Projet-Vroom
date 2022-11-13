@@ -20,3 +20,45 @@ $(document).ready(function(){
 
 console.log(findGetParameter("content"))
 
+
+function setArticleDivEditable (idOfDivToEdit, fieldName, id){
+	//if ( destroy )  setDivNoEditable ();
+	//if ( editor1 )  return;
+
+	tinymce.init({
+	// au minimum ces 2 lignes
+	inline: true,
+	selector: "#"+idOfDivToEdit,
+	menubar: false,
+	toolbar: 'undo redo | styleselect | bold italic | link image',
+	
+	
+	init_instance_callback: function(editor) {
+			editor.on('change', function(event) {//alert(idOfDivToEdit);
+				data = tinymce.get(idOfDivToEdit).getContent(); 
+				// alert("---"+$.trim(data)+"---");
+				dataChanged = true;
+				if (dataChanged = true) {
+					alert("test");//updateArticle(idOfDivToEdit.split("z")[1],idOfDivToEdit.split("z")[0], $.trim(data));
+				}
+			});
+		}
+	});
+}
+
+
+
+window.addEventListener('load', function () {
+
+	// deleteArticle(47)
+
+	function myFunction(element, index,) {
+		console.log(index);
+		setArticleDivEditable(element.attributes.id.value, "contenu", index + 1);
+	}
+	elements = document.querySelectorAll(".modifiable");
+	//console.log(elements);
+	elements.forEach(myFunction);
+
+})
+
