@@ -91,6 +91,23 @@ if (isset(
     echo "Ville : " . $_GET['ville'] . "</br>";
     echo "Adresse : " . $_GET['adresse'] . "</br>";
     echo "Code Postal : " . $_GET['codePostal'] . "</br>";
+
+
+    include "connexion.php"; 
+    $tabClient = array(
+        "nom" => $_GET['nom'],
+        "prenom" => $_GET['prenom'],
+        "age" => $_GET['age'],
+        "datedenaissance" => $_GET['dateDeNaissance'],
+        "numerotelephone" => $_GET['pays'],
+        "mail" => $_GET['mail'],
+        "adresse" => $_GET['adresse'],
+        "ville" => $_GET['ville'],
+        "codepostal" => $_GET['codePostal'],
+        "pays" => $_GET['pays'], 
+    );
+
+    insertSql("clients", $tabClient);
 }
 
 ?>
