@@ -332,9 +332,4 @@ if ( $result != "pedaie Societe"){
         $sql = " INSERT INTO ".$nomDeTable."(".$champs.") VALUES (".$listeValues.");";
         pg_query($conn, $sql);
     }
-
-
-    function update() {
-        
-    }
 ?>

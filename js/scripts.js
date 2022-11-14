@@ -30,6 +30,8 @@ function setArticleDivEditable (idOfDivToEdit, fieldName, id){
 	inline: true,
 	selector: "#"+idOfDivToEdit,
 	menubar: false,
+	//forced_root_block : false,
+
 	toolbar: 'undo redo | styleselect | bold italic | link image',
 	
 	
@@ -38,14 +40,29 @@ function setArticleDivEditable (idOfDivToEdit, fieldName, id){
 				data = tinymce.get(idOfDivToEdit).getContent(); 
 				//alert("---"+$.trim(data)+"---");
 				dataChanged = true;
-				if (dataChanged = true) {
-          //updateArticle(idOfDivToEdit.split("z")[1],idOfDivToEdit.split("z")[0], idOfDivToEdit.split("z")[2], $.trim(data));
+				element = document.getElementById(idOfDivToEdit);
+				console.log(element);
+				if (!element.classList.contains("titre")) {
+          			updateArticle(idOfDivToEdit.split("z")[1],idOfDivToEdit.split("z")[0], idOfDivToEdit.split("z")[2], $.trim(data));
+				}else{
+					champ = idOfDivToEdit.split("z")[0];
+					id = idOfDivToEdit.split("z")[1];
+					element = document.getElementById("select"+champ+"z"+id);
+					console.log(element);
+					element.innerHTML = document.getElementById(idOfDivToEdit).innerHTML;
+					updateArticle(idOfDivToEdit.split("z")[1],idOfDivToEdit.split("z")[0], idOfDivToEdit.split("z")[2], $.trim(data));
 				}
 			});
 		}
 	});
 }
 
+function datelistener(id) {
+	console.log(id)
+	data = $("#"+id).val();
+	console.log(data);
+	updateArticle(id.split("z")[1],id.split("z")[0], id.split("z")[2], $.trim(data));
+}
 
 
 window.addEventListener('load', function () {
@@ -53,7 +70,7 @@ window.addEventListener('load', function () {
 	// deleteArticle(47)
 
 	function myFunction(element, index,) {
-		console.log(index);
+		//console.log(index);
 		setArticleDivEditable(element.attributes.id.value);
 	}
 	elements = document.querySelectorAll(".modifiable");
@@ -80,16 +97,15 @@ function updateArticle(id, tableName, fieldName, data) {
 			}
 		});
 		request.done(function (output) { // output : variable qui contient les éventuels affichages générés dans le fichier PHP appelé
-			// Placer ici un éventuel code à exécuter si tout s'est bien exécuté coté PHP
-			// alert('bien ouej')
-			//window.location.replace("http://localhost/formulaire.php?content=accueil");
 			
+			//location.reload("http://localhost/formulaire.php?content=liste");
 		});
 		request.fail(function (error) { // error : variable qui contient l'erreur survenue
 			// Placer ici un éventuel code à exécuter en cas d'erreur coté PHP
-			alert(error)
+			alert(error);
 		});
 		request.always(function () {
 			// Placer ici un éventuel code à exécuter quoi qu'il arrive
+			//alert("test");
 		});
 }

@@ -1,26 +1,41 @@
 <?php
     $conn = pg_connect("host=db dbname=vroooom user=vroooom password=vroooom");
 
+    
+    function update($id, $fieldName, $tableName, $data) {
+        $conn = pg_connect("host=db dbname=vroooom user=vroooom password=vroooom");
+        
+        $sql = "UPDATE $1 SET $2=$3 WHERE id=$4";
+        print($sql);
+        $result = pg_prepare($conn, "my_query", $sql);
+        print($sql);
+        $result = pg_execute($conn, "my_query", array($tableName, $fieldName, $data, $id));
+        print($result);
+        }
+
+    //update(1, "nom", "client", "test");
+    
+        
     $fullfiche = "";
 
-    $sql = "SELECT * FROM Clients";
+    $sql = "SELECT * FROM Clients ORDER by id ASC";
     $valid = pg_query($conn, $sql);
     $optClient = "<optgroup id='client' label='Clients'>";
     $clientId = 1;
     while ($clients = pg_fetch_assoc($valid)) {
         //var_dump($clients);
-        $id = "client"."z".strval($clientId);
+        $id = "clients"."z".strval($clientId);
         $$id = "<div id='fiche".$id."' class='col-8 fiche desactiver'>
                     <br>
                     <b>Clients</b>
                     <br><br>
                     <div id='' class='champ row'>
                         <div id='' class='col-5'>Numéros Client: </div>
-                        <div id='".$id."zid"."' class='col-7 modifiable'>".$clients['id']."</div>                    
+                        <div id='".$id."zid"."' class='col-7'>".$clients['id']."</div>                    
                     </div>
                     <div id='' class='row champ'>
                         <div class='col-5'>Nom: </div>
-                        <div id='".$id."znom"."' class='col-7 modifiable'>".$clients['nom']."</div>                    
+                        <div id='".$id."znom"."' class='col-7 modifiable titre'>".$clients['nom']."</div>                    
                     </div>
                     <div id='' class='row champ'>
                         <div class='col-5'>Prenom: </div>
@@ -32,7 +47,7 @@
                     </div>
                     <div id='' class='row champ'>
                         <div class='col-5'>Date de naissance: </div>
-                        <div id='".$id."zdatedenaissance"."' class='col-7 modifiable'>".$clients['datedenaissance']."</div>                    
+                        <input type='date' id='".$id."zdatedenaissance"."' class='col-7' value='".$clients['datedenaissance']."' onChange='datelistener(this.id)'>                    
                     </div>
                     <div id='' class='row champ'>
                         <div class='col-5'>Numéro de Téléphone: </div>
@@ -62,7 +77,7 @@
                 </div>
                 ";
         $fullfiche .= ${$id};
-        $optClient .= "<option value='fiche".$id."' >".$clients['nom']."  ".$clients['prenom']."</option>";
+        $optClient .= "<option id='select".$id."' value='fiche".$id."' >".$clients['nom']."</option>";
         $clientId += 1;
     }
     $optClient .= "</optgroup>";
@@ -70,7 +85,7 @@
     
 
 
-    $sql = "SELECT * FROM Garage";
+    $sql = "SELECT * FROM Garage ORDER by id ASC";
     $valid = pg_query($conn, $sql);
     $optGarage = "<optgroup id='garage' label='Garages'>";
     $garageId = 1;
@@ -83,11 +98,11 @@
                     <br><br>
                     <div id='' class='champ row'>
                         <div id='' class='col-5'>Numéros Client Garage: </div>
-                        <div id='".$id."zid"."' class='col-7 modifiable'>".$garage['id']."</div>                    
+                        <div id='".$id."zid"."' class='col-7'>".$garage['id']."</div>                    
                     </div>
                     <div id='' class='row champ'>
                         <div class='col-5'>Nom du garage: </div>
-                        <div id='".$id."znomdugarage"."' class='col-7 modifiable'>".$garage['nomdugarage']."</div>                    
+                        <div id='".$id."znomdugarage"."' class='col-7 modifiable titre'>".$garage['nomdugarage']."</div>                    
                     </div>
                     <div id='' class='row champ'>
                         <div class='col-5'>Nom du propriétaire: </div>
@@ -113,13 +128,13 @@
                 </div>
                 ";
         $fullfiche .= ${$id};
-        $optGarage .= "<option value='fiche".$id."'>".$garage['nomdugarage']."</option>";
+        $optGarage .= "<option id='select".$id."' value='fiche".$id."'>".$garage['nomdugarage']."</option>";
         $garageId += 1;
     }
     $optGarage .= "</optgroup>";
 
 
-    $sql = "SELECT * FROM societeExpert";
+    $sql = "SELECT * FROM societeExpert ORDER by id ASC";
     $valid = pg_query($conn, $sql);
     $optSocieteExpert = "<optgroup id='societeExpert' label='Société Expert'>";
     $SocieteExpertId = 1;
@@ -131,11 +146,11 @@
                     <br><br>
                     <div id='' class='champ row'>
                         <div id='' class='col-5'>Numéros Client: </div>
-                        <div id='".$id."zid"."' class='col-7 modifiable'>".$SocieteExpert['id']."</div>                    
+                        <div id='".$id."zid"."' class='col-7 '>".$SocieteExpert['id']."</div>                    
                     </div>
                     <div id='' class='row champ'>
                         <div class='col-5'>Nom: </div>
-                        <div id='".$id."znom"."' class='col-7 modifiable'>".$SocieteExpert['nom']."</div>                    
+                        <div id='".$id."znom"."' class='col-7 modifiable titre'>".$SocieteExpert['nom']."</div>                    
                     </div>
                     <div id='' class='row champ'>
                         <div class='col-5'>Adresse: </div>
@@ -157,13 +172,13 @@
                 </div>
                 ";
         $fullfiche .= ${$id};
-        $optSocieteExpert .= "<option value='fiche".$id."'>".$SocieteExpert['nom']."</option>";
+        $optSocieteExpert .= "<option id='select".$id."' value='fiche".$id."'>".$SocieteExpert['nom']."</option>";
         $SocieteExpertId += 1;
     }
     $optSocieteExpert .= "</optgroup>";
 
 
-    $sql = "SELECT * FROM Expert";
+    $sql = "SELECT * FROM Expert ORDER by id ASC";
     $valid = pg_query($conn, $sql);
     $optExpert = "<optgroup id='expert' label='Expert'>";
     $expertId = 1;
@@ -175,11 +190,11 @@
                     <br><br>
                     <div id='' class='champ row'>
                         <div id='' class='col-5'>Numéros D'Expert: </div>
-                        <div id='".$id."zid"."' class='col-7 modifiable'>".$expert['id']."</div>                    
+                        <div id='".$id."zid"."' class='col-7'>".$expert['id']."</div>                    
                     </div>
                     <div id='' class='row champ'>
                         <div class='col-5'>Nom: </div>
-                        <div id='".$id."znom"."' class='col-7 modifiable'>".$expert['nom']."</div>                    
+                        <div id='".$id."znom"."' class='col-7 modifiable titre'>".$expert['nom']."</div>                    
                     </div>
                     <div id='' class='row champ'>
                         <div class='col-5'>Prenom: </div>
@@ -205,14 +220,14 @@
                 </div>
                 ";
         $fullfiche .= ${$id};
-        $optExpert .= "<option value='fiche".$id."'>".$expert['nom']."  ".$expert['prenom']."</option>";
+        $optExpert .= "<option id='select".$id."' value='fiche".$id."'>".$expert['nom']."</option>";
         $expertId += 1;
     }
     $optExpert .= "</optgroup>";
     //var_dump($expert);
 
 
-    $sql = "SELECT * FROM RendezVous";
+    $sql = "SELECT * FROM RendezVous ORDER by id ASC";
     $valid = pg_query($conn, $sql);
     $optRDV = "<optgroup id='rdv' label='Rendez-Vous'>";
     while ($rendezVous = pg_fetch_assoc($valid)) {
