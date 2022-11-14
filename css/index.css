@@ -25,8 +25,10 @@ body {
 #foot{
     font-size: 1.6rem;
     background-color:rgba(0, 0, 0);
-    
-    
+}
+
+.focus {
+    color: #00E676 !important;
 }
 
 .nav {

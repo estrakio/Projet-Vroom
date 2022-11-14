@@ -4,8 +4,12 @@ $(document).ready(function(){
       console.log("Clicked menu");
       $("#mainListDiv").toggleClass("show_list");
       $("#mainListDiv").fadeIn();
-  
     });
+
+	$(".titre").removeClass("focus");
+	$("#"+findGetParameter("content")).addClass("focus");
+	console.log(findGetParameter("content"));
+	console.log($("#"+findGetParameter("content")));
   });
 
   function findGetParameter(parameterName) {
@@ -18,7 +22,6 @@ $(document).ready(function(){
     return result;
 }
 
-console.log(findGetParameter("content"))
 
 
 function setArticleDivEditable (idOfDivToEdit, fieldName, id){

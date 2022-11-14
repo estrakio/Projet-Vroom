@@ -24,6 +24,10 @@ body {
     min-height: 80vh;
 }
 
+.focus {
+    color: #00E676 !important;
+}
+
 .champ {
     border: solid #000;
     border-width: 0px 0px 2px 2px;

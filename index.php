@@ -43,7 +43,7 @@ include 'connexion.php';
         <nav class="nav">
             <div class="container">
                 <div class="logo">
-                    <a href="/index.php?content=accueil">Accueil</a>
+                    <a class="titre" id="accueil" href="/index.php?content=accueil">Accueil</a>
                 </div>
                 <div id="mainListDiv" class="main_list">
                     <ul class="navlinks">
