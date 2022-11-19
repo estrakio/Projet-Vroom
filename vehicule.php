@@ -30,4 +30,11 @@ if (isset(
     echo "Plaque d'immatriculation : " . $_GET['immatriculation'];
 }
 
+include "vehicule.php"; 
+$tabVehicule = array(
+    "immatriculation" => $_GET['immatriculation'],
+);
+
+insertSql("vehicule", $tabVehicule);
+
 ?>

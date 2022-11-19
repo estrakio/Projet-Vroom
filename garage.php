@@ -63,6 +63,20 @@ if (isset(
     echo "Ville : " . $_GET['ville'] . "</br>";
     echo "Adresse : " . $_GET['adresse'] . "</br>";
     echo "Code postal : " . $_GET['codePostal'] . "</br>";
+
+
+    include "garage.php"; 
+    $tabGarage = array(
+        "nomDuGarage" => $_GET['nomDuGarage'],
+        "nomDuProprietaire" => $_GET['nomDuProprietaire'],
+        "pays" => $_GET['pays'],
+        "ville" => $_GET['ville'],
+        "adresse" => $_GET['adresse'],
+        "codePostal" => $_GET['codePostal'],
+    );
+    
+    insertSql("garage", $tabGarage);
+
 }
 
 ?>

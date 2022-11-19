@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-3 "></div>
     <div class="col-6">
-        <form action="/formulaire.php?content=societeExperts" method="get" id="formSocieteExperts">
+        <form action="/formulaire.php?content=societeExperts" method="get" class="needs-validation" id="formSocieteExperts" novalidate>
         <input hidden value="societeExperts" name="content" id="content">
             <br>
             <div>
@@ -58,5 +58,16 @@ if (isset(
     echo "Code Postal : " . $_GET['codePostal'] . "</br>";
     echo "Numéro Siret : " . $_GET['numeroSiret'] . "</br>";
 }
+
+include "SocieteExperts.php"; 
+$tabSocieteExperts = array(
+    "nom" => $_GET['nom'],
+    "ville" => $_GET['ville'],
+    "adresse" => $_GET['adresse'],
+    "codePostal" => $_GET['codePostal'],
+    "numeroSiret" => $_GET['numeroSiret'],
+);
+
+insertSql("societeExperts", $tabSocieteExperts);
 
 ?>

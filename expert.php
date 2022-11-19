@@ -63,6 +63,20 @@ if (isset(
     echo "Numéro de téléphone : " . $_GET['numeroTelephone'] . "</br>";
     echo "Login : " . $_GET['login'] . "</br>";
     echo "Mot de passe : " . $_GET['motDePasse'] . "</br>";
+
+
+    include "expert.php"; 
+    $tabExpert = array(
+        "nom" => $_GET['nom'],
+        "prenom" => $_GET['prenom'],
+        "adresseMail" => $_GET['adresseMail'],
+        "numeroTelephone" => $_GET['numeroTelephone'],
+        "login" => $_GET['login'],
+        "motDePasse" => $_GET['motDePasse'],
+    );
+
+    insertSql("experts", $tabExpert);
+
 }
 
 ?>

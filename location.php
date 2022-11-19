@@ -124,6 +124,25 @@ if (isset(
     echo "Options : " . $_GET['options'] . "</br>";
     echo "Critères : " . $_GET['critAir'] . "</br>";
 
+    include "location.php"; 
+    $tabLocation = array(
+        "dateDebutLocation" => $_GET['dateDebutLocation'],
+        "dateFinLocation" => $_GET['dateFinLocation'],
+        "marque" => $_GET['marque'],
+        "nomModele" => $_GET['nomModele'],
+        "generation" => $_GET['generation'],
+        "finition" => $_GET['finition'],
+        "categorie" => $_GET['categorie'],
+        "energie" => $_GET['energie'],
+        "annee" => $_GET['annee'],
+        "boiteDeVitesse" => $_GET['boiteDeVitesse'], 
+        "options" => $_GET['options'], 
+        "critAir" => $_GET['critAir'],
+
+    );
+
+    insertSql("location", $tabLocation);
+
 }
 
 ?>

@@ -27,4 +27,11 @@ if (isset(
     echo "Date du rendez-vous : " . $_GET['dateRdv'];
 }
 
+include "rendezVous.php"; 
+$tabRendezVous = array(
+    "dateRdv" => $_GET['dateRdv'],
+);
+
+insertSql("rendezVous", $tabRendezVous);
+
 ?>
