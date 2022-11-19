@@ -46,7 +46,7 @@ function setArticleDivEditable (idOfDivToEdit, fieldName, id){
 				element = document.getElementById(idOfDivToEdit);
 				console.log(element);
 				if (!element.classList.contains("titre")) {
-          			updateArticle(idOfDivToEdit.split("z")[1],idOfDivToEdit.split("z")[0], idOfDivToEdit.split("z")[2], $.trim(data));
+					updateArticle(idOfDivToEdit.split("z")[1],idOfDivToEdit.split("z")[0], idOfDivToEdit.split("z")[2], $.trim(data));
 				}else{
 					champ = idOfDivToEdit.split("z")[0];
 					id = idOfDivToEdit.split("z")[1];
