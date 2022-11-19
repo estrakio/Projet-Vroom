@@ -6,7 +6,7 @@
         <br>
             <div>
                 <label for="">Plaque d'immatriculation</label>
-                <input type="text" class="form-control" name = "immatriculation">
+                <input type="text" class="form-control" name = "immatriculation" required>
             </div>
         </form>
         <div class="text-center">

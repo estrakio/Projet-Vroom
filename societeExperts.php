@@ -6,27 +6,27 @@
             <br>
             <div>
                 <label for="nom">Nom</label>
-                <input type="text" class="form-control" placeholder="Nom" name="nom">
+                <input type="text" class="form-control" placeholder="Nom" name="nom" required>
             </div>
             <br>
             <div>
                 <label for="ville">Ville</label>
-                <input type="text" class="form-control" placeholder="Ville" name="ville">
+                <input type="text" class="form-control" placeholder="Ville" name="ville" required>
             </div>
             <br>
             <div>
                 <label for="adresse">Adresse</label>
-                <input type="text" class="form-control" placeholder="Adresse" name="adresse">
+                <input type="text" class="form-control" placeholder="Adresse" name="adresse" required>
             </div>
             <br>
             <div>
                 <label for="codePostal">Code Postal</label>
-                <input type="number" class="form-control" placeholder="Code Postal" name="codePostal">
+                <input type="number" class="form-control" placeholder="Code Postal" name="codePostal" required>
             </div>
             <br>
             <div>
                 <label for="numeroSiret">Numéro Siret</label>
-                <input type="number" class="form-control" placeholder="Numéro Siret" name="numeroSiret">
+                <input type="number" class="form-control" placeholder="Numéro Siret" name="numeroSiret" required>
             </div>
             <br>
         </form>

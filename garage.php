@@ -6,32 +6,32 @@
             <br>
             <div>
                 <label for="nomDuGarage">Nom du garage</label>
-                <input type="text" class="form-control" placeholder="Nom du garage" name="nomDuGarage">
+                <input type="text" class="form-control" placeholder="Nom du garage" name="nomDuGarage" required>
             </div>
             <br>
             <div>
                 <label for="nomDuProprietaire">Nom du propriétaire</label>
-                <input type="text" class="form-control" placeholder="Nom du propriétaire" name="nomDuProprietaire">
+                <input type="text" class="form-control" placeholder="Nom du propriétaire" name="nomDuProprietaire" required>
             </div>
             <br>
             <div>
                 <label for="pays">Pays</label>
-                <input for="text "class="form-control" placeholder="Pays" name="pays">
+                <input for="text "class="form-control" placeholder="Pays" name="pays" required>
             </div>
             <br>
             <div>
                 <label for="ville">Ville</label>
-                <input type="text" class="form-control" placeholder="Ville" name="ville">
+                <input type="text" class="form-control" placeholder="Ville" name="ville" required>
             </div>  
             <br>
             <div>
                 <label for="adresse">Adresse</label>
-                <input type="text" class="form-control" placeholder="Adresse" name="adresse">
+                <input type="text" class="form-control" placeholder="Adresse" name="adresse" required>
             </div>  
             <br>
             <div>
                 <label for="codePostal">Code Postal</label>
-                <input type="number" class="form-control" placeholder="Code Postal" name="codePostal">
+                <input type="number" class="form-control" placeholder="Code Postal" name="codePostal" required>
             </div>
         </form>
         <div class="text-center">

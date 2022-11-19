@@ -6,7 +6,7 @@
         <br>
             <div>
                 <label for="dateRdv">Date du rendez-vous</label>
-                <input type="date" class="form-control" name="dateRdv">
+                <input type="date" class="form-control" name="dateRdv" required>
             </div>
         </form>
         <div class="text-center">

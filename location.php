@@ -46,37 +46,37 @@
             <br>
             <div>
                 <label for="finition">Finition</label>
-                <input type="text" class="form-control" placeholder="Finition" name="finition">
+                <input type="text" class="form-control" placeholder="Finition" name="finition" required>
             </div>
             <br>
             <div>
                 <label for="categorie">Catégorie</label>
-                <input type="text" class="form-control" placeholder="Catégorie" name="categorie">
+                <input type="text" class="form-control" placeholder="Catégorie" name="categorie" required>
             </div>
             <br>
             <div>
                 <label for="energie">Energie</label>
-                <input type="text" class="form-control" placeholder="Energie" name="energie">
+                <input type="text" class="form-control" placeholder="Energie" name="energie" required>
             </div>
             <br>
             <div>
                 <label for="annee">Année</label>
-                <input type="date" class="form-control" name="annee">
+                <input type="date" class="form-control" name="annee" required>
             </div>
             <br>
             <div>
                 <label for="boiteDeVitesse">Boite de vitesse</label>
-                <input type="text" class="form-control" placeholder="Boite de vitesse" name="boiteDeVitesse">
+                <input type="text" class="form-control" placeholder="Boite de vitesse" name="boiteDeVitesse" required>
             </div>
             <br>
             <div>
                 <label for="options">Options</label>
-                <input type="text" class="form-control" placeholder="Options" name="options">
+                <input type="text" class="form-control" placeholder="Options" name="options" required>
             </div>
             <br>
             <div>
                 <label for="critAir">Critères</label>
-                <input type="text" class="form-control" placeholder="Critères" name="critAir">
+                <input type="text" class="form-control" placeholder="Critères" name="critAir" required>
             </div>
         </form>
         <br>
