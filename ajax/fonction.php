@@ -16,7 +16,7 @@ function update($id, $fieldName, $tableName, $data) {
         $sql = "UPDATE $escaptableName SET $escapfieldName=$escapdata WHERE id=$escapid";
         print($sql);
         pg_query($conn, $sql);
-    } 
+    }
 }
 
 function delete($id, $tableName) {
@@ -26,6 +26,7 @@ function delete($id, $tableName) {
         $escaptableName = pg_escape_string($conn, $tableName);
         $escapid = pg_escape_string($conn, $id);
 
+        
         $sql = "DELETE FROM $escaptableName WHERE id=$escapid";
         print($sql);
         pg_query($conn, $sql);

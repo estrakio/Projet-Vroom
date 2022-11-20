@@ -298,7 +298,7 @@
         echo($fullfiche);
     ?>
 </div>
-<div class="row" style="position: relative; overflow:hidden;z-index: 1;">
+<div class="row" style="position: relative; overflow:hidden;z-index: 0;">
     <div class="col-1 btnsupr">
         <b style="border-bottom: 2px solid;">Supprimer la fiche:</b>
         <div style="padding-top: 2vh;">

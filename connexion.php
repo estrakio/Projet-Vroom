@@ -75,7 +75,7 @@
             numeroTelephone VARCHAR(50),
             id_1 INT NOT NULL,
             PRIMARY KEY(id),
-            FOREIGN KEY(id_1) REFERENCES societeExpert(id)
+            FOREIGN KEY(id_1) REFERENCES societeExpert(id) ON DELETE CASCADE
          );
           ";     
 
@@ -109,7 +109,7 @@
             dateFinLocation VARCHAR(50),
             id_1 INT NOT NULL,
             PRIMARY KEY(id),
-            FOREIGN KEY(id_1) REFERENCES Clients(id)
+            FOREIGN KEY(id_1) REFERENCES Clients(id) ON DELETE CASCADE
 
          );
         ";    
@@ -123,9 +123,9 @@
             id_2 INT NOT NULL,
             id_3 INT NOT NULL,
             PRIMARY KEY(id),
-            FOREIGN KEY(id_1) REFERENCES Expert(id),
-            FOREIGN KEY(id_2) REFERENCES Garage(id),
-            FOREIGN KEY(id_3) REFERENCES Clients(id)
+            FOREIGN KEY(id_1) REFERENCES Expert(id) ON DELETE CASCADE,
+            FOREIGN KEY(id_2) REFERENCES Garage(id) ON DELETE CASCADE,
+            FOREIGN KEY(id_3) REFERENCES Clients(id) ON DELETE CASCADE
          );
 
         ";   
@@ -145,7 +145,7 @@
             critAir INT,
             idMarque VARCHAR(50) NOT NULL,
             PRIMARY KEY(id),
-            FOREIGN KEY(idMarque) REFERENCES Marques(idMarque)
+            FOREIGN KEY(idMarque) REFERENCES Marques(idMarque) ON DELETE CASCADE
          );   
         ";   
          // Kilométrage à supprimer !! ___________________________________________________________________________
@@ -158,8 +158,8 @@
             Id INT NOT NULL,
             id_1 INT NOT NULL,
             PRIMARY KEY(plaque_d_immatriculation),
-            FOREIGN KEY(Id) REFERENCES Location(Id),
-            FOREIGN KEY(id_1) REFERENCES Modele(id)
+            FOREIGN KEY(Id) REFERENCES Location(Id) ON DELETE CASCADE,
+            FOREIGN KEY(id_1) REFERENCES Modele(id) ON DELETE CASCADE
          );     
         ";    
 
@@ -170,7 +170,7 @@
             plaque_d_immatriculation VARCHAR(50) NOT NULL,
             PRIMARY KEY(id),
             UNIQUE(plaque_d_immatriculation),
-            FOREIGN KEY(plaque_d_immatriculation) REFERENCES Vehicule(plaque_d_immatriculation)
+            FOREIGN KEY(plaque_d_immatriculation) REFERENCES Vehicule(plaque_d_immatriculation) ON DELETE CASCADE
          );     
         ";    
      
@@ -180,8 +180,8 @@
             id INT,
             id_1 INT,
             PRIMARY KEY(id, id_1),
-            FOREIGN KEY(id) REFERENCES Piece(id),
-            FOREIGN KEY(id_1) REFERENCES Dossier(id)
+            FOREIGN KEY(id) REFERENCES Piece(id) ON DELETE CASCADE,
+            FOREIGN KEY(id_1) REFERENCES Dossier(id) ON DELETE CASCADE
          );
         ";  
      
