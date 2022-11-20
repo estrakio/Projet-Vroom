@@ -115,12 +115,20 @@ function updateArticle(id, tableName, fieldName, data) {
 
 function suprimerArticle() {
 	console.log($(".activer")[0].attributes.id.value);
+	div = $(".activer")[0].attributes.id.value
+	id = div.split("z")[2]
+	tableName = div.split("z")[1]
 
-	if (window.confirm('Voulez-vous vraiment supprimer cette fiche ?')) {
-		div = $(".activer")[0].attributes.id.value
-		id = div.split("z")[2]
-		tableName = div.split("z")[1]
-
+	if (tableName === "clients") {
+		ask = window.confirm('Voulez-vous vraiment supprimer cette fiche ?')	
+		ask = window.confirm("La supréssion d'un clients suprimera egalement tout les rendez vous affiliez, etes vous certain de vouloir le supprimer ?")	
+	} else if (tableName === "SocieteExpert") {
+		ask = window.confirm('Voulez-vous vraiment supprimer cette fiche ?')	
+		ask = window.confirm("La supréssion d'une société d'expert suprimera egalement tout les experts affiliez, etes vous certain de vouloir la supprimer ?")	
+	} else {
+		ask = window.confirm('Voulez-vous vraiment supprimer cette fiche ?')
+	}
+	if (ask) {
 		request =
 			$.ajax({
 				type: "POST", //Méthode à employer POST ou GET
