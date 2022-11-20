@@ -20,8 +20,23 @@ function update($id, $fieldName, $tableName, $data) {
     }
 }
 
+function delete($id, $tableName) {
+    $conn = pg_connect("host=db dbname=vroooom user=vroooom password=vroooom", PGSQL_CONNECT_FORCE_NEW);
+
+    if ($conn) {
+        $escaptableName = pg_escape_string($conn, $tableName);
+        $escapid = pg_escape_string($conn, $id);
+
+        $sql = "DELETE FROM $escaptableName WHERE id=$escapid";
+        print($sql);
+        pg_query($conn, $sql);
+    }
+}
+
 if(isset($_POST['todo'])) {
-    if($_POST['todo'] = 'update') {
+    if($_POST['todo'] == 'update') {
         update($_POST['id'], $_POST['fieldName'], $_POST['tableName'],$_POST['data']);
+    } elseif($_POST['todo'] == 'delete') {
+        delete($_POST['id'], $_POST['tableName']);
     }
 }

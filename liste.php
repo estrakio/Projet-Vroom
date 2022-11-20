@@ -18,14 +18,14 @@ $conn = pg_connect("host=db dbname=vroooom user=vroooom password=vroooom");
 
 $fullfiche = "";
 
-$sql = "SELECT * FROM Clients ORDER by id ASC";
-$valid = pg_query($conn, $sql);
-$optClient = "<optgroup id='client' label='Clients'>";
-$clientId = 1;
-while ($clients = pg_fetch_assoc($valid)) {
-    //var_dump($clients);
-    $id = "clients" . "z" . strval($clientId);
-    $$id = "<div id='fiche" . $id . "' class='col-8 fiche desactiver'>
+    $sql = "SELECT * FROM Clients ORDER by id ASC";
+    $valid = pg_query($conn, $sql);
+    $optClient = "<optgroup id='client' label='Clients'>";
+    $clientId = 1;
+    while ($clients = pg_fetch_assoc($valid)) {
+        //var_dump($clients);
+        $id = "clients"."z".strval($clientId);
+        $$id = "<div id='fiche".$id."' class='col-8 fiche desactiver'>
                     <br>
                     <b>Clients</b>
                     <br><br>
@@ -76,23 +76,23 @@ while ($clients = pg_fetch_assoc($valid)) {
                     <br>
                 </div>
                 ";
-    $fullfiche .= ${$id};
-    $optClient .= "<option id='select" . $id . "' value='fiche" . $id . "' >" . $clients['nom'] . "</option>";
-    $clientId += 1;
-}
-$optClient .= "</optgroup>";
+        $fullfiche .= ${$id};
+        $optClient .= "<option id='select".$id."' value='fiche".$id."' >".$clients['nom']."</option>";
+        $clientId += 1;
+    }
+    $optClient .= "</optgroup>";
+     
+    
 
 
-
-
-$sql = "SELECT * FROM Garage ORDER by id ASC";
-$valid = pg_query($conn, $sql);
-$optGarage = "<optgroup id='garage' label='Garages'>";
-$garageId = 1;
-while ($garage = pg_fetch_assoc($valid)) {
-    //var_dump($garage);
-    $id = "garage" . "z" . strval($garageId);
-    $$id = "<div id='fiche" . $id . "' class='col-8 fiche desactiver'>
+    $sql = "SELECT * FROM Garage ORDER by id ASC";
+    $valid = pg_query($conn, $sql);
+    $optGarage = "<optgroup id='garage' label='Garages'>";
+    $garageId = 1;
+    while ($garage = pg_fetch_assoc($valid)) {
+        //var_dump($garage);
+        $id = "garage"."z".strval($garageId);
+        $$id = "<div id='fiche".$id."' class='col-8 fiche desactiver'>
                     <br>
                     <b>Garage</b>
                     <br><br>
@@ -127,20 +127,20 @@ while ($garage = pg_fetch_assoc($valid)) {
                     <br>
                 </div>
                 ";
-    $fullfiche .= ${$id};
-    $optGarage .= "<option id='select" . $id . "' value='fiche" . $id . "'>" . $garage['nomdugarage'] . "</option>";
-    $garageId += 1;
-}
-$optGarage .= "</optgroup>";
+        $fullfiche .= ${$id};
+        $optGarage .= "<option id='select".$id."' value='fiche".$id."'>".$garage['nomdugarage']."</option>";
+        $garageId += 1;
+    }
+    $optGarage .= "</optgroup>";
 
 
-$sql = "SELECT * FROM societeExpert ORDER by id ASC";
-$valid = pg_query($conn, $sql);
-$optSocieteExpert = "<optgroup id='societeExpert' label='Société Expert'>";
-$SocieteExpertId = 1;
-while ($SocieteExpert = pg_fetch_assoc($valid)) {
-    $id = "SocieteExpert" . "z" . strval($SocieteExpertId);
-    $$id = "<div id='fiche" . $id . "' class='col-8 fiche desactiver'>
+    $sql = "SELECT * FROM societeExpert ORDER by id ASC";
+    $valid = pg_query($conn, $sql);
+    $optSocieteExpert = "<optgroup id='societeExpert' label='Société Expert'>";
+    $SocieteExpertId = 1;
+    while ($SocieteExpert = pg_fetch_assoc($valid)) {
+        $id = "SocieteExpert"."z".strval($SocieteExpertId);
+        $$id = "<div id='fiche".$id."' class='col-8 fiche desactiver'>
                     <br>
                     <b>Société d'Expert</b>
                     <br><br>
@@ -171,20 +171,20 @@ while ($SocieteExpert = pg_fetch_assoc($valid)) {
                     <br>
                 </div>
                 ";
-    $fullfiche .= ${$id};
-    $optSocieteExpert .= "<option id='select" . $id . "' value='fiche" . $id . "'>" . $SocieteExpert['nom'] . "</option>";
-    $SocieteExpertId += 1;
-}
-$optSocieteExpert .= "</optgroup>";
+        $fullfiche .= ${$id};
+        $optSocieteExpert .= "<option id='select".$id."' value='fiche".$id."'>".$SocieteExpert['nom']."</option>";
+        $SocieteExpertId += 1;
+    }
+    $optSocieteExpert .= "</optgroup>";
 
 
-$sql = "SELECT * FROM Expert ORDER by id ASC";
-$valid = pg_query($conn, $sql);
-$optExpert = "<optgroup id='expert' label='Expert'>";
-$expertId = 1;
-while ($expert = pg_fetch_assoc($valid)) {
-    $id = "expert" . "z" . strval($expertId);
-    $$id = "<div id='fiche" . $id . "' class='col-8 fiche desactiver'>
+    $sql = "SELECT * FROM Expert ORDER by id ASC";
+    $valid = pg_query($conn, $sql);
+    $optExpert = "<optgroup id='expert' label='Expert'>";
+    $expertId = 1;
+    while ($expert = pg_fetch_assoc($valid)) {
+        $id = "expert"."z".strval($expertId);
+        $$id = "<div id='fiche".$id."' class='col-8 fiche desactiver'>
                     <br>
                     <b>Expert</b>
                     <br><br>
@@ -219,12 +219,12 @@ while ($expert = pg_fetch_assoc($valid)) {
                     <br>
                 </div>
                 ";
-    $fullfiche .= ${$id};
-    $optExpert .= "<option id='select" . $id . "' value='fiche" . $id . "'>" . $expert['nom'] . "</option>";
-    $expertId += 1;
-}
-$optExpert .= "</optgroup>";
-//var_dump($expert);
+        $fullfiche .= ${$id};
+        $optExpert .= "<option id='select".$id."' value='fiche".$id."'>".$expert['nom']."</option>";
+        $expertId += 1;
+    }
+    $optExpert .= "</optgroup>";
+    //var_dump($expert);
 
 
 $sql = "SELECT * FROM RendezVous ORDER by id ASC";
@@ -247,15 +247,17 @@ $optRDV .= "</optgroup>";
         $("#second optgroup#" + valeur).show();
         //console.log(valeur);
         $(".fiche").removeClass("activer");
+        $(".btnsupr").removeClass("acti");
         $("#footer ").removeClass("descend");
         $("#second").prop('selectedIndex', 0);
     }
 
     function update2() {
         valeur = $("#second").val();
+        $(".btnsupr").removeClass("acti");
         $(".fiche").removeClass("activer");
-        $("#" + valeur).addClass("activer");
-
+        $("#"+valeur).addClass("activer");
+        
         $("#footer ").removeClass("descend");
         $("#footer ").addClass("descend");
         //console.log(valeur);
@@ -296,3 +298,4 @@ $optRDV .= "</optgroup>";
     echo ($fullfiche);
     ?>
 </div>
+

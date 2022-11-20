@@ -112,3 +112,45 @@ function updateArticle(id, tableName, fieldName, data) {
 			//alert("test");
 		});
 }
+
+function suprimerArticle() {
+	console.log($(".activer")[0].attributes.id.value);
+
+	if (window.confirm('Voulez-vous vraiment supprimer cette fiche ?')) {
+		div = $(".activer")[0].attributes.id.value
+		id = div.split("z")[2]
+		tableName = div.split("z")[1]
+
+		request =
+			$.ajax({
+				type: "POST", //Méthode à employer POST ou GET
+				url: "../ajax/fonction.php", // Page PHP à appeler coté serveur
+				data : {id: id, tableName: tableName, todo: 'delete'}, //cette propriété sert à stocker les données à envoyer
+				cache : false, //permet de spécifier si le navigateur doit mettre en cache les pages demandées
+				//contentType : false, //permets de préciser le type de contenu à utiliser lors de l'envoi au serveur.
+				//processData : false, // définit si les données envoyées doivent être transformées en chaine de requête (ex : ?id=1?login=johnDoe).
+				
+				success: function(response) {
+				},
+				beforeSend: function () {
+					// Placer ici un éventuel code à exécuter avant l'appel ajax en lui même
+				}
+			});
+			request.done(function (output) { // output : variable qui contient les éventuels affichages générés dans le fichier PHP appelé
+				$('#'+div).removeClass("activer")
+				$('.btnsupr').removeClass("acti")
+				$("#footer ").removeClass("descend");
+				$("#select"+tableName+"z"+id).hide();
+				$("#second").prop('selectedIndex',0);
+
+			});
+			request.fail(function (error) { // error : variable qui contient l'erreur survenue
+				// Placer ici un éventuel code à exécuter en cas d'erreur coté PHP
+				alert(error);
+			});
+			request.always(function () {
+				// Placer ici un éventuel code à exécuter quoi qu'il arrive
+				//alert("test");
+			});
+	}
+}
