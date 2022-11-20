@@ -105,7 +105,7 @@
         CREATE TABLE IF NOT EXISTS Location(
             id SERIAL,
             dateDebutLocation VARCHAR(50),
-            dureeLocation VARCHAR(50),
+            dureeLocation INT,
             dateFinLocation VARCHAR(50),
             id_1 INT NOT NULL,
             PRIMARY KEY(id),
@@ -192,10 +192,10 @@
     $valid = pg_query($conn, $test);
     $result = pg_fetch_row($valid)[0];
     //print($result == "alfa Romeo");
-    if ( $result != "alfa Romeo"){
+    if ( $result != "alfa romeo"){
         $insert = "
                     INSERT INTO marques (idmarque)
-                        VALUES ('alfa Romeo');";
+                        VALUES ('alfa romeo');";
         $insert .= "
                     INSERT INTO marques (idmarque)
                         VALUES ('audi');";
@@ -249,13 +249,13 @@ $test = "SELECT nom FROM societeexpert WHERE id = 1";
 $valid = pg_query($conn, $test);
 $result = pg_fetch_row($valid)[0];
 
-if ( $result != "pedaie Societe"){
+if ( $result != "pedaie societe"){
     $insertSociExpert = "
                 INSERT INTO societeexpert (nom, adresse, codepostal, numerosiret, ville)
-                    VALUES ('pedaie Societe', '6 avenue charles de gaulle', '67700', '12345678998765', 'Paris');";
+                    VALUES ('pedaie societe', '6 avenue charles de gaulle', '67700', '12345678998765', 'paris');";
     $insertSociExpert .= "
                 INSERT INTO societeexpert (nom, adresse, codepostal, numerosiret, ville)
-                    VALUES ('de la Faux entreprise', '6 route charles de hugo', '67700', '89987651234567', 'metz');";
+                    VALUES ('de la faux entreprise', '6 route charles de hugo', '67700', '89987651234567', 'metz');";
 
     pg_query($conn, $insertSociExpert);
 }
@@ -271,7 +271,7 @@ if ( $result != "pedaie Societe"){
                         VALUES ('pedaie', 'mathis', 'm.pedaie', 'pedaie-pro@hotmail.fr', 'bonjour123', '0388123432', '1');";
         $insertExpert .= "
                     INSERT INTO expert (nom, prenom, login, adressemail, motdepasse, numerotelephone, id_1)
-                        VALUES ('de laFaux', 'bertrand', 'b.delafaux', 'delafaux-pro@gmail.fr', 'bonjour123', '0678123432', '1');";
+                        VALUES ('de lafaux', 'bertrand', 'b.delafaux', 'delafaux-pro@gmail.fr', 'bonjour123', '0678123432', '1');";
 
         pg_query($conn, $insertExpert);
     }
@@ -284,10 +284,10 @@ if ( $result != "pedaie Societe"){
     if ( $result != "otto mobile"){
         $insertExpert = "
                     INSERT INTO garage (nomdugarage, nomduproprietaire, adresse, codepostal, ville, pays)
-                        VALUES ('otto mobile', 'mathis moustache', '4 rue du garage otto', '677123', 'Saverne', 'Allemagne');";
+                        VALUES ('otto mobile', 'mathis moustache', '4 rue du garage otto', '677123', 'saverne', 'allemagne');";
         $insertExpert .= "
                     INSERT INTO garage (nomdugarage, nomduproprietaire, adresse, codepostal, ville, pays)
-                        VALUES ('moto toto', 'ewan salopette', '23 rue du grand moulin', '67000', 'Marseillle', 'Turquie');";
+                        VALUES ('moto toto', 'ewan salopette', '23 rue du grand moulin', '67000', 'marseillle', 'turquie');";
 
         pg_query($conn, $insertExpert);
     }
@@ -301,10 +301,10 @@ if ( $result != "pedaie Societe"){
     if ( $result != "2000-01-01"){
         $insertLocation = "
                     INSERT INTO location (dateDebutLocation, dureeLocation, dateFinLocation, id_1)
-                        VALUES ('2000-01-01', '4 ans', '2004-01-01', 1 );";
+                        VALUES ('2000-01-01', '23', '2004-01-01', 1 );";
         $insertLocation .= "
                     INSERT INTO location (dateDebutLocation, dureeLocation, dateFinLocation, id_1)
-                        VALUES ('2003-01-01', '4 ans', '2007-01-01', 1 );";
+                        VALUES ('2003-01-01', '2', '2007-01-01', 1 );";
 
         pg_query($conn, $insertLocation);
     }
@@ -328,8 +328,64 @@ if ( $result != "pedaie Societe"){
                 $listeValues .= ", ";
             }
         }
+        $nomDeTable = strtolower($nomDeTable);
+        $champs = strtolower($champs);
+        $listeValues = strtolower($listeValues);
 
         $sql = " INSERT INTO ".$nomDeTable."(".$champs.") VALUES (".$listeValues.");";
         pg_query($conn, $sql);
     }
+
+        // Fonction permettant de Faire un Select avec condition sur n'importe quel table
+        function selectSql($table, $tableauCondition, $listeData){
+
+            $conn = pg_connect("host=db dbname=vroooom user=vroooom password=vroooom");
+            $data = "";
+            $condition = "";
+    
+            foreach($listeData as $col){
+    
+                $data .= $col; 
+    
+                if ( next($listeData)){
+                    $data .= ", ";
+                }
+    
+            }
+    
+            foreach($tableauCondition as $conditionTab => $valeur){
+                if (is_string($valeur)){
+                    $valeur = " '".$valeur."'";
+                    $condition .= $conditionTab." LIKE ".$valeur;
+    
+                }
+                else{
+                    $condition .= $conditionTab." = ".$valeur;
+                }
+    
+                if ( next($tableauCondition)){
+                    $condition .= " AND ";
+                }
+            }
+            $data = strtolower($data);
+            $table = strtolower($table);
+            $condition = strtolower($condition);
+    
+            $sql = "SELECT ".$data." FROM ".$table." WHERE ".$condition.";"; 
+    
+    
+    
+            return(pg_fetch_assoc(pg_query($conn, $sql)));
+    
+        
+            
+        }
+
+        function tableSql($table){
+
+            $conn = pg_connect("host=db dbname=vroooom user=vroooom password=vroooom");
+            $sql = "SELECT * FROM ".$table.";"; 
+    
+            return(pg_fetch_all(pg_query($conn, $sql)));
+        }
 ?>

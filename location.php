@@ -1,42 +1,119 @@
+<?php
+
+if (isset(
+    $_GET['client'],
+    $_GET['plaque_d_immatriculation'],
+    $_GET['datedebutlocation'],
+    $_GET['dureelocation'],
+    $_GET['datefinlocation'],
+    $_GET['idmarque'],
+    $_GET['nommodele'],
+    $_GET['generation'],
+    $_GET['finition'],
+    $_GET['couleur'],
+    $_GET['categorie'],
+    $_GET['energie'],
+    $_GET['annee'],
+    $_GET['boitedevitesse'],
+    $_GET['options'],
+    $_GET['critair']
+)) {
+
+    $tabModele = array(
+        'nommodele' =>      $_GET['nommodele'],
+        'generation' =>     $_GET['generation'],
+        'finition' =>       $_GET['finition'],
+        'categorie' =>      $_GET['categorie'],
+        'energie' =>        $_GET['energie'],
+        'annee' =>          $_GET['annee'],
+        'boitedevitesse' => $_GET['boitedevitesse'],
+        'options' =>        $_GET['options'],
+        'critair' =>        $_GET['critair'],
+        'idmarque' =>       $_GET['idmarque'],
+    );
+
+    insertSql("modele", $tabModele);
+
+
+    $clientListe = explode(" ", $_GET['client']);
+    $tabCondition = array('nom' => $clientListe[0],
+                        'prenom' => $clientListe[1]);
+
+    $listeData = ['id'];
+
+    $idClient = selectSql("clients",$tabCondition,$listeData);
+
+    $tabLocation = array(
+        'datedebutlocation' =>      $_GET['datedebutlocation'],
+        'dureelocation' =>          $_GET['dureelocation'],
+        'datefinlocation' =>        $_GET['datefinlocation'],
+        'id_1' =>                   $idClient['id'],
+    );
+    insertSql("location", $tabLocation);
+
+}
+
+
+
+
+?>
+
+
 <div class="row">
     <div class="col-3 "></div>
     <div class="col-6">
         <form action="/formulaire.php?content=location" method="get" id="formLocation">
-        <input hidden value="location" name="content" id="content">
+            <input hidden value="location" name="content" id="content">
             <br>
             <div>
-                <label for="dateDebutLocation">Début de la location</label>
-                <input type="date" class="form-control" name="dateDebutLocation">
-            </div>
-            <br>
-            <div>
-                <label for="dureelocation">Durée de la location</label>
-                <input type="text" class="form-control" name="dureelocation">
-            </div> 
-            <br>
-            <div>
-                <label for="dateFinLocation">Fin de la location</label>
-                <input type="date" class="form-control" name="dateFinLocation">
-            </div>
-            <br>
-            <div>
-                <label for="marque">Marque de la voiture</label>
-                <select class="form-control" name="marque">
-                    <option>marque 1</option>
-                    <option>marque 2</option>
-                    <option>marque 3</option>
-                    <option>marque 4</option>
+                <label for="client">location attribué à : </label>
+                <select class="form-control" id="" name="client">
+                    <option disabled selected value>-- Select an option -- </option>
+                    <?php
+                    $clients = tableSql('clients');
+                    foreach ($clients as $champ => $data) {
+                        echo ("<option>" . $data['nom'] . " " . $data['prenom'] . "</option>");
+                    }
+                    ?>
                 </select>
             </div>
             <br>
             <div>
-                <label for="nomModele">Modèle de la voiture</label>
-                <select class="form-control" name="nomModele">
-                    <option>modele 1</option>
-                    <option>modele 2</option>
-                    <option>modele 3</option>
-                    <option>modele 4</option>
+                <label for="plaque_d_immatriculation">Plaque d'immatriculation</label>
+                <input type="text" class="form-control" name="plaque_d_immatriculation" required>
+            </div>
+            <br>
+            <div>
+                <label for="datedebutlocation">Début de la location</label>
+                <input type="date" class="form-control" name="datedebutlocation">
+            </div>
+            <br>
+            <div>
+                <label for="dureelocation">Durée de la location (en mois)</label>
+                <input type="number" class="form-control" name="dureelocation">
+            </div>
+            <br>
+            <div>
+                <label for="datefinlocation">Fin de la location</label>
+                <input type="date" class="form-control" name="datefinlocation">
+            </div>
+            <br>
+            <div>
+                <label for="idmarque">Marque du véhicule : </label>
+                <select class="form-control" id="" name="idmarque">
+                    <option disabled selected value>-- Select an option -- </option>
+                    <?php
+                    $societes = tableSql('marques');
+                    foreach ($societes as $champ => $data) {
+                        echo ("<option>" . $data['idmarque'] . "</option>");
+                    }
+                    ?>
                 </select>
+            </div>
+            <br>
+            <div>
+                <label for="nommodele">Modèle du véhicule</label>
+                <input type="text" class="form-control" name="nommodele">
             </div>
             <br>
             <div>
@@ -50,13 +127,24 @@
             </div>
             <br>
             <div>
+                <label for="couleur">Couleur du véhicule</label>
+                <input type="text" class="form-control" name="couleur">
+            </div>
+            <br>
+            <div>
                 <label for="categorie">Catégorie</label>
                 <input type="text" class="form-control" placeholder="Catégorie" name="categorie" required>
             </div>
             <br>
             <div>
                 <label for="energie">Energie</label>
-                <input type="text" class="form-control" placeholder="Energie" name="energie" required>
+                <select class="form-control" name="energie">
+                    <option disabled selected value>-- Select an option -- </option>
+                    <option>essence</option>
+                    <option>diesel</option>
+                    <option>electrique</option>
+                    <option>hybride</option>
+                </select>
             </div>
             <br>
             <div>
@@ -65,8 +153,12 @@
             </div>
             <br>
             <div>
-                <label for="boiteDeVitesse">Boite de vitesse</label>
-                <input type="text" class="form-control" placeholder="Boite de vitesse" name="boiteDeVitesse" required>
+                <label for="boitedevitesse">Boite de vitesse</label>
+                <select class="form-control" name="boitedevitesse">
+                    <option disabled selected value>-- Select an option -- </option>
+                    <option>manuel</option>
+                    <option>automatique</option>
+                </select>
             </div>
             <br>
             <div>
@@ -75,8 +167,15 @@
             </div>
             <br>
             <div>
-                <label for="critAir">Critères</label>
-                <input type="text" class="form-control" placeholder="Critères" name="critAir" required>
+                <label for="critair">Crit'Air</label>
+                <select class="form-control" name="critair">
+                    <option disabled selected value>-- Select an option -- </option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
             </div>
         </form>
         <br>
@@ -87,62 +186,3 @@
     </div>
     <div class="col-3"></div>
 </div>
-
-
-
-
-
-<?php
-
-if (isset(
-    $_GET['dateDebutLocation'], 
-    $_GET['dureelocation'],
-    $_GET['dateFinLocation'],
-    $_GET['marque'],
-    $_GET['nomModele'],
-    $_GET['generation'],
-    $_GET['finition'],
-    $_GET['categorie'],
-    $_GET['energie'],
-    $_GET['annee'],
-    $_GET['boiteDeVitesse'],
-    $_GET['options'],
-    $_GET['critAir']
-    ))
-{
-    echo "Début de la location : " . $_GET['dateDebutLocation'] . "</br>";
-    echo "Durée de la location : " . $_GET['dureelocation'] . "</br>";
-    echo "Fin de la location : " . $_GET['dateFinLocation'] . "</br>";
-    echo "Marque de la voiture : " . $_GET['marque'] . "</br>";
-    echo "Modèle de la voiture : " . $_GET['nomModele'] . "</br>";
-    echo "Génération : " . $_GET['generation'] . "</br>";
-    echo "Finition : " . $_GET['finition'] . "</br>";
-    echo "Catégorie : " . $_GET['categorie'] . "</br>";
-    echo "Energie : " . $_GET['energie'] . "</br>";
-    echo "Année : " . $_GET['annee'] . "</br>";
-    echo "Boite de vitesse : " . $_GET['boiteDeVitesse'] . "</br>";
-    echo "Options : " . $_GET['options'] . "</br>";
-    echo "Critères : " . $_GET['critAir'] . "</br>";
-
-    include "location.php"; 
-    $tabLocation = array(
-        "dateDebutLocation" => $_GET['dateDebutLocation'],
-        "dateFinLocation" => $_GET['dateFinLocation'],
-        "marque" => $_GET['marque'],
-        "nomModele" => $_GET['nomModele'],
-        "generation" => $_GET['generation'],
-        "finition" => $_GET['finition'],
-        "categorie" => $_GET['categorie'],
-        "energie" => $_GET['energie'],
-        "annee" => $_GET['annee'],
-        "boiteDeVitesse" => $_GET['boiteDeVitesse'], 
-        "options" => $_GET['options'], 
-        "critAir" => $_GET['critAir'],
-
-    );
-
-    insertSql("location", $tabLocation);
-
-}
-
-?>
