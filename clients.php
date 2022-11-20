@@ -1,3 +1,56 @@
+<?php
+// Si la variable : nom, prenom, age, mail, numeroTelephone, dateDeNaissance, pays, ville, adresse, codePostal exisent alors echo
+if (isset(
+    $_GET['nom'], 
+    $_GET['prenom'],
+    $_GET['age'],
+    $_GET['mail'],
+    $_GET['numeroTelephone'],
+    $_GET['dateDeNaissance'],
+    $_GET['pays'],
+    $_GET['ville'],
+    $_GET['adresse'],
+    $_GET['codePostal']
+    ))
+{
+    //echo "Nom : " . $_GET['nom'] . "</br>";
+    //echo "Prénom : " . $_GET['prenom'] . "</br>";
+    //echo "Age : " . $_GET['age'] . "</br>";
+    //echo "Mail : " . $_GET['mail'] . "</br>";
+    //echo "Numéro de téléphone : " . $_GET['numeroTelephone'] . "</br>";
+    //echo "Date de naissance : " . $_GET['dateDeNaissance'] . "</br>";
+    //echo "Pays : " . $_GET['pays'] . "</br>";
+    //echo "Ville : " . $_GET['ville'] . "</br>";
+    //echo "Adresse : " . $_GET['adresse'] . "</br>";
+    //echo "Code Postal : " . $_GET['codePostal'] . "</br>";
+
+
+    $tabClient = array(
+        "nom" => $_GET['nom'],
+        "prenom" => $_GET['prenom'],
+        "age" => $_GET['age'],
+        "datedenaissance" => $_GET['dateDeNaissance'],
+        "numerotelephone" => $_GET['pays'],
+        "mail" => $_GET['mail'],
+        "adresse" => $_GET['adresse'],
+        "ville" => $_GET['ville'],
+        "codepostal" => $_GET['codePostal'],
+        "pays" => $_GET['pays'], 
+    );
+
+    insertSql("clients", $tabClient);
+?>
+
+<div class="row text-center text-success">
+    <b style="margin-top:5vh;"> Clients Ajouté ! </b>
+</div>
+
+<?php
+}
+
+?>
+
+
 <div class="row">
     <div class="col-3 "></div>
     <div class="col-6">
@@ -66,48 +119,3 @@
 
 
 
-<?php
-// Si la variable : nom, prenom, age, mail, numeroTelephone, dateDeNaissance, pays, ville, adresse, codePostal exisent alors echo
-if (isset(
-    $_GET['nom'], 
-    $_GET['prenom'],
-    $_GET['age'],
-    $_GET['mail'],
-    $_GET['numeroTelephone'],
-    $_GET['dateDeNaissance'],
-    $_GET['pays'],
-    $_GET['ville'],
-    $_GET['adresse'],
-    $_GET['codePostal']
-    ))
-{
-    echo "Nom : " . $_GET['nom'] . "</br>";
-    echo "Prénom : " . $_GET['prenom'] . "</br>";
-    echo "Age : " . $_GET['age'] . "</br>";
-    echo "Mail : " . $_GET['mail'] . "</br>";
-    echo "Numéro de téléphone : " . $_GET['numeroTelephone'] . "</br>";
-    echo "Date de naissance : " . $_GET['dateDeNaissance'] . "</br>";
-    echo "Pays : " . $_GET['pays'] . "</br>";
-    echo "Ville : " . $_GET['ville'] . "</br>";
-    echo "Adresse : " . $_GET['adresse'] . "</br>";
-    echo "Code Postal : " . $_GET['codePostal'] . "</br>";
-
-
-    include "connexion.php"; 
-    $tabClient = array(
-        "nom" => $_GET['nom'],
-        "prenom" => $_GET['prenom'],
-        "age" => $_GET['age'],
-        "datedenaissance" => $_GET['dateDeNaissance'],
-        "numerotelephone" => $_GET['pays'],
-        "mail" => $_GET['mail'],
-        "adresse" => $_GET['adresse'],
-        "ville" => $_GET['ville'],
-        "codepostal" => $_GET['codePostal'],
-        "pays" => $_GET['pays'], 
-    );
-
-    insertSql("clients", $tabClient);
-}
-
-?>

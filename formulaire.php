@@ -1,3 +1,10 @@
+<?php
+
+include 'connexion.php';
+
+?>
+
+
 <!DOCTYPE HTML>
 <html>
     <head>
