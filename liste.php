@@ -21,11 +21,11 @@
     $sql = "SELECT * FROM Clients ORDER by id ASC";
     $valid = pg_query($conn, $sql);
     $optClient = "<optgroup id='client' label='Clients'>";
-    $clientId = 1;
     while ($clients = pg_fetch_assoc($valid)) {
         //var_dump($clients);
+        $clientId = $clients['id'];
         $id = "clients"."z".strval($clientId);
-        $$id = "<div id='fiche".$id."' class='col-8 fiche desactiver'>
+        $$id = "<div id='fiche"."z".$id."' class='col-8 fiche desactiver'>
                     <br>
                     <b>Clients</b>
                     <br><br>
@@ -77,8 +77,7 @@
                 </div>
                 ";
         $fullfiche .= ${$id};
-        $optClient .= "<option id='select".$id."' value='fiche".$id."' >".$clients['nom']."</option>";
-        $clientId += 1;
+        $optClient .= "<option id='select".$id."' value='fiche"."z".$id."' >".$clients['nom']."</option>";
     }
     $optClient .= "</optgroup>";
      
@@ -88,11 +87,11 @@
     $sql = "SELECT * FROM Garage ORDER by id ASC";
     $valid = pg_query($conn, $sql);
     $optGarage = "<optgroup id='garage' label='Garages'>";
-    $garageId = 1;
     while ($garage = pg_fetch_assoc($valid)) {
         //var_dump($garage);
+        $garageId = $garage['id'];
         $id = "garage"."z".strval($garageId);
-        $$id = "<div id='fiche".$id."' class='col-8 fiche desactiver'>
+        $$id = "<div id='fiche"."z".$id."' class='col-8 fiche desactiver'>
                     <br>
                     <b>Garage</b>
                     <br><br>
@@ -128,8 +127,7 @@
                 </div>
                 ";
         $fullfiche .= ${$id};
-        $optGarage .= "<option id='select".$id."' value='fiche".$id."'>".$garage['nomdugarage']."</option>";
-        $garageId += 1;
+        $optGarage .= "<option id='select".$id."' value='fiche"."z".$id."'>".$garage['nomdugarage']."</option>";
     }
     $optGarage .= "</optgroup>";
 
@@ -137,10 +135,10 @@
     $sql = "SELECT * FROM societeExpert ORDER by id ASC";
     $valid = pg_query($conn, $sql);
     $optSocieteExpert = "<optgroup id='societeExpert' label='Société Expert'>";
-    $SocieteExpertId = 1;
     while ($SocieteExpert = pg_fetch_assoc($valid)) {
+        $SocieteExpertId = $SocieteExpert['id'];
         $id = "SocieteExpert"."z".strval($SocieteExpertId);
-        $$id = "<div id='fiche".$id."' class='col-8 fiche desactiver'>
+        $$id = "<div id='fiche"."z".$id."' class='col-8 fiche desactiver'>
                     <br>
                     <b>Société d'Expert</b>
                     <br><br>
@@ -172,8 +170,7 @@
                 </div>
                 ";
         $fullfiche .= ${$id};
-        $optSocieteExpert .= "<option id='select".$id."' value='fiche".$id."'>".$SocieteExpert['nom']."</option>";
-        $SocieteExpertId += 1;
+        $optSocieteExpert .= "<option id='select".$id."' value='fiche"."z".$id."'>".$SocieteExpert['nom']."</option>";
     }
     $optSocieteExpert .= "</optgroup>";
 
@@ -183,8 +180,9 @@
     $optExpert = "<optgroup id='expert' label='Expert'>";
     $expertId = 1;
     while ($expert = pg_fetch_assoc($valid)) {
+        $expertId = $expert['id'];
         $id = "expert"."z".strval($expertId);
-        $$id = "<div id='fiche".$id."' class='col-8 fiche desactiver'>
+        $$id = "<div id='fiche"."z".$id."' class='col-8 fiche desactiver'>
                     <br>
                     <b>Expert</b>
                     <br><br>
@@ -220,7 +218,7 @@
                 </div>
                 ";
         $fullfiche .= ${$id};
-        $optExpert .= "<option id='select".$id."' value='fiche".$id."'>".$expert['nom']."</option>";
+        $optExpert .= "<option id='select".$id."' value='fiche"."z".$id."'>".$expert['nom']."</option>";
         $expertId += 1;
     }
     $optExpert .= "</optgroup>";
@@ -247,14 +245,18 @@
         $("#second optgroup#"+valeur).show();
         //console.log(valeur);
         $(".fiche").removeClass("activer");
+        $(".btnsupr").removeClass("acti");
         $("#footer ").removeClass("descend");
         $("#second").prop('selectedIndex',0);
     }
 
     function update2() {
         valeur = $("#second").val();
+        $(".btnsupr").removeClass("acti");
         $(".fiche").removeClass("activer");
         $("#"+valeur).addClass("activer");
+        $(".btnsupr").addClass("acti");
+        
         
         $("#footer ").removeClass("descend");
         $("#footer ").addClass("descend");
@@ -295,5 +297,13 @@
     <?php  
         echo($fullfiche);
     ?>
+</div>
+<div class="row" style="position: relative; overflow:hidden;z-index: 1;">
+    <div class="col-1 btnsupr">
+        <b style="border-bottom: 2px solid;">Supprimer la fiche:</b>
+        <div style="padding-top: 2vh;">
+        <button class="btn btn-secondary btn-lg" style="height: 40px;" onclick="suprimerArticle()">Supprimer</button>
+        </div>
+    </div>
 </div>
 

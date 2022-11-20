@@ -24,6 +24,18 @@ body {
     min-height: 80vh;
 }
 
+.btnsupr {
+    width: 50vh;
+    margin-left: 150vh;
+    padding-top: 30vh;
+    transition: transform 400ms ease-in-out;
+    transform: translateX(200%);
+}
+
+.acti {
+    transform: translateX(0%);
+}
+
 .focus {
     color: #00E676 !important;
 }
@@ -38,6 +50,7 @@ body {
     position: absolute;
     transition: transform 400ms ease-in-out;
     font-size: 2.9rem;
+    z-index: 2;
 }
 
 .desactiver {
