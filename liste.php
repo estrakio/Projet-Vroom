@@ -218,7 +218,7 @@
                 </div>
                 ";
         $fullfiche .= ${$id};
-        $optExpert .= "<option id='select".$id."' value='fiche"."z".$id."'>".$expert['nom']."</option>";
+        $optExpert .= "<option class=ap".$expert['id_1']." id='select".$id."' value='fiche"."z".$id."'>".$expert['nom']."</option>";
         $expertId += 1;
     }
     $optExpert .= "</optgroup>";

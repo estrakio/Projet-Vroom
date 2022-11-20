@@ -125,6 +125,9 @@ function suprimerArticle() {
 	} else if (tableName === "SocieteExpert") {
 		ask = window.confirm('Voulez-vous vraiment supprimer cette fiche ?')	
 		ask = window.confirm("La supréssion d'une société d'expert suprimera egalement tout les experts affiliez, etes vous certain de vouloir la supprimer ?")	
+		// console.log($(".ap"+id));
+		// console.log(document.querySelectorAll(".ap"+id))
+		document.querySelectorAll(".ap"+id).forEach(element => element.setAttribute("hidden", "hidden"));
 	} else {
 		ask = window.confirm('Voulez-vous vraiment supprimer cette fiche ?')
 	}
