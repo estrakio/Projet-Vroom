@@ -1,3 +1,22 @@
+<?php
+
+if (isset(
+    $_GET['dateRdv']
+    ))
+{
+    echo "Date du rendez-vous : " . $_GET['dateRdv'];
+}
+
+$tabRendezVous = array(
+    "dateRdv" => $_GET['dateRdv'],
+);
+
+insertSql("rendezVous", $tabRendezVous);
+
+?>
+
+
+
 <div class="row">
     <div class="col-3 "></div>
     <div class="col-6">
@@ -17,21 +36,3 @@
     <div class="col-3"></div>
 </div>
 
-
-<?php
-
-if (isset(
-    $_GET['dateRdv']
-    ))
-{
-    echo "Date du rendez-vous : " . $_GET['dateRdv'];
-}
-
-include "rendezVous.php"; 
-$tabRendezVous = array(
-    "dateRdv" => $_GET['dateRdv'],
-);
-
-insertSql("rendezVous", $tabRendezVous);
-
-?>

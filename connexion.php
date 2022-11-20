@@ -148,7 +148,7 @@
             FOREIGN KEY(idMarque) REFERENCES Marques(idMarque)
          );   
         ";   
-
+         // Kilométrage à supprimer !! ___________________________________________________________________________
     $sql .= "
 
         CREATE TABLE IF NOT EXISTS Vehicule(
@@ -387,5 +387,13 @@ if ( $result != "pedaie societe"){
             $sql = "SELECT * FROM ".$table.";"; 
     
             return(pg_fetch_all(pg_query($conn, $sql)));
+        }
+
+        function justGoSql($requete){
+
+            $conn = pg_connect("host=db dbname=vroooom user=vroooom password=vroooom");
+
+            return(pg_fetch_assoc(pg_query($conn, $requete)));
+
         }
 ?>

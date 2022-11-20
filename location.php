@@ -42,7 +42,6 @@ if (isset(
     $listeData = ['id'];
 
     $idClient = selectSql("clients",$tabCondition,$listeData);
-
     $tabLocation = array(
         'datedebutlocation' =>      $_GET['datedebutlocation'],
         'dureelocation' =>          $_GET['dureelocation'],
@@ -50,8 +49,28 @@ if (isset(
         'id_1' =>                   $idClient['id'],
     );
     insertSql("location", $tabLocation);
+    sleep(1);
+    $sqlIdLocation = "SELECT id FROM location WHERE datedebutlocation = "."'".$_GET['datedebutlocation']."'"." AND dureelocation = "."'".$_GET['dureelocation']."'"." ORDER BY id DESC LIMIT 1;";
 
-}
+    $idLocation = justGoSql($sqlIdLocation);
+    sleep(1);
+    $sqlIdModele = "SELECT id FROM modele WHERE nommodele = "."'".$_GET['nommodele']."'"." AND generation = "."'".$_GET['generation']."'"." ORDER BY id DESC LIMIT 1;";
+
+    $idModele = justGoSql($sqlIdModele);
+    sleep(1);
+    $tabVehicule = array(
+        'plaque_d_immatriculation' => $_GET['plaque_d_immatriculation'],
+        'couleur' => $_GET['couleur'],
+        'id' => $idLocation['id'],
+        'id_1' => $idModele['id'],  
+    );
+    echo("<pre>");
+    var_dump($tabVehicule);
+    echo("</pre>");
+    
+    insertSql("vehicule", $tabVehicule);
+
+}   
 
 
 
