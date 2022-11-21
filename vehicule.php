@@ -3,6 +3,8 @@
 if (isset(
     $_GET['plaque_d_immatriculation']
 )) {
+    
+    $_GET['plaque_d_immatriculation'] = pg_escape_string($conn, $_GET['plaque_d_immatriculation']);
 
     $condition = "'".$_GET['plaque_d_immatriculation']."'";
     $sql = "SELECT

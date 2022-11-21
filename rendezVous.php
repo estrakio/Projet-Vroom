@@ -5,12 +5,15 @@ if (isset(
     $_GET['garage'],
     $_GET['expert'],
     $_GET['dateRdv'],
-    
     ))
 {
-    //echo("<pre>");
-    //var_dump($_GET);
-    //echo("</pre>");
+    
+    $_GET['plaque_d_immatriculation'] = pg_escape_string($conn, $_GET['plaque_d_immatriculation']);
+    $_GET['garage'] = pg_escape_string($conn, $_GET['garage']);
+    $_GET['expert'] = pg_escape_string($conn, $_GET['expert']);
+    $_GET['dateRdv'] = pg_escape_string($conn, $_GET['dateRdv']);
+
+
     $expertListe = explode(" ", $_GET['expert']);
     $tabCondition = array("nom" => $expertListe[0],
                         "prenom" => $expertListe[1],

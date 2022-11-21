@@ -13,16 +13,17 @@ if (isset(
     $_GET['codePostal']
     ))
 {
-    //echo "Nom : " . $_GET['nom'] . "</br>";
-    //echo "Prénom : " . $_GET['prenom'] . "</br>";
-    //echo "Age : " . $_GET['age'] . "</br>";
-    //echo "Mail : " . $_GET['mail'] . "</br>";
-    //echo "Numéro de téléphone : " . $_GET['numeroTelephone'] . "</br>";
-    //echo "Date de naissance : " . $_GET['dateDeNaissance'] . "</br>";
-    //echo "Pays : " . $_GET['pays'] . "</br>";
-    //echo "Ville : " . $_GET['ville'] . "</br>";
-    //echo "Adresse : " . $_GET['adresse'] . "</br>";
-    //echo "Code Postal : " . $_GET['codePostal'] . "</br>";
+
+    $_GET['nom'] = pg_escape_string($conn, $_GET['nom']);
+    $_GET['prenom'] = pg_escape_string($conn, $_GET['prenom']);
+    $_GET['age'] = pg_escape_string($conn, $_GET['age']);
+    $_GET['mail'] = pg_escape_string($conn, $_GET['mail']);
+    $_GET['numeroTelephone'] = pg_escape_string($conn, $_GET['numeroTelephone']);
+    $_GET['dateDeNaissance'] = pg_escape_string($conn, $_GET['dateDeNaissance']);
+    $_GET['pays'] = pg_escape_string($conn, $_GET['pays']);
+    $_GET['ville'] = pg_escape_string($conn, $_GET['ville']);
+    $_GET['adresse'] = pg_escape_string($conn, $_GET['adresse']);
+    $_GET['codePostal'] = pg_escape_string($conn, $_GET['codePostal']);
 
 
     $tabClient = array(

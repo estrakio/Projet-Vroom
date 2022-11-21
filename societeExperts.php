@@ -7,7 +7,17 @@ if (isset(
     $_GET['codepostal'],
     $_GET['numerosiret']
     ))
+
 {
+
+    $_GET['nom'] = pg_escape_string($conn, $_GET['nom']);
+    $_GET['ville'] = pg_escape_string($conn, $_GET['ville']);
+    $_GET['adresse'] = pg_escape_string($conn, $_GET['adresse']);
+    $_GET['codepostal'] = pg_escape_string($conn, $_GET['codepostal']);
+    $_GET['numerosiret'] = pg_escape_string($conn, $_GET['numerosiret']);
+
+
+
     $tabFinale = array('nom' => $_GET['nom'],
                         'adresse' => $_GET['adresse'],
                         'codepostal' => $_GET['codepostal'],

@@ -17,7 +17,26 @@ if (isset(
     $_GET['boitedevitesse'],
     $_GET['options'],
     $_GET['critair']
-)) {
+)) 
+
+{
+
+    $_GET['client'] = pg_escape_string($conn, $_GET['client']);
+    $_GET['plaque_d_immatriculation'] = pg_escape_string($conn, $_GET['plaque_d_immatriculation']);
+    $_GET['datedebutlocation'] = pg_escape_string($conn, $_GET['datedebutlocation']);
+    $_GET['dureelocation'] = pg_escape_string($conn, $_GET['dureelocation']);
+    $_GET['datefinlocation'] = pg_escape_string($conn, $_GET['datefinlocation']);
+    $_GET['idmarque'] = pg_escape_string($conn, $_GET['idmarque']);
+    $_GET['nommodele'] = pg_escape_string($conn, $_GET['nommodele']);
+    $_GET['generation'] = pg_escape_string($conn, $_GET['generation']);
+    $_GET['finition'] = pg_escape_string($conn, $_GET['finition']);
+    $_GET['couleur'] = pg_escape_string($conn, $_GET['couleur']);
+    $_GET['categorie'] = pg_escape_string($conn, $_GET['categorie']);
+    $_GET['energie'] = pg_escape_string($conn, $_GET['energie']);
+    $_GET['annee'] = pg_escape_string($conn, $_GET['annee']);
+    $_GET['boitedevitesse'] = pg_escape_string($conn, $_GET['boitedevitesse']);
+    $_GET['options'] = pg_escape_string($conn, $_GET['options']);
+    $_GET['critair'] = pg_escape_string($conn, $_GET['critair']);
 
     $tabModele = array(
         'nommodele' =>      $_GET['nommodele'],

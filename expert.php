@@ -9,14 +9,17 @@ if (isset(
     $_GET['motDePasse'],
     $_GET['societe']
 
-)) {
-    //echo "Nom : " . $_GET['nom'] . "</br>";
-    //echo "Prénom : " . $_GET['prenom'] . "</br>";
-    //echo "Mail : " . $_GET['adresseMail'] . "</br>";
-    //echo "Numéro de téléphone : " . $_GET['numeroTelephone'] . "</br>";
-    //echo "Login : " . $_GET['login'] . "</br>";
-    //echo "Mot de passe : " . $_GET['motDePasse'] . "</br>";
-    //echo $_GET['societe'];
+)) 
+{
+
+    $_GET['nom'] = pg_escape_string($conn, $_GET['nom']);
+    $_GET['prenom'] = pg_escape_string($conn, $_GET['prenom']);
+    $_GET['adresseMail'] = pg_escape_string($conn, $_GET['adresseMail']);
+    $_GET['numeroTelephone'] = pg_escape_string($conn, $_GET['numeroTelephone']);
+    $_GET['login'] = pg_escape_string($conn, $_GET['login']);
+    $_GET['motDePasse'] = pg_escape_string($conn, $_GET['motDePasse']);
+    $_GET['societe'] = pg_escape_string($conn, $_GET['societe']);
+
 
 
     $tabCondition = array('nom' => $_GET['societe'],);
