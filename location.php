@@ -64,16 +64,16 @@ if (isset(
         'id' => $idLocation['id'],
         'id_1' => $idModele['id'],  
     );
-    echo("<pre>");
-    var_dump($tabVehicule);
-    echo("</pre>");
     
     insertSql("vehicule", $tabVehicule);
+    ?>
 
-}   
-
-
-
+    <div class="row text-center text-success">
+        <b style="margin-top:5vh;"> Location crée avec succés ! </b>
+    </div>
+    
+<?php
+    }
 
 ?>
 

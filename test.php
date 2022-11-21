@@ -1,14 +1,17 @@
 <?php
     // Page de test pour comprendre le format de données pour l'envoi via la fonction SQL 
-    $a = "1112-11-11";
-    $b = "12";
+    $tableVehicule = "vehicule";
+    $plaque ="immatriculation";
 
-    $sqlIdLocation = "SELECT id FROM location WHERE datedebutlocation = "."'".$a."'"." AND dureelocation = "."'".$b."'"." ORDER BY id DESC LIMIT 1;";
+    $sql = "SELECT * FROM " . $tableVehicule . " WHERE plaque_d_immatriculation = ".$plaque." ;";
+    $requeteVehicule = pg_fetch_all(pg_query($conn, $sql));
 
-    $idLocation = justGoSql($sqlIdLocation);
+    //    $sql = "SELECT * FROM vehicule WHERE plaque_d_immatriculation = 'immatriculation' ;";
+    $requeteVehicule = pg_fetch_all(pg_query($conn, $sql));
+
 
     echo("<pre>");
-    var_dump($idLocation);
+    var_dump($requeteVehicule);
     echo("</pre>");
     
 

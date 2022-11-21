@@ -396,4 +396,12 @@ if ( $result != "pedaie societe"){
             return(pg_fetch_assoc(pg_query($conn, $requete)));
 
         }
+
+        function tableSqlOrderById($table){
+
+            $conn = pg_connect("host=db dbname=vroooom user=vroooom password=vroooom");
+            $sql = "SELECT * FROM ".$table." ORDER BY id DESC;"; 
+    
+            return(pg_fetch_all(pg_query($conn, $sql)));
+        }
 ?>
