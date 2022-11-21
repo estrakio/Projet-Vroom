@@ -32,9 +32,6 @@ if (isset(
 
 
 
-    echo ("<pre>");
-    var_dump($idSociete);
-    echo ("</pre>");
 
     $tabExpert = array(
         "nom" => $_GET['nom'],

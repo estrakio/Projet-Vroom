@@ -40,10 +40,10 @@ include 'connexion.php';
                         <li><a class="titre" id="liste" href="/formulaire.php?content=liste">Liste</a></li>
                         <li><a class="titre" id="clients" href="/formulaire.php?content=clients">Clients</a></li>
                         <li><a class="titre" id="garage" href="/formulaire.php?content=garage">Garage</a></li>
+                        <li><a class="titre" id="societeExperts" href="/formulaire.php?content=societeExperts">Société expert</a></li>
                         <li><a class="titre" id="expert" href="/formulaire.php?content=expert">Expert</a></li>
                         <li><a class="titre" id="location" href="/formulaire.php?content=location">Location</a></li>
                         <li><a class="titre" id="rendezVous" href="/formulaire.php?content=rendezVous">Rendez-Vous</a></li>
-                        <li><a class="titre" id="societeExperts" href="/formulaire.php?content=societeExperts">Société expert</a></li>
                         <li><a class="titre" id="vehicule" href="/formulaire.php?content=vehicule">vehicule</a></li>
                     </ul>
                 </div>

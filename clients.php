@@ -30,7 +30,7 @@ if (isset(
         "prenom" => $_GET['prenom'],
         "age" => $_GET['age'],
         "datedenaissance" => $_GET['dateDeNaissance'],
-        "numerotelephone" => $_GET['pays'],
+        "numerotelephone" => $_GET['numeroTelephone'],
         "mail" => $_GET['mail'],
         "adresse" => $_GET['adresse'],
         "ville" => $_GET['ville'],

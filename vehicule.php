@@ -4,19 +4,28 @@ if (isset(
     $_GET['plaque_d_immatriculation']
 )) {
 
+    $condition = "'".$_GET['plaque_d_immatriculation']."'";
+    $sql = "SELECT
+            *
+            FROM vehicule
+            LEFT JOIN modele
+            ON  vehicule.id_1 = modele.id
+            LEFT JOIN location
+            ON  vehicule.id = location.id
+            LEFT JOIN clients
+            ON  Location.id_1 = clients.id
+            WHERE vehicule.plaque_d_immatriculation = ".$condition.";";
 
-    $tabCondition = array("plaque_d_immatriculation" => $_GET['plaque_d_immatriculation'],);
-    $listeData = ["id",];
-    $idVehicule = selectSql("vehicule", $tabCondition, $listeData);
+    $conn = pg_connect("host=db dbname=vroooom user=vroooom password=vroooom");
+    
+    $result = pg_fetch_all(pg_query($conn, $sql));
 
-    $tabCondition = array("id" =>  intval($idVehicule['id']),);
-    $listeData = ["id_1",];
-    $idClients = selectSql("location", $tabCondition, $listeData);
 
-    tableauClient("clients", $idClients);
-    tableauLocation("location", $tabCondition);
-    $plaque = $_GET['plaque_d_immatriculation'];
-    tableauVehicule("vehicule","modele", $plaque);
+
+    tableauClient($result);
+    tableauLocation($result);
+    tableauVehicule($result);
+    tableauDetail($result);
 
 } else {
 
@@ -53,8 +62,7 @@ if (isset(
 
 
 
-function tableauClient($table, $listeConditon)
-{
+function tableauClient($data){
 ?>
 
 <div class="row text-center  h3">
@@ -83,23 +91,20 @@ function tableauClient($table, $listeConditon)
 
         <?php
 
-        $conn = pg_connect("host=db dbname=vroooom user=vroooom password=vroooom");
-        $sql = "SELECT * FROM " . $table . " WHERE id =".$listeConditon['id_1'].";";
-        $requete = pg_fetch_all(pg_query($conn, $sql));
 
         echo ('<div class="row">');
-        foreach ($requete  as $data) {
+        foreach ($data  as $champs => $val) {
             echo ("<tr>");
-            echo ("<td>" . $data['nom'] . "</td>");
-            echo ("<td>" . $data['prenom'] . "</td>");
-            echo ("<td>" . $data['age'] . "</td>");
-            echo ("<td>" . $data["datedenaissance"] . "</td>");
-            echo ("<td>" . $data["numerotelephone"] . "</td>");
-            echo ("<td>" . $data["mail"] . "</td>");
-            echo ("<td>" . $data["adresse"] . "</td>");
-            echo ("<td>" . $data["ville"] . "</td>");
-            echo ("<td>" . $data["codepostal"] . "</td>");
-            echo ("<td>" . $data["pays"] . "</td>");
+            echo ("<td>" . $val['nom'] . "</td>");
+            echo ("<td>" . $val['prenom'] . "</td>");
+            echo ("<td>" . $val['age'] . "</td>");
+            echo ("<td>" . $val["datedenaissance"] . "</td>");
+            echo ("<td>" . $val["numerotelephone"] . "</td>");
+            echo ("<td>" . $val["mail"] . "</td>");
+            echo ("<td>" . $val["adresse"] . "</td>");
+            echo ("<td>" . $val["ville"] . "</td>");
+            echo ("<td>" . $val["codepostal"] . "</td>");
+            echo ("<td>" . $val["pays"] . "</td>");
             echo ("</tr>");
         }
         echo ('</tbody>');
@@ -108,49 +113,8 @@ function tableauClient($table, $listeConditon)
         echo('</div>');
     }
 // *************************************************************************************************
-    function tableauLocation($table, $listeConditon)
-    {
-    ?>
-    
-    <div class="row text-center  h3">
-            <b style="margin-top:5vh;"> Location </b>
-        </div>
-    <div class="row">
-        <div>
-        <table class="table table-striped table-dark h5">
-    
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">début de location :</th>
-                    <th scope="col">mois de location :</th>
-                    <th scope="col">Fin de location :</th>
-                </tr>
-            </thead>
-    
-            <tbody>
-    
-            <?php
-    
-            $conn = pg_connect("host=db dbname=vroooom user=vroooom password=vroooom");
-            $sql = "SELECT * FROM " . $table . " WHERE id =".$listeConditon['id'].";";
-            $requete = pg_fetch_all(pg_query($conn, $sql));
-    
-            echo ('<div class="row">');
-            foreach ($requete  as $data) {
-                echo ("<tr>");
-                echo ("<td>" . $data['datedebutlocation'] . "</td>");
-                echo ("<td>" . $data['dureelocation'] . "</td>");
-                echo ("<td>" . $data['datefinlocation'] . "</td>");
 
-            }
-            echo ('</tbody>');
-            echo ('</table>');
-            echo('</div>');
-            echo('</div>');
-        }
-
-// *************************************************************************************************
-function tableauVehicule($tableVehicule, $tableModele, $plaque)
+function tableauLocation($data)
 {
 ?>
 
@@ -163,56 +127,118 @@ function tableauVehicule($tableVehicule, $tableModele, $plaque)
 
         <thead class="thead-dark">
             <tr>
-                <th scope="col">marque</th>
-                <th scope="col">modele</th>
-                <th scope="col">finition</th>
-                <th scope="col">annee</th>
-                <th scope="col">plaque d'immatriculation</th>
-
+                <th scope="col">début de la location</th>
+                <th scope="col">durée en mois</th>
+                <th scope="col">fin de la location</th>
             </tr>
         </thead>
 
         <tbody>
 
         <?php
-        $plaque = "'".$plaque."'";
-        $conn = pg_connect("host=db dbname=vroooom user=vroooom password=vroooom");
-        //$sql = "SELECT * FROM vehicule WHERE plaque_d_immatriculation = 'immatriculation' ;";
-        $sql = "SELECT * FROM " . $tableVehicule . " WHERE plaque_d_immatriculation = ".$plaque." ;";
-        $requeteVehicule = pg_fetch_all(pg_query($conn, $sql));
-        
-        $conn = pg_connect("host=db dbname=vroooom user=vroooom password=vroooom");
-        
-        $sql = "SELECT * FROM " . $tableModele . " WHERE id =".$requeteVehicule['id_1'].";";
-        $requeteModele = pg_fetch_all(pg_query($conn, $sql));
 
-        $tabData = array("plaque" =>  $requeteVehicule["plaque_d_immatriculation"],
-                        "couleur" =>  $requeteVehicule["couleur"], 
-                        "nommodele" =>  $requeteModele["nommodele"], 
-                        "generation" =>  $requeteModele["generation"], 
-                        "finition" =>  $requeteModele["finition"], 
-                        "categorie" =>  $requeteModele["categorie"], 
-                        "energie" =>  $requeteModele["energie"], 
-                        "annee" =>  $requeteModele["annee"], 
-                        "boitedevitesse" =>  $requeteModele["boitedevitesse"], 
-                        "options" =>  $requeteModele["options"], 
-                        "critair" =>  $requeteModele["critair"], 
-                        "idmarque" =>  $requeteModele["idmarque"], 
-                    
-                    );
 
         echo ('<div class="row">');
+        foreach ($data  as $champs => $val) {
             echo ("<tr>");
-            echo ("<td>" . $tabData['marque'] . "</td>");
-            echo ("<td>" . $tabData['modele'] . "</td>");
-            echo ("<td>" . $tabData['finition'] . "</td>");
-            echo ("<td>" . $tabData['annee'] . "</td>");
-            echo ("<td>" . $tabData['plaque_d_immatriculation'] . "</td>");
+            echo ("<td>" . $val['datedebutlocation'] . "</td>");
+            echo ("<td>" . $val['dureelocation'] . "</td>");
+            echo ("<td>" . $val['datefinlocation'] . "</td>");
 
-        
+            echo ("</tr>");
+        }
         echo ('</tbody>');
         echo ('</table>');
         echo('</div>');
         echo('</div>');
     }
+// *************************************************************************************************
+function tableauDetail($data){
+    ?>
+    
+    <div class="row text-center  h3">
+            <b style="margin-top:5vh;"> Détails </b>
+        </div>
+    <div class="row">
+        <div>
+        <table class="table table-striped table-dark h5">
+    
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Année</th>
+                    <th scope="col">Boite de vitesse</th>
+                    <th scope="col">Options</th>
+                    <th scope="col">Crit'Air</th>
+                    <th scope="col">Génération</th>
+                </tr>
+            </thead>
+    
+            <tbody>
+    
+            <?php
+    
+    
+            echo ('<div class="row">');
+            foreach ($data  as $champs => $val) {
+                echo ("<tr>");
+                echo ("<td>" . $val['annee'] . "</td>");
+                echo ("<td>" . $val['boitedevitesse'] . "</td>");
+                echo ("<td>" . $val['options'] . "</td>");
+                echo ("<td>" . $val['critair'] . "</td>");
+                echo ("<td>" . $val['generation'] . "</td>");
+                echo ("</tr>");
+            }
+            echo ('</tbody>');
+            echo ('</table>');
+            echo('</div>');
+            echo('</div>');
+        }
+    // *************************************************************************************************
+
+    function tableauVehicule($data){
         ?>
+        
+        <div class="row text-center  h3">
+                <b style="margin-top:5vh;"> Véhicule </b>
+            </div>
+        <div class="row">
+            <div>
+            <table class="table table-striped table-dark h5">
+        
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Plaque d'immatriculation</th>
+                        <th scope="col">Marque</th>
+                        <th scope="col">Modèle</th>
+                        <th scope="col">Couleur</th>
+                        <th scope="col">Finition</th>
+                        <th scope="col">Catégorie</th>
+                        <th scope="col">énergie</th>
+                    </tr>
+                </thead>
+        
+                <tbody>
+        
+                <?php
+        
+        
+                echo ('<div class="row">');
+                foreach ($data  as $champs => $val) {
+                    echo ("<tr>");
+                    echo ("<td>" . $val['plaque_d_immatriculation'] . "</td>");
+                    echo ("<td>" . $val['idmarque'] . "</td>");
+                    echo ("<td>" . $val['nommodele'] . "</td>");
+                    echo ("<td>" . $val['couleur'] . "</td>");
+                    echo ("<td>" . $val['finition'] . "</td>");
+                    echo ("<td>" . $val['categorie'] . "</td>");
+                    echo ("<td>" . $val['energie'] . "</td>");
+                    echo ("</tr>");
+                }
+                echo ('</tbody>');
+                echo ('</table>');
+                echo('</div>');
+                echo('</div>');
+            }
+        // *************************************************************************************************
+        ?>
+

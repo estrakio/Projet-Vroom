@@ -1,13 +1,13 @@
 <?php
 
-    // Connect to the database
-    $conn = pg_connect("host=db dbname=vroooom user=vroooom password=vroooom");
-    // Show the client and server versions
-    //print_r(pg_version($conn));
+// Connect to the database
+$conn = pg_connect("host=db dbname=vroooom user=vroooom password=vroooom");
+// Show the client and server versions
+//print_r(pg_version($conn));
 
 
-    $sql = "
-
+$sql = "
+    
         CREATE TABLE IF NOT EXISTS UsersWeb(
         id SERIAL,
         login VARCHAR(50),
@@ -15,17 +15,17 @@
         prenom VARCHAR(50),
         nom VARCHAR(50),
         PRIMARY KEY(id)
-        );
-        ";
+    );
+    ";
 
     $sql .= "
-
-        CREATE TABLE IF NOT EXISTS Clients(
-            id SERIAL,
-            nom VARCHAR(50),
-            prenom VARCHAR(50),
-            age INT,
-            dateDeNaissance DATE,
+    
+    CREATE TABLE IF NOT EXISTS Clients(
+        id SERIAL,
+        nom VARCHAR(50),
+        prenom VARCHAR(50),
+        age INT,
+        dateDeNaissance DATE,
             numeroTelephone VARCHAR(50),
             mail VARCHAR(50),
             adresse VARCHAR(50),
@@ -33,11 +33,11 @@
             codePostal VARCHAR(50),
             pays VARCHAR(50),
             PRIMARY KEY(id)
-         );
-         ";
-
-    $sql .= "
-
+        );
+        ";
+        
+        $sql .= "
+        
         CREATE TABLE IF NOT EXISTS Garage(
             id SERIAL,
             nomDuGarage VARCHAR(50),
@@ -47,11 +47,11 @@
             ville VARCHAR(50),
             pays VARCHAR(50),
             PRIMARY KEY(id)
-         );
-         ";
-
-    $sql .= "
-
+        );
+        ";
+        
+        $sql .= "
+        
         CREATE TABLE IF NOT EXISTS societeExpert(
             id SERIAL,
             nom VARCHAR(50),
@@ -60,12 +60,12 @@
             numeroSiret VARCHAR(50),
             ville VARCHAR(50),
             PRIMARY KEY(id)
-         );     
-         ";
-
-    $sql .= "
-
-         CREATE TABLE IF NOT EXISTS Expert(
+        );     
+        ";
+        
+        $sql .= "
+        
+        CREATE TABLE IF NOT EXISTS Expert(
             id SERIAL,
             nom VARCHAR(50),
             prenom VARCHAR(50),
@@ -76,32 +76,32 @@
             id_1 INT NOT NULL,
             PRIMARY KEY(id),
             FOREIGN KEY(id_1) REFERENCES societeExpert(id) ON DELETE CASCADE
-         );
-          ";     
-
-    $sql .= "
-
-         CREATE TABLE IF NOT EXISTS Piece(
+        );
+        ";     
+        
+        $sql .= "
+        
+        CREATE TABLE IF NOT EXISTS Piece(
             id SERIAL,
             piece VARCHAR(50),
             Description VARCHAR(50),
             lienPhoto VARCHAR(50),
             PRIMARY KEY(id)
-         );
-
-          "; 
-
-    $sql .= "
-
-          CREATE TABLE IF NOT EXISTS Marques(
+        );
+        
+        "; 
+        
+        $sql .= "
+        
+        CREATE TABLE IF NOT EXISTS Marques(
             id SERIAL,
             idMarque VARCHAR(50),
             PRIMARY KEY(idMarque)
         );         
         ";      
-
-    $sql .= "
-
+        
+        $sql .= "
+        
         CREATE TABLE IF NOT EXISTS Location(
             id SERIAL,
             dateDebutLocation VARCHAR(50),
@@ -110,12 +110,12 @@
             id_1 INT NOT NULL,
             PRIMARY KEY(id),
             FOREIGN KEY(id_1) REFERENCES Clients(id) ON DELETE CASCADE
-
-         );
+            
+        );
         ";    
-     
-    $sql .= "
-
+        
+        $sql .= "
+        
         CREATE TABLE IF NOT EXISTS RendezVous(
             id SERIAL,
             dateRdv VARCHAR(50),
@@ -126,12 +126,12 @@
             FOREIGN KEY(id_1) REFERENCES Expert(id) ON DELETE CASCADE,
             FOREIGN KEY(id_2) REFERENCES Garage(id) ON DELETE CASCADE,
             FOREIGN KEY(id_3) REFERENCES Clients(id) ON DELETE CASCADE
-         );
-
+        );
+        
         ";   
-
-    $sql .= "
-
+        
+        $sql .= "
+        
         CREATE TABLE IF NOT EXISTS Modele(
             id SERIAL,
             nomModele VARCHAR(50),
@@ -146,11 +146,11 @@
             idMarque VARCHAR(50) NOT NULL,
             PRIMARY KEY(id),
             FOREIGN KEY(idMarque) REFERENCES Marques(idMarque) ON DELETE CASCADE
-         );   
+        );   
         ";   
-         // Kilométrage à supprimer !! ___________________________________________________________________________
-    $sql .= "
-
+        // Kilométrage à supprimer !! ___________________________________________________________________________
+        $sql .= "
+        
         CREATE TABLE IF NOT EXISTS Vehicule(
             plaque_d_immatriculation VARCHAR(50),
             couleur VARCHAR(50),
@@ -160,81 +160,82 @@
             PRIMARY KEY(plaque_d_immatriculation),
             FOREIGN KEY(Id) REFERENCES Location(Id) ON DELETE CASCADE,
             FOREIGN KEY(id_1) REFERENCES Modele(id) ON DELETE CASCADE
-         );     
+        );     
         ";    
-
-    $sql .= "
-
+        
+        $sql .= "
+        
         CREATE TABLE IF NOT EXISTS Dossier(
             id SERIAL,
             plaque_d_immatriculation VARCHAR(50) NOT NULL,
             PRIMARY KEY(id),
             UNIQUE(plaque_d_immatriculation),
             FOREIGN KEY(plaque_d_immatriculation) REFERENCES Vehicule(plaque_d_immatriculation) ON DELETE CASCADE
-         );     
+        );     
         ";    
-     
-    $sql .= "
-
+        
+        $sql .= "
+        
         CREATE TABLE IF NOT EXISTS Asso19(
             id INT,
             id_1 INT,
             PRIMARY KEY(id, id_1),
             FOREIGN KEY(id) REFERENCES Piece(id) ON DELETE CASCADE,
             FOREIGN KEY(id_1) REFERENCES Dossier(id) ON DELETE CASCADE
-         );
+        );
         ";  
-     
-    pg_query($conn, $sql);
-
-// Ajout de données dans la table MARQUES
-    $test = "SELECT idmarque FROM marques WHERE id = 1";
-    $valid = pg_query($conn, $test);
-    $result = pg_fetch_row($valid)[0];
-    //print($result == "alfa Romeo");
-    if ( $result != "alfa romeo"){
-        $insert = "
-                    INSERT INTO marques (idmarque)
-                        VALUES ('alfa romeo');";
-        $insert .= "
-                    INSERT INTO marques (idmarque)
-                        VALUES ('audi');";
-        $insert .= "
-                    INSERT INTO marques (idmarque)
-                        VALUES ('bmw');";
-        $insert .= "
-                    INSERT INTO marques (idmarque)
-                        VALUES ('citroen');";
-        $insert .= "
-                    INSERT INTO marques (idmarque)
-                        VALUES ('dacia');";
-        $insert .= "
-                    INSERT INTO marques (idmarque)
-                        VALUES ('fiat');";
-        $insert .= "
-                    INSERT INTO marques (idmarque)
-                        VALUES ('mercedes-benz');";
-        $insert .= "
-                    INSERT INTO marques (idmarque)
-                        VALUES ('peugeot');";
-        $insert .= "
-                    INSERT INTO marques (idmarque)
-                        VALUES ('lexus');";
-        $insert .= "
-                    INSERT INTO marques (idmarque)
-                        VALUES ('toyota');";
-        pg_query($conn, $insert);
-    }
-
-
-
-// Ajout de données dans la TABLE CLIENTS
-    $test = "SELECT nom FROM clients WHERE id = 1";
-    $valid = pg_query($conn, $test);
-    $result = pg_fetch_row($valid)[0];
-    //print($result == "alfa Romeo");
-    if ( $result != "mousli"){
-        $insertClients = "
+        
+        pg_query($conn, $sql);
+        
+        // Ajout de données dans la table MARQUES
+            $test = "SELECT idmarque FROM marques WHERE id = 1";
+            $valid = pg_query($conn, $test);
+            $result = pg_fetch_row($valid)[0];
+            //print($result == "alfa Romeo");
+            if ( $result != "alfa romeo"){
+                $insert = "
+                            INSERT INTO marques (idmarque)
+                                VALUES ('alfa romeo');";
+                $insert .= "
+                            INSERT INTO marques (idmarque)
+                                VALUES ('audi');";
+                $insert .= "
+                            INSERT INTO marques (idmarque)
+                                VALUES ('bmw');";
+                $insert .= "
+                            INSERT INTO marques (idmarque)
+                                VALUES ('citroen');";
+                $insert .= "
+                            INSERT INTO marques (idmarque)
+                                VALUES ('dacia');";
+                $insert .= "
+                            INSERT INTO marques (idmarque)
+                                VALUES ('fiat');";
+                $insert .= "
+                            INSERT INTO marques (idmarque)
+                                VALUES ('mercedes-benz');";
+                $insert .= "
+                            INSERT INTO marques (idmarque)
+                                VALUES ('peugeot');";
+                $insert .= "
+                            INSERT INTO marques (idmarque)
+                                VALUES ('lexus');";
+                $insert .= "
+                            INSERT INTO marques (idmarque)
+                                VALUES ('toyota');";
+                pg_query($conn, $insert);
+            }
+        
+        
+        
+        function testDataSql($conn){
+        // Ajout de données dans la TABLE CLIENTS
+        $test = "SELECT nom FROM clients WHERE id = 1";
+        $valid = pg_query($conn, $test);
+        $result = pg_fetch_row($valid)[0];
+        //print($result == "alfa Romeo");
+        if ( $result != "mousli"){
+            $insertClients = "
                     INSERT INTO clients (nom, prenom, age, datedenaissance, numerotelephone, mail, adresse, ville, codepostal, pays)
                         VALUES ('mousli', 'mathis', '20', '2000-08-23', '0606060606', 'waltermathis@hotmail.congo', '6 rue du pif', 'strasbourg', '60000', 'france');";
         $insertClients .= "
@@ -308,7 +309,7 @@ if ( $result != "pedaie societe"){
 
         pg_query($conn, $insertLocation);
     }
-
+}
 
     function insertSql($nomDeTable,$tableau){
         
