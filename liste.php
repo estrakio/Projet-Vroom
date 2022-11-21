@@ -298,11 +298,11 @@
         echo($fullfiche);
     ?>
 </div>
-<div class="row" style="position: relative; overflow:hidden;z-index: 0;">
+<div class="row" style="position: relative; overflow:hidden;z-index: 0;; color: red;">
     <div class="col-1 btnsupr">
         <b style="border-bottom: 2px solid;">Supprimer la fiche:</b>
         <div style="padding-top: 2vh;">
-        <button class="btn btn-secondary btn-lg" style="height: 40px;" onclick="suprimerArticle()">Supprimer</button>
+        <button class="btn btn-danger btn-lg" style="height: 40px;font-size: 2rem;" onclick="suprimerArticle()">Supprimer</button>
         </div>
     </div>
 </div>
