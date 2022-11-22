@@ -374,7 +374,7 @@ if ( $result != "pedaie societe"){
     
             $sql = "SELECT ".$data." FROM ".$table." WHERE ".$condition.";"; 
     
-    
+            // print($sql);
     
             return(pg_fetch_assoc(pg_query($conn, $sql)));
     

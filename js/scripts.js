@@ -52,7 +52,12 @@ function setArticleDivEditable (idOfDivToEdit, fieldName, id){
 					id = idOfDivToEdit.split("z")[1];
 					element = document.getElementById("select"+champ+"z"+id);
 					console.log(element);
-					element.innerHTML = document.getElementById(idOfDivToEdit).innerHTML;
+					str = "";
+					document.querySelectorAll(".activer .titre").forEach(element => {
+						str += element.innerHTML;
+						str += " "
+					});
+					element.innerHTML = str;
 					updateArticle(idOfDivToEdit.split("z")[1],idOfDivToEdit.split("z")[0], idOfDivToEdit.split("z")[2], $.trim(data));
 				}
 			});
@@ -116,9 +121,13 @@ function updateArticle(id, tableName, fieldName, data) {
 function suprimerArticle() {
 	console.log($(".activer")[0].attributes.id.value);
 	div = $(".activer")[0].attributes.id.value
-	id = div.split("z")[2]
-	tableName = div.split("z")[1]
-
+	if (div.split("z")[1] === "rende") {
+		id = div.split("z")[3]
+		tableName = "rendezvous"
+	} else {
+		id = div.split("z")[2]
+		tableName = div.split("z")[1]
+	}
 	if (tableName === "clients") {
 		ask = window.confirm('Voulez-vous vraiment supprimer cette fiche ?')	
 		ask = window.confirm("La supréssion d'un clients suprimera egalement tout les rendez vous affiliez, etes vous certain de vouloir le supprimer ?")	
@@ -151,6 +160,7 @@ function suprimerArticle() {
 				$('#'+div).removeClass("activer")
 				$('.btnsupr').removeClass("acti")
 				$("#footer ").removeClass("descend");
+				console.log(tableName+" "+id)
 				$("#select"+tableName+"z"+id).hide();
 				$("#second").prop('selectedIndex',0);
 

@@ -39,7 +39,7 @@
                     </div>
                     <div id='' class='row champ'>
                         <div class='col-5'>Prenom: </div>
-                        <div id='".$id."zprenom"."' class='col-7 modifiable'>".$clients['prenom']."</div>                    
+                        <div id='".$id."zprenom"."' class='col-7 modifiable titre'>".$clients['prenom']."</div>                    
                     </div>
                     <div id='' class='row champ'>
                         <div class='col-5'>Age: </div>
@@ -77,7 +77,7 @@
                 </div>
                 ";
         $fullfiche .= ${$id};
-        $optClient .= "<option id='select".$id."' value='fiche"."z".$id."' >".$clients['nom']."</option>";
+        $optClient .= "<option id='select".$id."' value='fiche"."z".$id."' >".$clients['nom']." ".$clients['prenom']."</option>";
     }
     $optClient .= "</optgroup>";
      
@@ -196,7 +196,7 @@
                     </div>
                     <div id='' class='row champ'>
                         <div class='col-5'>Prenom: </div>
-                        <div id='".$id."zprenom"."' class='col-7 modifiable'>".$expert['prenom']."</div>                    
+                        <div id='".$id."zprenom"."' class='col-7 modifiable titre'>".$expert['prenom']."</div>                    
                     </div>
                     <div id='' class='row champ'>
                         <div class='col-5'>Login: </div>
@@ -218,18 +218,97 @@
                 </div>
                 ";
         $fullfiche .= ${$id};
-        $optExpert .= "<option class=ap".$expert['id_1']." id='select".$id."' value='fiche"."z".$id."'>".$expert['nom']."</option>";
+        $optExpert .= "<option class=ap".$expert['id_1']." id='select".$id."' value='fiche"."z".$id."'>".$expert['nom']." ".$expert["prenom"]."</option>";
         $expertId += 1;
     }
     $optExpert .= "</optgroup>";
     //var_dump($expert);
 
 
-    $sql = "SELECT * FROM RendezVous ORDER by id ASC";
+    $sql = "SELECT * FROM vehicule ORDER by id ASC";
     $valid = pg_query($conn, $sql);
     $optRDV = "<optgroup id='rdv' label='Rendez-Vous'>";
-    while ($rendezVous = pg_fetch_assoc($valid)) {
-        $optRDV .= "<option>".$rendezVous['dateRdv']."</option>";
+    $rendezvousId = 1;
+    while ($rendezvous = pg_fetch_assoc($valid)) {
+        // $tabCondition = array("id" => intval($rendezvous['id_1']),);
+        // $listeData = ["nom", "prenom",];
+        // $Expert = selectSql("expert",$tabCondition,$listeData); 
+        
+        // $tabCondition = array("id" => intval($rendezvous['id_2']),);
+        // $listeData = ["nomdugarage",];
+        // $Garage = selectSql("garage",$tabCondition,$listeData);
+        
+        // $tabCondition = array("id" =>  intval($rendezvous['id_3']),);
+        // $listeData = ["id",];
+        // $Clients = selectSql("location",$tabCondition,$listeData);
+
+        // $tabCondition = array("id" => intval($Clients['id']),);
+        // $listeData = ["plaque_d_immatriculation",];
+        // $Vehicule = selectSql("vehicule",$tabCondition,$listeData);
+        $condition = "'".$rendezvous['plaque_d_immatriculation']."'";
+        $sql = "SELECT
+            *
+            FROM vehicule
+            LEFT JOIN location
+            ON  vehicule.id = location.id
+            LEFT JOIN clients
+            ON  Location.id_1 = clients.id
+            LEFT JOIN rendezvous
+            ON  clients.id = rendezvous.id_3
+            LEFT JOIN expert
+            ON rendezvous.id_1 = expert.id
+            LEFT JOIN garage
+            ON rendezvous.id_2 = garage.id
+            
+
+            WHERE vehicule.plaque_d_immatriculation = ".$condition.";";
+        
+        
+        $rendezvous = pg_fetch_assoc(pg_query($conn, $sql));
+
+        $sql = "SELECT id FROM rendezvous WHERE daterdv = '".$rendezvous['daterdv']."'";
+        $rdv = pg_fetch_assoc(pg_query($conn, $sql));
+        
+        if (!($rendezvous['id'] == null)) {
+            
+            
+            
+            // var_dump($rendezvous);
+            
+
+            $rendezvousId = $rdv['id'];
+            $id = "rendezvous"."z".strval($rendezvousId);
+            $$id = "<div id='fiche"."z".$id."' class='col-8 fiche desactiver'>
+                        <br>
+                        <b>Rendez-vous: </b>
+                        <br><br>
+                        <div id='' class='champ row'>
+                            <div id='' class='col-5'>Id du rendez-vous: </div>
+                            <div id='".$id."zid"."' class='col-7'>".$rdv['id']."</div>              
+                        </div>
+                        <div id='' class='row champ'>
+                            <div class='col-5'>Expert concerné: </div>
+                            <div id='".$id."znom"."' class='col-7 titre'>".$rendezvous['nom']." ".$rendezvous['prenom']."</div>                    
+                        </div>
+                        <div id='' class='row champ'>
+                            <div class='col-5'>Garage concerné: </div>
+                            <div id='".$id."zprenom"."' class='col-7'>".$rendezvous['nomdugarage']."</div>                    
+                        </div>
+                        <div id='' class='row champ'>
+                            <div class='col-5'>Plaque d'imatriculation: </div>
+                            <div id='".$id."zlogin"."' class='col-7'>".$rendezvous['plaque_d_immatriculation']."</div>                    
+                        </div>
+                        <div id='' class='row champ'>
+                            <div class='col-5'>Date du rendez-vous: </div>
+                            <div id='".$id."zdate"."' class='col-7'>".$rendezvous['daterdv']."</div>                    
+                        </div>
+                        <br>
+                    </div>
+                    ";
+            $fullfiche .= ${$id};
+            $optRDV .= "<option class=ap".$rendezvous['id_3']." id='select".$id."' value='fiche"."z".$id."'>".$rendezvous['plaque_d_immatriculation']."</option>";
+            $rendezvousId += 1;
+        }
     }
     $optRDV .= "</optgroup>";
     //var_dump($rendezVous);
