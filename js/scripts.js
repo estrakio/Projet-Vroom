@@ -54,7 +54,7 @@ function setArticleDivEditable (idOfDivToEdit, fieldName, id){
 					console.log(element);
 					str = "";
 					document.querySelectorAll(".activer .titre").forEach(element => {
-						str += element.innerHTML;
+						str += element.text;
 						str += " "
 					});
 					element.innerHTML = str;

@@ -311,7 +311,71 @@
         }
     }
     $optRDV .= "</optgroup>";
-    //var_dump($rendezVous);
+
+
+
+    $sql = "SELECT * FROM vehicule ORDER by id ASC";
+    $valid = pg_query($conn, $sql);
+    $optVehicule = "<optgroup id='vehicule' label='Véhicule'>";
+    $vehiculeId = 1;
+    while ($vehicule = pg_fetch_assoc($valid)) {
+    $condition = "'".$vehicule['plaque_d_immatriculation']."'";
+    $sql = "SELECT
+            vehicule.id_1, vehicule.plaque_d_immatriculation, vehicule.couleur, vehicule.kilometrage, vehicule.id, 
+            modele.id AS m_id, modele.nomModele, modele.generation, modele.finition, modele.categorie, modele.energie, modele.annee, modele.boiteDeVitesse, modele.options, modele.critAir ,modele idMarque, 
+            location.id AS l_id, location.dateDebutLocation, location.dureeLocation, location.dateFinLocation
+            
+            FROM vehicule
+            LEFT JOIN modele
+            ON  vehicule.id_1 = modele.id
+            LEFT JOIN location
+            ON  vehicule.id = location.id 
+
+            WHERE vehicule.plaque_d_immatriculation = ".$condition.";";
+
+    $conn = pg_connect("host=db dbname=vroooom user=vroooom password=vroooom");
+    
+    $result = pg_fetch_assoc(pg_query($conn, $sql));
+    var_dump($result);
+    //     print("test:".$result['kilometrage']);
+    
+    $vehiculeId = $vehicule['id'];
+    $id = "vehicule"."z".strval($vehiculeId);
+    $mid = "modele"."z".strval($vehiculeId);
+
+    $$id = "<div id='fiche"."z".$id."' class='col-8 fiche desactiver'>
+                <br>
+                <b>Véhicule: </b>
+                <br><br>
+                <div id='' class='champ row'>
+                    <div id='' class='col-5'>Id du véhicule: </div>
+                    <div id='".$id."zid"."' class='col-7'>".$vehicule['id']."</div>              
+                </div>
+                <div id='' class='row champ'>
+                    <div class='col-5'>Plaque d'imatriculation: </div>
+                    <div id='".$id."zplaque_d_immatriculation"."' class='col-7 titre modifiable'>".$result['plaque_d_immatriculation']."</div>                    
+                </div>
+                <div id='' class='row champ'>
+                    <div class='col-5'>couleur: </div>
+                    <div id='".$id."zcouleur"."' class='col-7 modifiable'>".$result['couleur']."</div>                    
+                </div>
+                <div id='' class='row champ'>
+                    <div class='col-5'>Nom du modèle: </div>
+                    <div id='".$mid."znomModele"."' class='col-7 modifiable'>".$result['nommodele']."</div>                    
+                </div>
+                <div id='' class='row champ'>
+                    <div class='col-5'>Kilométrage: </div>
+                    <div id='".$id."zkilometrage"."' class='col-7 modifiable'>".$result['kilometrage']."</div>                    
+                </div>
+                <br>
+            </div>
+            ";
+    $fullfiche .= ${$id};
+    $optVehicule .= "<option class=ap id='select".$id."' value='fiche"."z".$id."'>".$result['plaque_d_immatriculation']."</option>";
+    $vehiculeId += 1;
+
+    }
+    $optVehicule .= "</optgroup>";
 
 
 ?>
@@ -357,6 +421,7 @@
                     <option value="expert">Expert</option>
                     <option value="societeExpert">société expert</option>
                     <option value="rdv">rendez-vous</option>
+                    <option value="vehicule">Véhicule</option>
                 </select>
             </div>
             <br>
@@ -364,7 +429,7 @@
                 <label for="">Choisissez: </label>
                 <select class="form-control" id="second" onchange="update2()">
                     <option disabled selected value> -- select an option -- </option>
-                    <?php echo ($optClient.$optGarage.$optExpert.$optSocieteExpert.$optRDV) ?>
+                    <?php echo ($optClient.$optGarage.$optExpert.$optSocieteExpert.$optRDV.$optVehicule) ?>
                 </select>
             </div>
         </form>
