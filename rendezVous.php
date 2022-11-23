@@ -65,9 +65,7 @@ if (isset(
 $conn = pg_connect("host=db dbname=vroooom user=vroooom password=vroooom");
 
 $result = pg_fetch_all(pg_query($conn, $sql));
-echo("<pre>");
-var_dump($result);
-echo("</pre>");
+
     ?>
 
 
