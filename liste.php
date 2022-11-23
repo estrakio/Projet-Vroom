@@ -336,12 +336,13 @@
     $conn = pg_connect("host=db dbname=vroooom user=vroooom password=vroooom");
     
     $result = pg_fetch_assoc(pg_query($conn, $sql));
-    var_dump($result);
+    //var_dump($result);
     //     print("test:".$result['kilometrage']);
     
     $vehiculeId = $vehicule['id'];
     $id = "vehicule"."z".strval($vehiculeId);
     $mid = "modele"."z".strval($vehiculeId);
+    $lid = "location"."z".strval($vehiculeId);
 
     $$id = "<div id='fiche"."z".$id."' class='col-8 fiche desactiver'>
                 <br>
@@ -364,8 +365,48 @@
                     <div id='".$mid."znomModele"."' class='col-7 modifiable'>".$result['nommodele']."</div>                    
                 </div>
                 <div id='' class='row champ'>
-                    <div class='col-5'>Kilométrage: </div>
-                    <div id='".$id."zkilometrage"."' class='col-7 modifiable'>".$result['kilometrage']."</div>                    
+                    <div class='col-5'>Génération du modèle: </div>
+                    <div id='".$mid."zgeneration"."' class='col-7 modifiable'>".$result['generation']."</div>                    
+                </div>
+                <div id='' class='row champ'>
+                    <div class='col-5'>Finition du modèle: </div>
+                    <div id='".$mid."zfinition"."' class='col-7 modifiable'>".$result['finition']."</div>                    
+                </div>
+                <div id='' class='row champ'>
+                    <div class='col-5'>Catégorie du modèle: </div>
+                    <div id='".$mid."zcategorie"."' class='col-7 modifiable'>".$result['categorie']."</div>                    
+                </div>
+                <div id='' class='row champ'>
+                    <div class='col-5'>Energie du modèle: </div>
+                    <div id='".$mid."zenergie"."' class='col-7 modifiable'>".$result['energie']."</div>                    
+                </div>
+                <div id='' class='row champ'>
+                    <div class='col-5'>Année du modèle: </div>
+                    <div id='".$mid."zannee"."' class='col-7 modifiable'>".$result['annee']."</div>                    
+                </div>
+                <div id='' class='row champ'>
+                    <div class='col-5'>Option du modèle: </div>
+                    <div id='".$mid."zoptions"."' class='col-7 modifiable'>".$result['options']."</div>                    
+                </div>
+                <div id='' class='row champ'>
+                    <div class='col-5'>Boite de vitesse du modèle: </div>
+                    <div id='".$mid."zboitedevitesse"."' class='col-7 modifiable'>".$result['boitedevitesse']."</div>                    
+                </div>
+                <div id='' class='row champ'>
+                    <div class='col-5'>Crit'Air du modèle: </div>
+                    <div id='".$mid."zcritair"."' class='col-7 modifiable'>".$result['critair']."</div>                    
+                </div>
+                <div id='' class='row champ'>
+                    <div class='col-5'>Date de debut de location: </div>
+                    <input type='date' id='".$lid."zdatedebutlocation"."' class='col-7' value='".$result['datedebutlocation']."' onChange='datelistener(this.id)'>                    
+                </div>
+                <div id='' class='row champ'>
+                    <div class='col-5'>duré de la location: </div>
+                    <div id='".$lid."zdureelocation"."' class='col-7 modifiable'>".$result['dureelocation']."</div>                    
+                </div>
+                <div id='' class='row champ'>
+                    <div class='col-5'>Date de fin de location: </div>
+                    <input type='date' id='".$lid."zdatefinlocation"."' class='col-7' value='".$result['datefinlocation']."' onChange='datelistener(this.id)'>                    
                 </div>
                 <br>
             </div>

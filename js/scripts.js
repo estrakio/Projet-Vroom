@@ -129,15 +129,28 @@ function suprimerArticle() {
 		tableName = div.split("z")[1]
 	}
 	if (tableName === "clients") {
-		ask = window.confirm('Voulez-vous vraiment supprimer cette fiche ?')	
+
+		todo = 'delete';
+		//ask = window.confirm('Voulez-vous vraiment supprimer cette fiche ?')	
 		ask = window.confirm("La supréssion d'un clients suprimera egalement tout les rendez vous affiliez, etes vous certain de vouloir le supprimer ?")	
+
 	} else if (tableName === "SocieteExpert") {
-		ask = window.confirm('Voulez-vous vraiment supprimer cette fiche ?')	
+
+		todo = 'delete';
+		//ask = window.confirm('Voulez-vous vraiment supprimer cette fiche ?')	
 		ask = window.confirm("La supréssion d'une société d'expert suprimera egalement tout les experts affiliez, etes vous certain de vouloir la supprimer ?")	
 		// console.log($(".ap"+id));
 		// console.log(document.querySelectorAll(".ap"+id))
 		document.querySelectorAll(".ap"+id).forEach(element => element.setAttribute("hidden", "hidden"));
+
+	} else if (tableName === "vehicule") {
+
+		todo = 'vehidelete';
+		ask = window.confirm("La supréssion d'un véhicule suprimera egalement la location affiliez ainsi que son modele, etes vous certain de vouloir le supprimer ?")	
+	
 	} else {
+
+		todo = 'delete';
 		ask = window.confirm('Voulez-vous vraiment supprimer cette fiche ?')
 	}
 	if (ask) {
@@ -145,7 +158,7 @@ function suprimerArticle() {
 			$.ajax({
 				type: "POST", //Méthode à employer POST ou GET
 				url: "../ajax/fonction.php", // Page PHP à appeler coté serveur
-				data : {id: id, tableName: tableName, todo: 'delete'}, //cette propriété sert à stocker les données à envoyer
+				data : {id: id, tableName: tableName, todo: todo}, //cette propriété sert à stocker les données à envoyer
 				cache : false, //permet de spécifier si le navigateur doit mettre en cache les pages demandées
 				//contentType : false, //permets de préciser le type de contenu à utiliser lors de l'envoi au serveur.
 				//processData : false, // définit si les données envoyées doivent être transformées en chaine de requête (ex : ?id=1?login=johnDoe).

@@ -35,8 +35,16 @@ function delete($id, $tableName) {
 
 if(isset($_POST['todo'])) {
     if($_POST['todo'] == 'update') {
+
         update($_POST['id'], $_POST['fieldName'], $_POST['tableName'],$_POST['data']);
+
     } elseif($_POST['todo'] == 'delete') {
+
         delete($_POST['id'], $_POST['tableName']);
+
+    } elseif($_POST['todo'] == 'vehidelete') {
+
+        delete($_POST['id'], "location");
+        delete($_POST['id'], "modele");
     }
 }
