@@ -51,6 +51,23 @@ if (isset(
     
     <?php
     }
+
+    $sql = "SELECT
+            *
+            FROM vehicule
+            LEFT JOIN modele
+            ON  vehicule.id_1 = modele.id
+            LEFT JOIN location
+            ON  vehicule.id = location.id
+            LEFT JOIN clients
+            ON  Location.id_1 = clients.id;";
+
+$conn = pg_connect("host=db dbname=vroooom user=vroooom password=vroooom");
+
+$result = pg_fetch_all(pg_query($conn, $sql));
+echo("<pre>");
+var_dump($result);
+echo("</pre>");
     ?>
 
 
@@ -68,9 +85,10 @@ if (isset(
                 <select class="form-control" id="" name="plaque_d_immatriculation">
                     <option disabled selected value>-- Select an option -- </option>
                     <?php
-                        $vehicule = tableSql('vehicule');
-                        foreach ($vehicule as $champ => $plaque) {
-                            echo ("<option>" . $plaque['plaque_d_immatriculation'] . "</option>");
+
+                        
+                        foreach ($result as $champ => $plaque) {
+                            echo ("<option>" . $plaque['plaque_d_immatriculation'] ." -- ". $plaque['nom']." ".$plaque['prenom']."</option>");
                         }
                     ?>
                 </select>
