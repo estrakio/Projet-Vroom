@@ -20,7 +20,7 @@ function expertConnect($login, $mdp){
     return $login_valid;
 }
 
-function dataExpert($id){
+function getExpert($id){
     $tabCondition = array('id' => $id);
     $listeData = ['nom','prenom', 'login'];
     $data = selectSql("expert",$tabCondition,$listeData);
@@ -37,7 +37,7 @@ if (isset($_POST["login"]) and isset($_POST["password"])) {
     
     $test = expertConnect($_POST["login"], $_POST["password"]);
     if($test === "True"){
-        echo(dataExpert($id));
+        echo(getExpert($id));
     }
 }
 

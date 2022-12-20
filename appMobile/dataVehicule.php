@@ -1,13 +1,11 @@
 <?php
-include_once("connexion.php");
-$_POST["plaque"] = "plaque";
-
+include_once("../connexion.php");
 function testPlaque($plaque){
     $table = tableSql("Vehicule");
     $plaque_valid = "False";
 
     foreach ($table as $line) {
-        if ($line["plaque_d_immatriculation"]){
+        if ($line["plaque_d_immatriculation"] == $_POST["plaque"]){
             $plaque_valid = "True";
             break;
         }
@@ -42,6 +40,8 @@ function dataVehicule($plaque){
                         "plaque_d_immatriculation" => $result[0]["plaque_d_immatriculation"],
                         "couleur" => $result[0]["couleur"],
                         "nommodele" => $result[0]["nommodele"],
+                        "nom" => $result[0]["nom"],
+                        "prenom" => $result[0]["prenom"],
                         "datedebutlocation" => $result[0]["datedebutlocation"],
                         "dureelocation" => $result[0]["dureelocation"],
                         "datefinlocation" => $result[0]["datefinlocation"],
