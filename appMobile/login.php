@@ -1,21 +1,17 @@
 <?php
-
+include_once("../connexion.php");
 function expertConnect($login, $mdp){
-    $test = tableSql("Expert");
-    $valid = 0;
+    $table = tableSql("Expert");
+    $login_valid = "False";
 
-    foreach ($test as $line) {
+    foreach ($table as $line) {
         if ($line["login"] == $login and $line["motdepasse"] == $mdp){
-            $valid = 1;
+            $login_valid = "True";
             break;
         }
     }
 
-    if ($valid === 1 ){
-        return "true";
-    }else{
-        return "false";
-    }
+    return $login_valid;
     
     //echo("<pre>");
     //var_dump($test);
@@ -24,7 +20,13 @@ function expertConnect($login, $mdp){
 }
 
 
-$login = "expert";
-$mdp = "expert";
+$login = "test";
+$mdp = "testmdp";
 
-echo(expertConnect($login, $mdp));
+if (isset($_POST["login"]) and isset($_POST["password"])) {
+    
+    echo(expertConnect($_POST["login"], $_POST["password"]));
+}
+
+
+
