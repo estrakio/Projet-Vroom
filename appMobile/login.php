@@ -25,7 +25,7 @@ $mdp = "testmdp";
 
 if (isset($_POST["login"]) and isset($_POST["password"])) {
     
-    echo(expertConnect($_POST["login"], $_POST["password"]));
+    echo(json_encode(array("login" => expertConnect($_POST["login"], $_POST["password"]))));
 }
 
 
