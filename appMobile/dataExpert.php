@@ -1,7 +1,12 @@
 <?php
 include_once("../connexion.php");
 
+$id = "";
+$login = "test";
+$mdp = "testmdp";
+
 function expertConnect($login, $mdp){
+    global $id;
     $table = tableSql("Expert");
     $login_valid = "False";
 
@@ -12,33 +17,28 @@ function expertConnect($login, $mdp){
             break;
         }
     }
-
     return $login_valid;
-    
-    //echo("<pre>");
-    //var_dump($test);
-    //echo("</pre>");
-
 }
 
 function dataExpert($id){
-
     $tabCondition = array('id' => $id);
-
     $listeData = ['nom','prenom', 'login'];
-
-    $data = selectSql("clients",$tabCondition,$listeData);
-    $json_data = json_encode($data);
+    $data = selectSql("expert",$tabCondition,$listeData);
+    $tableau = array ("dataExpert" => "true",
+                        "nom" => $data["nom"],
+                        "prenom" => $data["prenom"],
+                        "login" => $data["login"],
+    );
+    $json_data = json_encode($tableau);
     return $json_data;
 }
 
-$id = "";
-$login = "test";
-$mdp = "testmdp";
-
 if (isset($_POST["login"]) and isset($_POST["password"])) {
     
-    echo(expertConnect($_POST["login"], $_POST["password"]));
+    $test = expertConnect($_POST["login"], $_POST["password"]);
+    if($test === "True"){
+        echo(dataExpert($id));
+    }
 }
 
 
