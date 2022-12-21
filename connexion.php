@@ -355,13 +355,12 @@ if ( $result != "pedaie societe"){
             }
     
             foreach($tableauCondition as $conditionTab => $valeur){
-                if (is_string($valeur)){
-                    $valeur = " '".$valeur."'";
+                if (!is_numeric($valeur)){
+                    $valeur = "'".$valeur."'";
                     $condition .= $conditionTab." LIKE ".$valeur;
     
-                }
-                else{
-                    $condition .= $conditionTab." = ".$valeur;
+                } else {
+                    $condition .= $conditionTab . " = " . $valeur;
                 }
     
                 if ( next($tableauCondition)){

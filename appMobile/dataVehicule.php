@@ -2,11 +2,11 @@
 include_once("../connexion.php");
 function testPlaque($plaque){
     $table = tableSql("Vehicule");
-    $plaque_valid = "False";
+    $plaque_valid = false;
 
     foreach ($table as $line) {
-        if ($line["plaque_d_immatriculation"] == $_POST["plaque"]){
-            $plaque_valid = "True";
+        if ($line["plaque_d_immatriculation"] == $plaque){
+            $plaque_valid = true;
             break;
         }
     }
@@ -36,26 +36,30 @@ function dataVehicule($plaque){
     //var_dump($result);
     //echo("</pre>");
 
-    $tableau = array ("dataVehicule" => "true",
-                        "plaque_d_immatriculation" => $result[0]["plaque_d_immatriculation"],
-                        "couleur" => $result[0]["couleur"],
-                        "nommodele" => $result[0]["nommodele"],
-                        "nom" => $result[0]["nom"],
-                        "prenom" => $result[0]["prenom"],
-                        "datedebutlocation" => $result[0]["datedebutlocation"],
-                        "dureelocation" => $result[0]["dureelocation"],
-                        "datefinlocation" => $result[0]["datefinlocation"],
-                        "idmarque" => $result[0]["idmarque"],
+    $tableau = array (  
+        "plaque_d_immatriculation" => $result[0]["plaque_d_immatriculation"],
+        "couleur" => $result[0]["couleur"],
+        "nommodele" => $result[0]["nommodele"],
+        "nom" => $result[0]["nom"],
+        "prenom" => $result[0]["prenom"],
+        "datedebutlocation" => $result[0]["datedebutlocation"],
+        "dureelocation" => $result[0]["dureelocation"],
+        "datefinlocation" => $result[0]["datefinlocation"],
+        "idmarque" => $result[0]["idmarque"],
     );
-    $json_data = json_encode($tableau);
-    return $json_data;
+    
+    // $json_data = json_encode($tableau);
+    return $tableau;
 }
 
 if (isset($_POST["plaque"])){
     
-    $test = testPlaque($_POST["plaque"]);
-    if($test === "True"){
-        echo(dataVehicule($_POST["plaque"]));
+    $plaque_valid = testPlaque($_POST["plaque"]);
+
+    if($plaque_valid){
+        echo(json_encode(array( "dataVehicule" => dataVehicule($_POST["plaque"]))));
+    } else {
+        echo(json_encode(array( "dataVehicule" => "False")));
     }
 }
 
