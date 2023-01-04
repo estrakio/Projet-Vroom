@@ -76,17 +76,18 @@ function get_dossier($plaque) {
     foreach ($result as $expertise) {
 
         $ligne = array(
-            "piece" => $expertise["piece"],
             "description" => $expertise["description"],
-            "lienphoto" =>  $expertise["lienphoto"]
+            "lienphoto" =>  $expertise["lienphoto"],
+            "piece" => $expertise["piece"]
         );
         array_push($envoi,$ligne);
 
     }
-    $listExpertise = array("list_expertise" => $envoi);
-    $json = json_encode($listExpertise);
-    echo($json);
+    // $listExpertise = array("list_expertise" => $envoi);
+    // $json = json_encode($listExpertise);
+    // echo($json);
 
+    return $envoi;
     //echo("<pre>");
     //var_dump($envoi);
     //echo("</pre>");
@@ -102,8 +103,10 @@ if (isset($_POST["plaque"])){
             echo(json_encode(array( "state" => "pas de dossier")));
         }
     } else {
-        get_dossier($_POST["plaque"]);
-        echo(json_encode(array( "state" => "fail")));
+        if (!isset($_POST["dossier"])) {
+            $doss = get_dossier($_POST["plaque"]);
+            echo (json_encode(array("state" => "get dossier", "dossier" => array("list_expertise" => $doss))));
+        }
     }
 }
 
