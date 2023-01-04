@@ -73,16 +73,23 @@ function get_dossier($plaque) {
     $result = pg_fetch_all(pg_query($conn, $sql));
 
     $envoi = [];
-    foreach ($result as $line) {
+    foreach ($result as $expertise) {
 
-        $ligne = array("
-        ");
+        $ligne = array(
+            "piece" => $expertise["piece"],
+            "description" => $expertise["description"],
+            "lienphoto" =>  $expertise["lienphoto"]
+        );
+        array_push($envoi,$ligne);
+
     }
-    $envoi = array();
+    $listExpertise = array("list_expertise" => $envoi);
+    $json = json_encode($listExpertise);
+    echo($json);
 
-    echo("<pre>");
-    var_dump($result);
-    echo("</pre>");
+    //echo("<pre>");
+    //var_dump($envoi);
+    //echo("</pre>");
 }
 if (isset($_POST["plaque"])){
     $already_created = testPlaqueDossier($_POST["plaque"]);
