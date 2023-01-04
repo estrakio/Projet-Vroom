@@ -323,8 +323,12 @@ if ( $result != "pedaie societe"){
         $listeValues = "";
         foreach($tableau as $nomChamp => $valeurs){
             $champs .= $nomChamp;
-            $listeValues .= "'".$valeurs."'";
-            if ( next($tableau)){
+            if (!is_numeric($valeurs)) { 
+                $listeValues .= "'".$valeurs."'";
+            } else {
+                $listeValues .= $valeurs;
+            }
+            if ( next($tableau) !== false){
                 $champs .= ", ";
                 $listeValues .= ", ";
             }
@@ -334,6 +338,7 @@ if ( $result != "pedaie societe"){
         $listeValues = strtolower($listeValues);
 
         $sql = " INSERT INTO ".$nomDeTable."(".$champs.") VALUES (".$listeValues.");";
+        // print($sql);
         pg_query($conn, $sql);
     }
 

@@ -33,7 +33,7 @@ if (isset(
     $idSociete = pg_fetch_assoc(pg_query($conn, $sql));
 
 
-
+    // var_dump($idSociete);
 
 
     $tabExpert = array(
