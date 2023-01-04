@@ -72,17 +72,28 @@ function get_dossier($plaque) {
     
     $result = pg_fetch_all(pg_query($conn, $sql));
 
+    $envoi = [];
+    foreach ($result as $line) {
+
+        $ligne = array("
+        ");
+    }
+    $envoi = array();
+
     echo("<pre>");
     var_dump($result);
     echo("</pre>");
 }
-
-if (isset($_POST["dossier"])){
+if (isset($_POST["plaque"])){
     $already_created = testPlaqueDossier($_POST["plaque"]);
 
     if(!$already_created){
-        create_dossier($_POST["plaque"]);
-        echo(json_encode(array( "state" => "success")));
+        if (isset($_POST["dossier"])){
+            create_dossier($_POST["plaque"]);
+            echo(json_encode(array( "state" => "success")));
+        }else{
+            echo(json_encode(array( "state" => "pas de dossier")));
+        }
     } else {
         get_dossier($_POST["plaque"]);
         echo(json_encode(array( "state" => "fail")));
