@@ -27,7 +27,7 @@ function create_dossier($plaque){
     $dossier = json_decode($_POST["dossier"], true);
     // echo $dossier["list_expertise"];
 
-    foreach ($dossier['list_expertise'] as $i => $expertise) {
+    foreach ($dossier as $i => $expertise) {
         // var_dump($expertise);
 
         $id_expertise = pg_fetch_assoc(pg_query($conn, "INSERT INTO piece (piece, description, lienphoto) VALUES ('".$expertise['piece']."', '".$expertise['description']."', '".$expertise['lienphoto']."') RETURNING id;"))['id'];
@@ -105,7 +105,7 @@ if (isset($_POST["plaque"])){
     } else {
         if (!isset($_POST["dossier"])) {
             $doss = get_dossier($_POST["plaque"]);
-            echo (json_encode(array("state" => "get dossier", "dossier" => array("list_expertise" => $doss))));
+            echo (json_encode(array("state" => "get dossier", "dossier" => array("list_expertise" => $doss, "new_list_expertise" => null))));
         }
     }
 }
