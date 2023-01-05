@@ -85,7 +85,7 @@ $sql = "
             id SERIAL,
             piece VARCHAR(50),
             Description VARCHAR(50),
-            lienPhoto VARCHAR(50),
+            lienPhoto BYTEA,
             PRIMARY KEY(id)
         );
         
