@@ -27,10 +27,17 @@ function create_dossier($plaque){
     $dossier = json_decode($_POST["dossier"], true);
     // echo $dossier["list_expertise"];
 
-    foreach ($dossier['list_expertise'] as $i => $expertise) {
+    foreach ($dossier as $i => $expertise) {
         // var_dump($expertise);
 
-        $id_expertise = pg_fetch_assoc(pg_query($conn, "INSERT INTO piece (piece, description, lienphoto) VALUES ('".$expertise['piece']."', '".$expertise['description']."', '".$expertise['lienphoto']."') RETURNING id;"))['id'];
+        $img = $expertise['lienphoto'];
+        // echo $img;
+        // $img = base64_decode($img);
+        // $img = pg_escape_bytea($conn, $img);
+        // echo $img;
+        // echo base64_encode($img);
+
+        $id_expertise = pg_fetch_assoc(pg_query($conn, "INSERT INTO piece (piece, description, lienphoto) VALUES ('".$expertise['piece']."', '".$expertise['description']."', '$img') RETURNING id;"))['id'];
         pg_query($conn, "INSERT INTO asso19 (id, id_1) VALUES ('$id_expertise', '$id_dossier');");
 
         // insertSql('asso19', array('id' => $id_expertise, 'id_1' => $id_dossier));
@@ -97,7 +104,7 @@ function updateData($plaque){
 
     $conn = pg_connect("host=db dbname=vroooom user=vroooom password=vroooom");
     $plaque = pg_escape_string($conn, $plaque);
-            $sql = "SELECT id FROM Dossier WHERE plaque_d_immatriculation = '".$plaque."';"; 
+    $sql = "SELECT id FROM Dossier WHERE plaque_d_immatriculation = '".$plaque."';"; 
     
     $id_dossier = pg_fetch_assoc(pg_query($conn, $sql))['id'];
 
@@ -106,10 +113,10 @@ function updateData($plaque){
     $dossier = json_decode($_POST["dossier"], true);
     // echo $dossier["list_expertise"];
 
-    foreach ($dossier['list_expertise'] as $i => $expertise) {
+    foreach ($dossier as $i => $expertise) {
         // var_dump($expertise);
 
-        $id_expertise = pg_fetch_assoc(pg_query($conn, "INSERT INTO piece (piece, description, lienphoto) VALUES ('".$expertise['piece']."', '".$expertise['description']."', '".$expertise['lienphoto']."') RETURNING id;"))['id'];
+        $id_expertise = pg_fetch_assoc(pg_query($conn, "INSERT INTO piece (piece, description, lienphoto) VALUES ('".$expertise['piece']."', '".$expertise['description']."', '".base64_decode($expertise['lienphoto'])."') RETURNING id;"))['id'];
         pg_query($conn, "INSERT INTO asso19 (id, id_1) VALUES ('$id_expertise', '$id_dossier');");
     }
 }
@@ -127,9 +134,11 @@ if (isset($_POST["plaque"])){
         }
     } else {
         if (!isset($_POST["dossier"])) {
-            updateData($_POST["plaque"]);
             $doss = get_dossier($_POST["plaque"]);
             echo (json_encode(array("state" => "get dossier", "dossier" => array("list_expertise" => $doss))));
+        } else {
+            updateData($_POST["plaque"]);
+            echo(json_encode(array( "state" => "success")));
         }
     }
 }
