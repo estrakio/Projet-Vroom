@@ -116,7 +116,7 @@ function updateData($plaque){
     foreach ($dossier as $i => $expertise) {
         // var_dump($expertise);
 
-        $id_expertise = pg_fetch_assoc(pg_query($conn, "INSERT INTO piece (piece, description, lienphoto) VALUES ('".$expertise['piece']."', '".$expertise['description']."', '".base64_decode($expertise['lienphoto'])."') RETURNING id;"))['id'];
+        $id_expertise = pg_fetch_assoc(pg_query($conn, "INSERT INTO piece (piece, description, lienphoto) VALUES ('".$expertise['piece']."', '".$expertise['description']."', '".$expertise['lienphoto']."') RETURNING id;"))['id'];
         pg_query($conn, "INSERT INTO asso19 (id, id_1) VALUES ('$id_expertise', '$id_dossier');");
     }
 }
