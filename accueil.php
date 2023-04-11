@@ -20,7 +20,7 @@
       <div class="col-6">
         <h4>
           <b class="term">Application mobile</b>
-        </h4>l'application mobile sert a remplir les formulaires des experts qui vont vérifier l'état de la voiture,
+        </h4>L'application mobile sert a remplir les formulaires des experts qui vont vérifier l'état de la voiture,
         <br>
         il y remplisse tout les dégats que la voiture à subi durant ça location.
       </div>
