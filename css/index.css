@@ -7,13 +7,12 @@ body {
     font-family: "Quicksand", sans-serif;
     font-size: 62.5%;
     font-size: 10px;
+    overflow-x: hidden;
 }
-/*-- Inspiration taken from abdo steif -->
-/* --> https://codepen.io/abdosteif/pen/bRoyMb?editors=1100*/
 
 /* Navbar section */
 #content {
-    height: 100vh;
+    /* height: 100vh; */
     width:100%;
     background: linear-gradient(#808080, #FFFFFF);
     margin: 0;
@@ -101,7 +100,7 @@ body {
 
 .home {
     width: 100%;
-    height: 100vh;
+    height: 20vh;
     background: linear-gradient(#000000, #808080);
 }
 
@@ -496,4 +495,17 @@ body {
     font-size:13px;
     color:#fff;
     margin-bottom:0;
+}
+
+/* Style de la barre de défilement en mode sombre */
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: #333;
+    /* Couleur de fond en mode sombre */
+}
+
+/* Style du curseur de la barre de défilement en mode sombre */
+::-webkit-scrollbar-thumb {
+    background-color: #555;
+    /* Couleur du curseur en mode sombre */
 }
