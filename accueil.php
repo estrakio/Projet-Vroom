@@ -13,7 +13,7 @@
         <h4>
           <b class="term">Site web</b>
         </h4>
-        le site sert de gestionnaire pour la société de leasing.
+        Le site sert de gestionnaire pour la société de leasing.
         <br>
         c'est ici que toute les données de base sont créer, modifiées et supprimées.
       </div>
