@@ -15,7 +15,7 @@
         </h4>
         Le site sert de gestionnaire pour la société de leasing.
         <br>
-        c'est ici que toute les données de base sont créer, modifiées et supprimées.
+        C'est ici que toute les données de base sont créer, modifiées et supprimées.
       </div>
       <div class="col-6">
         <h4>
