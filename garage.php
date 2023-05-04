@@ -1,47 +1,36 @@
 <?php
 
-if (isset(
-    $_GET['nomDuGarage'], 
-    $_GET['nomDuProprietaire'],
-    $_GET['pays'],
-    $_GET['ville'],
-    $_GET['adresse'],
-    $_GET['codePostal']
-    ))
-{
-
-    $_GET['nomDuGarage'] = pg_escape_string($conn, $_GET['nomDuGarage']);
-    $_GET['nomDuProprietaire'] = pg_escape_string($conn, $_GET['nomDuProprietaire']);
-    $_GET['pays'] = pg_escape_string($conn, $_GET['pays']);
-    $_GET['ville'] = pg_escape_string($conn, $_GET['ville']);
-    $_GET['adresse'] = pg_escape_string($conn, $_GET['adresse']);
-    $_GET['codePostal'] = pg_escape_string($conn, $_GET['codePostal']);
+if(!empty($_POST)){
+    
+    foreach ($_POST as $key => $value) {
+        $value = pg_escape_string($conn, $value);
+    }
 
 
     $tabGarage = array(
-        "nomDuGarage" => $_GET['nomDuGarage'],
-        "nomDuProprietaire" => $_GET['nomDuProprietaire'],
-        "pays" => $_GET['pays'],
-        "ville" => $_GET['ville'],
-        "adresse" => $_GET['adresse'],
-        "codePostal" => $_GET['codePostal'],
+        "nomDuGarage" => $_POST['nomDuGarage'],
+        "nomDuProprietaire" => $_POST['nomDuProprietaire'],
+        "pays" => $_POST['pays'],
+        "ville" => $_POST['ville'],
+        "adresse" => $_POST['adresse'],
+        "codePostal" => $_POST['codePostal'],
     );
     
     insertSql("garage", $tabGarage);
-
 ?>
+
 <div class="row text-center text-success">
     <p style="margin-top:5vh;"> Garage Ajouté ! </p>
 </div>
 
 <?php
-    }
+}
 ?>
 
 <div class="row">
     <div class="col-3 "></div>
     <div class="col-6">
-        <form action="/formulaire.php?content=garage" method="get" id="formGarage">
+        <form action="/formulaire.php?content=garage" method="post" id="formGarage">
         <input hidden value="garage" name="content" id="content">
             <br>
             <div>
