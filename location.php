@@ -1,60 +1,29 @@
 <?php
 
-if (isset(
-    $_GET['client'],
-    $_GET['plaque_d_immatriculation'],
-    $_GET['datedebutlocation'],
-    $_GET['dureelocation'],
-    $_GET['datefinlocation'],
-    $_GET['idmarque'],
-    $_GET['nommodele'],
-    $_GET['generation'],
-    $_GET['finition'],
-    $_GET['couleur'],
-    $_GET['categorie'],
-    $_GET['energie'],
-    $_GET['annee'],
-    $_GET['boitedevitesse'],
-    $_GET['options'],
-    $_GET['critair']
-)) 
+if(!empty($_POST)){
 
-{
+    foreach ($_POST as $key => $value) {
+        $value = pg_escape_string($conn, $value);
+    }
 
-    $_GET['client'] = pg_escape_string($conn, $_GET['client']);
-    $_GET['plaque_d_immatriculation'] = pg_escape_string($conn, $_GET['plaque_d_immatriculation']);
-    $_GET['datedebutlocation'] = pg_escape_string($conn, $_GET['datedebutlocation']);
-    $_GET['dureelocation'] = pg_escape_string($conn, $_GET['dureelocation']);
-    $_GET['datefinlocation'] = pg_escape_string($conn, $_GET['datefinlocation']);
-    $_GET['idmarque'] = pg_escape_string($conn, $_GET['idmarque']);
-    $_GET['nommodele'] = pg_escape_string($conn, $_GET['nommodele']);
-    $_GET['generation'] = pg_escape_string($conn, $_GET['generation']);
-    $_GET['finition'] = pg_escape_string($conn, $_GET['finition']);
-    $_GET['couleur'] = pg_escape_string($conn, $_GET['couleur']);
-    $_GET['categorie'] = pg_escape_string($conn, $_GET['categorie']);
-    $_GET['energie'] = pg_escape_string($conn, $_GET['energie']);
-    $_GET['annee'] = pg_escape_string($conn, $_GET['annee']);
-    $_GET['boitedevitesse'] = pg_escape_string($conn, $_GET['boitedevitesse']);
-    $_GET['options'] = pg_escape_string($conn, $_GET['options']);
-    $_GET['critair'] = pg_escape_string($conn, $_GET['critair']);
 
     $tabModele = array(
-        'nommodele' =>      $_GET['nommodele'],
-        'generation' =>     $_GET['generation'],
-        'finition' =>       $_GET['finition'],
-        'categorie' =>      $_GET['categorie'],
-        'energie' =>        $_GET['energie'],
-        'annee' =>          $_GET['annee'],
-        'boitedevitesse' => $_GET['boitedevitesse'],
-        'options' =>        $_GET['options'],
-        'critair' =>        $_GET['critair'],
-        'idmarque' =>       $_GET['idmarque'],
+        'nommodele' =>      $_POST['nommodele'],
+        'generation' =>     $_POST['generation'],
+        'finition' =>       $_POST['finition'],
+        'categorie' =>      $_POST['categorie'],
+        'energie' =>        $_POST['energie'],
+        'annee' =>          $_POST['annee'],
+        'boitedevitesse' => $_POST['boitedevitesse'],
+        'options' =>        $_POST['options'],
+        'critair' =>        $_POST['critair'],
+        'idmarque' =>       $_POST['idmarque'],
     );
 
     insertSql("modele", $tabModele);
 
 
-    $clientListe = explode(" ", $_GET['client']);
+    $clientListe = explode(" ", $_POST['client']);
     $tabCondition = array('nom' => $clientListe[0],
                         'prenom' => $clientListe[1]);
 
@@ -62,25 +31,25 @@ if (isset(
 
     $idClient = selectSql("clients",$tabCondition,$listeData);
     $tabLocation = array(
-        'datedebutlocation' =>      $_GET['datedebutlocation'],
-        'dureelocation' =>          $_GET['dureelocation'],
-        'datefinlocation' =>        $_GET['datefinlocation'],
+        'datedebutlocation' =>      $_POST['datedebutlocation'],
+        'dureelocation' =>          $_POST['dureelocation'],
+        'datefinlocation' =>        $_POST['datefinlocation'],
         'id_1' =>                   $idClient['id'],
     );
     insertSql("location", $tabLocation);
     sleep(1);
-    $sqlIdLocation = "SELECT id FROM location WHERE datedebutlocation = "."'".strtolower($_GET['datedebutlocation'])."'"." AND dureelocation = "."'".strtolower($_GET['dureelocation'])."'"." ORDER BY id DESC LIMIT 1;";
+    $sqlIdLocation = "SELECT id FROM location WHERE datedebutlocation = "."'".strtolower($_POST['datedebutlocation'])."'"." AND dureelocation = "."'".strtolower($_POST['dureelocation'])."'"." ORDER BY id DESC LIMIT 1;";
 
     $idLocation = justGoSql($sqlIdLocation);
     sleep(1);
-    $sqlIdModele = "SELECT id FROM modele WHERE nommodele = "."'".strtolower($_GET['nommodele'])."'"." AND generation = "."'".strtolower($_GET['generation'])."'"." ORDER BY id DESC LIMIT 1;";
+    $sqlIdModele = "SELECT id FROM modele WHERE nommodele = "."'".strtolower($_POST['nommodele'])."'"." AND generation = "."'".strtolower($_POST['generation'])."'"." ORDER BY id DESC LIMIT 1;";
     // print($sqlIdModele);
     $idModele = justGoSql($sqlIdModele);
     // var_dump($idModele);
     sleep(1);
     $tabVehicule = array(
-        'plaque_d_immatriculation' => $_GET['plaque_d_immatriculation'],
-        'couleur' => $_GET['couleur'],
+        'plaque_d_immatriculation' => $_POST['plaque_d_immatriculation'],
+        'couleur' => $_POST['couleur'],
         'id' => $idLocation['id'],
         'id_1' => $idModele['id'],  
     );
@@ -101,7 +70,7 @@ if (isset(
 <div class="row">
     <div class="col-3 "></div>
     <div class="col-6">
-        <form action="/formulaire.php?content=location" method="get" id="formLocation">
+        <form action="/formulaire.php?content=location" method="post" id="formLocation">
             <input hidden value="location" name="content" id="content">
             <br>
             <div>
