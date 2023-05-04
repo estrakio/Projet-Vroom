@@ -1,46 +1,32 @@
 <?php
-// Si la variable : nom, prenom, age, mail, numeroTelephone, dateDeNaissance, pays, ville, adresse, codePostal exisent alors echo
-if (isset(
-    $_GET['nom'], 
-    $_GET['prenom'],
-    $_GET['age'],
-    $_GET['mail'],
-    $_GET['numeroTelephone'],
-    $_GET['dateDeNaissance'],
-    $_GET['pays'],
-    $_GET['ville'],
-    $_GET['adresse'],
-    $_GET['codePostal']
-    ))
-{
 
-    $_GET['nom'] = pg_escape_string($conn, $_GET['nom']);
-    $_GET['prenom'] = pg_escape_string($conn, $_GET['prenom']);
-    $_GET['age'] = pg_escape_string($conn, $_GET['age']);
-    $_GET['mail'] = pg_escape_string($conn, $_GET['mail']);
-    $_GET['numeroTelephone'] = pg_escape_string($conn, $_GET['numeroTelephone']);
-    $_GET['dateDeNaissance'] = pg_escape_string($conn, $_GET['dateDeNaissance']);
-    $_GET['pays'] = pg_escape_string($conn, $_GET['pays']);
-    $_GET['ville'] = pg_escape_string($conn, $_GET['ville']);
-    $_GET['adresse'] = pg_escape_string($conn, $_GET['adresse']);
-    $_GET['codePostal'] = pg_escape_string($conn, $_GET['codePostal']);
+// echo('<div>');
+// var_dump($_POST);
+// echo('</div>');
 
+
+if(!empty($_POST)){
+
+    foreach ($_POST as $key => &$value) {
+        $value = pg_escape_string($conn, $value);
+    }
 
     $tabClient = array(
-        "nom" => $_GET['nom'],
-        "prenom" => $_GET['prenom'],
-        "age" => $_GET['age'],
-        "datedenaissance" => $_GET['dateDeNaissance'],
-        "numerotelephone" => $_GET['numeroTelephone'],
-        "mail" => $_GET['mail'],
-        "adresse" => $_GET['adresse'],
-        "ville" => $_GET['ville'],
-        "codepostal" => $_GET['codePostal'],
-        "pays" => $_GET['pays'], 
+        "nom" => $_POST['nom'],
+        "prenom" => $_POST['prenom'],
+        "age" => $_POST['age'],
+        "datedenaissance" => $_POST['dateDeNaissance'],
+        "numerotelephone" => $_POST['numeroTelephone'],
+        "mail" => $_POST['mail'],
+        "adresse" => $_POST['adresse'],
+        "ville" => $_POST['ville'],
+        "codepostal" => $_POST['codePostal'],
+        "pays" => $_POST['pays'], 
     );
 
     insertSql("clients", $tabClient);
 ?>
+
 
 <div class="row text-center text-success">
     <b style="margin-top:5vh;"> Clients Ajouté ! </b>
@@ -55,7 +41,7 @@ if (isset(
 <div class="row">
     <div class="col-3 "></div>
     <div class="col-6">
-        <form action="/formulaire.php?content=clients" method="get" id="formClients">
+        <form action="/formulaire.php?content=clients" method="post" id="formClients">
         <input hidden value="clients" name="content" id="content">
             <br>
             <div>
