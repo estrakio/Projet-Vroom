@@ -9,7 +9,7 @@
         print($sql);
         $result = pg_prepare($conn, "my_query", $sql);
         print($sql);
-        $result = pg_execute($conn, "my_query", array($tableName, $fieldName, $data, $id));
+        $result = pg_execute($conn, "my_query", array($tableName, $fieldName, strip_tags($data), $id));
         print($result);
         }
 
@@ -321,7 +321,7 @@
     while ($vehicule = pg_fetch_assoc($valid)) {
     $condition = "'".$vehicule['plaque_d_immatriculation']."'";
     $sql = "SELECT
-            vehicule.id_1, vehicule.plaque_d_immatriculation, vehicule.couleur, vehicule.kilometrage, vehicule.id, 
+            vehicule.id_1, vehicule.plaque_d_immatriculation, vehicule.couleur, vehicule.id, 
             modele.id AS m_id, modele.nomModele, modele.generation, modele.finition, modele.categorie, modele.energie, modele.annee, modele.boiteDeVitesse, modele.options, modele.critAir ,modele idMarque, 
             location.id AS l_id, location.dateDebutLocation, location.dureeLocation, location.dateFinLocation
             
@@ -337,7 +337,6 @@
     
     $result = pg_fetch_assoc(pg_query($conn, $sql));
     //var_dump($result);
-    //     print("test:".$result['kilometrage']);
     
     $vehiculeId = $vehicule['id'];
     $id = "vehicule"."z".strval($vehiculeId);

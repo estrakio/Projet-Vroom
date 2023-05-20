@@ -35,8 +35,7 @@ function delete($id, $tableName) {
 
 if(isset($_POST['todo'])) {
     if($_POST['todo'] == 'update') {
-
-        update($_POST['id'], $_POST['fieldName'], $_POST['tableName'],$_POST['data']);
+        update($_POST['id'], $_POST['fieldName'], $_POST['tableName'], strip_tags($_POST['data']));
 
     } elseif($_POST['todo'] == 'delete') {
 

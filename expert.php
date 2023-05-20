@@ -1,48 +1,24 @@
 <?php
 // Si la variable : nom, prenom, age, mail, numeroTelephone, dateDeNaissance, pays, ville, adresse, codePostal exisent alors echo
-if (isset(
-    $_GET['nom'],
-    $_GET['prenom'],
-    $_GET['adresseMail'],
-    $_GET['numeroTelephone'],
-    $_GET['login'],
-    $_GET['motDePasse'],
-    $_GET['societe']
-
-)) 
-{
-
-    $_GET['nom'] = pg_escape_string($conn, $_GET['nom']);
-    $_GET['prenom'] = pg_escape_string($conn, $_GET['prenom']);
-    $_GET['adresseMail'] = pg_escape_string($conn, $_GET['adresseMail']);
-    $_GET['numeroTelephone'] = pg_escape_string($conn, $_GET['numeroTelephone']);
-    $_GET['login'] = pg_escape_string($conn, $_GET['login']);
-    $_GET['motDePasse'] = pg_escape_string($conn, $_GET['motDePasse']);
-    $_GET['societe'] = pg_escape_string($conn, $_GET['societe']);
-
-
-
-    $tabCondition = array('nom' => $_GET['societe'],);
-    $data = ["id"];
-    //$idSociete = selectSql("societeExpert", $tabCondition, $data);
-
-
+if (!empty($_POST)) {
+    foreach ($_POST as $key => &$value) {
+        $value = pg_escape_string($conn, $value);
+    }
 
     $conn = pg_connect("host=db dbname=vroooom user=vroooom password=vroooom");
-    $sql = "SELECT id FROM societeExpert WHERE nom = '" . $_GET['societe'] . "';";
+    $sql = "SELECT id FROM societeexpert WHERE nom = '" . $_POST['societe'] . "';";
     $idSociete = pg_fetch_assoc(pg_query($conn, $sql));
-
-
     // var_dump($idSociete);
 
 
+
     $tabExpert = array(
-        "nom" => $_GET['nom'],
-        "prenom" => $_GET['prenom'],
-        "adresseMail" => $_GET['adresseMail'],
-        "numeroTelephone" => $_GET['numeroTelephone'],
-        "login" => $_GET['login'],
-        "motDePasse" => $_GET['motDePasse'],
+        "nom" => $_POST['nom'],
+        "prenom" => $_POST['prenom'],
+        "adresseMail" => $_POST['adresseMail'],
+        "numeroTelephone" => $_POST['numeroTelephone'],
+        "login" => $_POST['login'],
+        "motDePasse" => $_POST['motDePasse'],
         "id_1" => $idSociete['id'],
     );
 
@@ -60,7 +36,7 @@ if (isset(
 <div class="row">
     <div class="col-3 "></div>
     <div class="col-6">
-        <form action="/formulaire.php?content=expert" method="get" id="formExpert">
+        <form action="/formulaire.php?content=expert" method="post" id="formExpert">
             <input hidden value="expert" name="content" id="content">
             <br>
             <div>

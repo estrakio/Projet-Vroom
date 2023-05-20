@@ -1,5 +1,34 @@
 <?php
 
+// *----------------------------------------------------------------------*
+// *  PHP        : clients.php                                            *
+// *  Site       : Vroooom                                                *
+// *  AUTEUR     : WALTER KARL                                            *
+// *  DATE       : 20/03/2023                                             *
+// *  DATE       :                                                        *
+// *  BUT PAGE   : -------------------------------------------------------*
+// *                                                                      *
+// *  Formulaire de création Clients                                      *
+// *  Le formulaire écrit des données sur les champs suivants de la       *
+// *  table  CLIENTS                                                      *
+// *  - nom                                                               *
+// *  - prenom                                                            *
+// *  - age                                                               *
+// *  - datedenaissance                                                   *
+// *  - numerotelephone                                                   *
+// *  - mail                                                              *
+// *  - adresse                                                           *
+// *  - ville                                                             *
+// *  - codepostal                                                        *
+// *  - pays                                                              *
+// *----------------------------------------------------------------------*
+// *  MODIFICATIONS                                                       *
+// *                                                                      *
+// *                                                                      *
+// *----------------------------------------------------------------------*
+
+
+
 // echo('<div>');
 // var_dump($_POST);
 // echo('</div>');

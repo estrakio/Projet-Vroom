@@ -82,7 +82,7 @@ window.addEventListener('load', function () {
 		setArticleDivEditable(element.attributes.id.value);
 	}
 	elements = document.querySelectorAll(".modifiable");
-	//console.log(elements);
+
 	elements.forEach(myFunction);
 })
 

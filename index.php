@@ -6,7 +6,7 @@ include 'connexion.php';
 <html>
 
 <head>
-  <title> Gestion Vroooom </title>
+  <title> Gestion leasing Vroooom </title>
 
   <!-- css necessaire pour Bootstrap -->
   <link rel="stylesheet" href="./bootstrap/5.1.2/css/bootstrap.min.css">
