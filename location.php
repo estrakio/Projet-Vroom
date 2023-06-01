@@ -1,5 +1,44 @@
 <?php
 
+// *----------------------------------------------------------------------*
+// *  PHP        : garage.php                                             *
+// *  Site       : Vroooom                                                *
+// *  AUTEUR     : MOUSLI MATHIS                                          *
+// *  DATE       : 20/03/2022                                             *
+// *  DATE       :                                                        *
+// *  BUT PAGE   : -------------------------------------------------------*
+// *                                                                      *
+// *  Formulaire de création Clients                                      *
+// *  Le formulaire écrit des données sur les champs suivants des tables  *
+// *  MODELE                                                              *
+// *  - nommodele                                                         *
+// *  - generation                                                        *
+// *  - finition                                                          *
+// *  - categorie                                                         *
+// *  - energie                                                           *
+// *  - annee                                                             *
+// *  - boitedevitesse                                                    *
+// *  - options                                                           *
+// *  - critair                                                           *
+// *  - idmarque                                                          *
+// *                                                                      *
+// *  LOCATION                                                            *
+// *  - datedebutlocation                                                 *
+// *  - dureelocation                                                     *
+// *  - datefinlocation                                                   *
+// *  - id_1                                                              *
+// *                                                                      *
+// *  VEHICULE                                                            *
+// *  - plaque_d_immatriculation                                          *
+// *  - couleur                                                           *
+// *  - id                                                                *
+// *  - id_1                                                              *
+// *----------------------------------------------------------------------*
+// *  MODIFICATIONS                                                       *
+// *                                                                      *
+// *                                                                      *
+// *----------------------------------------------------------------------*
+
 if (!empty($_POST)) {
   // echo('<pre>');
   // var_dump($_POST);

@@ -4,7 +4,7 @@
 // *  PHP        : accueil.php                                            *
 // *  Site       : Vroooom                                                *
 // *  AUTEUR     : WALTER KARL                                            *
-// *  DATE       : 20/03/2023                                             *
+// *  DATE       : 20/03/2022                                             *
 // *  DATE       :                                                        *
 // *  BUT PAGE   : -------------------------------------------------------*
 // *                                                                      *

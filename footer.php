@@ -3,7 +3,7 @@
 // *  PHP        : footer.php                                            *
 // *  Site       : Vroooom                                                *
 // *  AUTEUR     : BERROS YITSHAK                                         *
-// *  DATE       : 20/03/2023                                             *
+// *  DATE       : 20/03/2022                                             *
 // *  DATE       :                                                        *
 // *  BUT PAGE   : -------------------------------------------------------*
 // *                                                                      *

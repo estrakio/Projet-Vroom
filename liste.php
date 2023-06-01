@@ -1,4 +1,21 @@
 <?php
+
+// *----------------------------------------------------------------------*
+// *  PHP        : liste.php                                              *
+// *  Site       : Vroooom                                                *
+// *  AUTEUR     : RIMMELY EWAN                                            *
+// *  DATE       : 20/03/2022                                             *
+// *  DATE       :                                                        *
+// *  BUT PAGE   : -------------------------------------------------------*
+// *                                                                      *
+// *  Page s'occupant de la création des tables ainsi que des fontions    *
+// *  SQL utilisé pour les envoies de données                             *
+// *----------------------------------------------------------------------*
+// *  MODIFICATIONS                                                       *
+// *                                                                      *
+// *                                                                      *
+// *----------------------------------------------------------------------*
+
     $conn = pg_connect("host=db dbname=vroooom user=vroooom password=vroooom");
 
     

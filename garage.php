@@ -1,5 +1,28 @@
 <?php
 
+// *----------------------------------------------------------------------*
+// *  PHP        : garage.php                                             *
+// *  Site       : Vroooom                                                *
+// *  AUTEUR     : MOUSLI MATHIS                                          *
+// *  DATE       : 20/03/2022                                             *
+// *  DATE       :                                                        *
+// *  BUT PAGE   : -------------------------------------------------------*
+// *                                                                      *
+// *  Formulaire de création Garage                                       *
+// *  Le formulaire écrit des données sur les champs suivants de la       *
+// *  table GARAGE :                                                      *
+// *  - nomdugarage                                                       *
+// *  - nomduproprietaire                                                 *
+// *  - adresse                                                           *
+// *  - codepostal                                                        *
+// *  - ville                                                             *
+// *  - pays                                                              *
+// *----------------------------------------------------------------------*
+// *  MODIFICATIONS                                                       *
+// *                                                                      *
+// *                                                                      *
+// *----------------------------------------------------------------------*
+
 if(!empty($_POST)){
     
     foreach ($_POST as $key => $value) {

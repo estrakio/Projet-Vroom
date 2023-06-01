@@ -1,4 +1,22 @@
 <?php
+
+// *----------------------------------------------------------------------*
+// *  PHP        : expert.php                                          *
+// *  Site       : Vroooom                                                *
+// *  AUTEUR     : WALTER KARL                                            *
+// *  DATE       : 20/03/2022                                             *
+// *  DATE       :                                                        *
+// *  BUT PAGE   : -------------------------------------------------------*
+// *                                                                      *
+// *  Page s'occupant de la création des données de base des experts      *
+// *                                                                      *
+// *----------------------------------------------------------------------*
+// *  MODIFICATIONS                                                       *
+// *                                                                      *
+// *                                                                      *
+// *----------------------------------------------------------------------*
+
+
 // Si la variable : nom, prenom, age, mail, numeroTelephone, dateDeNaissance, pays, ville, adresse, codePostal exisent alors echo
 if (!empty($_POST)) {
     foreach ($_POST as $key => &$value) {
