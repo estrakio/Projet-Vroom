@@ -13,28 +13,30 @@ if (!empty($_POST)) {
     "nom" => trim($expertListe[0]),
     "prenom" => trim($expertListe[1]),
   );
-  $listeData = ["id",];
-  $idExpert = selectSql("expert", $tabCondition, $listeData);
+  $sql = "select id from expert where nom = '".trim($expertListe[0])."' and prenom ='".trim($expertListe[1])."';";
+  $id_expert = pg_fetch_assoc(pg_query($conn, $sql));
 
-  $tabCondition = array("nomdugarage" => $_POST['garage'], );
-  $listeData = ["id",];
-  $idGarage = selectSql("garage", $tabCondition, $listeData);
+  $sql = "select id from garage where nomdugarage = '".trim($_POST['garage'])."';";
+  $id_garage = pg_fetch_assoc(pg_query($conn, $sql));
 
-  $tabCondition = array("plaque_d_immatriculation" => $_POST['plaque_d_immatriculation'], );
-  $listeData = ["id",];
-  $idVehicule = selectSql("vehicule", $tabCondition, $listeData);
+  $sql = "select id from vehicule where plaque_d_immatriculation = '".trim($_POST['plaque_d_immatriculation'])."';";
+  $id_vehicule = pg_fetch_assoc(pg_query($conn, $sql));
 
-  $tabCondition = array("id" => intval($idVehicule['id']), );
-  $listeData = ["id_1",];
-  $idClients = selectSql("location", $tabCondition, $listeData);
+  $sql = "select id_1 from location where id = ".trim($id_vehicule['id']).";";
+  $id_clients = pg_fetch_assoc(pg_query($conn, $sql));
 
-  $tabFinale = array(
-    'daterdv' => $_POST['dateRdv'],
-    'id_1' => $idExpert['id'],
-    'id_2' => $idGarage['id'],
-    'id_3' => $idClients['id_1'],
-  );
-  insertSql("rendezvous", $tabFinale);
+  // echo ("<div>");
+  // var_dump($idExpert);
+  // echo ("</div>");
+  $sql = "insert into rendezvous (daterdv, id_1, id_2, id_3) values (".$_POST['dateRdv'].",".$id_expert['id'].", ".$id_garage['id'].", ".$id_clients['id_1']."  );";
+  pg_query($conn, $sql);
+  //$tabFinale = array(
+  //  'daterdv' => $_POST['dateRdv'],
+  //  'id_1' => $idExpert['id'],
+  //  'id_2' => $idGarage['id'],
+  //  'id_3' => $idClients['id_1'],
+  //);
+  //insertSql("rendezvous", $tabFinale);
   ?>
 
   <div class="row text-center text-success">
